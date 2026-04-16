@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Benul IA — Consultant en Transformation IA</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benul IA — Consultant en Transformation IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
   --bg: #FAFAF8;
   --bg-warm: #F5F0EB;
   --bg-card: #FFFFFF;
+  --bg-dark: #1A1A1A;
   --accent: #C45D3E;
   --accent-soft: #E8A990;
   --accent-bg: rgba(196, 93, 62, 0.06);
@@ -25,12 +27,9 @@
   --border: #E8E4DF;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
   --shadow-md: 0 8px 30px rgba(0,0,0,0.06);
-  --shadow-lg: 0 20px 60px rgba(0,0,0,0.08);
-  --radius: 16px;
 }
 
 html { scroll-behavior: smooth; }
-
 body {
   font-family: 'DM Sans', -apple-system, sans-serif;
   background: var(--bg);
@@ -39,1015 +38,692 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ===== NAVIGATION ===== */
+/* ===== NAV ===== */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   padding: 1.2rem 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; justify-content: space-between; align-items: center;
   background: rgba(250, 250, 248, 0.85);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid transparent;
-  transition: all 0.4s ease;
+  transition: all 0.4s;
 }
-
 nav.scrolled {
   padding: 0.9rem 3rem;
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
 }
-
 .nav-logo {
   font-family: 'DM Serif Display', serif;
-  font-size: 1.4rem;
-  color: var(--heading);
-  text-decoration: none;
+  font-size: 1.4rem; color: var(--heading); text-decoration: none;
 }
-
-.nav-links {
-  display: flex;
-  gap: 2.5rem;
-  list-style: none;
-}
-
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
 .nav-links a {
-  color: var(--text);
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: color 0.3s;
+  color: var(--text); text-decoration: none; font-size: 0.9rem;
+  font-weight: 500; transition: color 0.3s;
 }
-
 .nav-links a:hover { color: var(--accent); }
-
 .nav-cta {
-  padding: 0.6rem 1.6rem;
-  background: var(--heading);
-  border: none;
-  border-radius: 50px;
-  color: white;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 600;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-decoration: none;
+  padding: 0.6rem 1.6rem; background: var(--heading); border: none;
+  border-radius: 50px; color: white; font-family: 'DM Sans', sans-serif;
+  font-weight: 600; font-size: 0.85rem; text-decoration: none;
+  transition: all 0.3s; cursor: pointer;
 }
-
-.nav-cta:hover {
-  background: var(--accent);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
+.nav-cta:hover { background: var(--accent); transform: translateY(-1px); }
 
 /* ===== HERO ===== */
 .hero {
   min-height: 100vh;
+  padding: 10rem 3rem 5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 6rem 2rem 4rem;
+  align-items: center;
+  text-align: center;
   position: relative;
   overflow: hidden;
 }
 
-.hero-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
+.hero-shapes {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob {
+  position: absolute;
+  bottom: 10%; right: 5%;
+  width: 400px; height: 400px;
+  background: var(--bg-warm);
+  border-radius: 45% 55% 52% 48% / 48% 45% 55% 52%;
+  opacity: 0.6;
+}
+
+.circle-outline {
+  position: absolute;
+  top: 15%; left: 8%;
+  width: 300px; height: 300px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
 }
 
 .hero-badge {
   display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 1rem;
+  align-items: center; gap: 8px;
+  padding: 10px 16px;
+  background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 50px;
-  font-size: 0.82rem;
-  color: var(--accent);
-  font-weight: 500;
-  margin-bottom: 2.5rem;
-  background: white;
+  border-radius: 24px;
+  margin-bottom: 30px;
+  font-size: 13px; font-weight: 600;
+  color: var(--text);
+  opacity: 0;
 }
 
-.hero-badge .dot {
-  width: 7px; height: 7px;
-  background: var(--accent);
+.badge-dot {
+  width: 8px; height: 8px;
+  background: #22C55E;
   border-radius: 50%;
-  animation: pulse 2.5s ease infinite;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(1.4); }
-}
-
-.hero h1 {
+.hero-title {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.8rem, 6.5vw, 5rem);
-  font-weight: 400;
-  line-height: 1.1;
+  font-size: clamp(2.8rem, 5.5vw, 4rem);
+  line-height: 1.15;
   color: var(--heading);
-  margin-bottom: 1.8rem;
-  max-width: 800px;
+  margin-bottom: 1.5rem;
+  opacity: 0;
 }
 
-.hero h1 em {
+.hero-title .accent {
   color: var(--accent);
   font-style: italic;
 }
 
-.hero-description {
-  font-size: 1.2rem;
+.typewriter { display: inline; }
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px; height: 1em;
+  background: var(--accent);
+  margin-left: 4px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
   color: var(--text);
-  max-width: 520px;
   line-height: 1.7;
-  font-weight: 400;
   margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 60px;
+  opacity: 0;
 }
 
 .hero-buttons {
-  display: flex;
-  gap: 1rem;
+  display: flex; gap: 1rem;
+  justify-content: center;
   flex-wrap: wrap;
+  opacity: 0;
 }
 
-.btn-primary {
-  padding: 0.9rem 2.2rem;
-  background: var(--heading);
-  border: none;
+.btn {
+  padding: 14px 28px;
   border-radius: 50px;
-  color: white;
+  font-size: 0.95rem; font-weight: 600;
+  text-decoration: none; cursor: pointer;
+  border: none; transition: all 0.3s;
+  display: inline-flex; align-items: center; gap: 8px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
+.btn-primary { background: var(--heading); color: white; }
 .btn-primary:hover {
   background: var(--accent);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 10px 30px rgba(196, 93, 62, 0.2);
 }
 
 .btn-secondary {
-  padding: 0.9rem 2.2rem;
   background: transparent;
-  border: 1.5px solid var(--border);
-  border-radius: 50px;
   color: var(--heading);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  border: 2px solid var(--heading);
 }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
-.btn-secondary:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-1px);
-}
-
-/* Hero decorative shape */
-.hero-shape {
+.scroll-indicator {
   position: absolute;
-  right: -5%;
-  top: 15%;
-  width: 45%;
-  height: 70%;
-  background: var(--bg-warm);
-  border-radius: 240px 240px 240px 240px;
-  z-index: -1;
-  opacity: 0.7;
-}
-
-.hero-shape-inner {
-  position: absolute;
-  right: 5%;
-  top: 25%;
-  width: 30%;
-  height: 45%;
-  border: 1.5px solid var(--border);
-  border-radius: 200px;
-  z-index: -1;
-}
-
-.hero-scroll {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
+  bottom: 40px; left: 50%;
   transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--text-light);
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  opacity: 0;
 }
 
-.scroll-line {
-  width: 1px; height: 35px;
-  background: linear-gradient(to bottom, var(--accent-soft), transparent);
-  animation: scrollAnim 2s ease infinite;
+.scroll-dot {
+  width: 8px; height: 8px;
+  background: var(--text);
+  border-radius: 50%;
+  animation: scroll-bounce 2s infinite;
 }
 
-@keyframes scrollAnim {
-  0% { transform: scaleY(0); transform-origin: top; }
-  50% { transform: scaleY(1); transform-origin: top; }
-  51% { transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(12px); opacity: 1; }
 }
 
-/* ===== SECTIONS ===== */
-section { padding: 7rem 2rem; position: relative; }
-
-.section-inner { max-width: 1100px; margin: 0 auto; }
-
-.section-label {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.8rem;
+/* ===== VIDEO ===== */
+.video-section {
+  padding: 6rem 3rem;
+  text-align: center;
 }
 
-.section-title {
+.video-label {
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+  opacity: 0;
+}
+
+.video-title {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  font-weight: 400;
-  line-height: 1.2;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
   color: var(--heading);
+  margin-bottom: 3rem;
+  opacity: 0;
+}
+
+.video-container {
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+  position: relative;
+  aspect-ratio: 16/9;
+  background: var(--bg-dark);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.play-button {
+  width: 72px; height: 72px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 28px;
+  transition: all 0.3s;
+}
+
+.video-container:hover .play-button {
+  transform: scale(1.1);
+  background: var(--accent-soft);
+}
+
+.video-caption {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  font-style: italic;
+  max-width: 500px;
+  margin: 0 auto;
+  opacity: 0;
+}
+
+/* ===== PHILOSOPHY ===== */
+.philosophy {
+  padding: 6rem 3rem;
+  background: var(--bg-dark);
+  color: white;
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.philosophy-label {
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--accent-soft); text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+  opacity: 0;
+}
+
+.philosophy-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: white;
+  margin-bottom: 4rem;
+  opacity: 0;
+}
+
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.philosophy-item { opacity: 0; }
+
+.philosophy-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 4rem;
+  color: rgba(255,255,255,0.08);
+  margin-bottom: 1rem;
+}
+
+.philosophy-divider {
+  width: 36px; height: 2px;
+  background: var(--accent-soft);
   margin-bottom: 1.2rem;
 }
 
-.section-desc {
-  font-size: 1.05rem;
-  color: var(--text);
-  max-width: 580px;
+.philosophy-item h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem;
+  color: white;
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+
+.philosophy-item p {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.6);
   line-height: 1.7;
 }
 
-/* ===== PROBLEM ===== */
-.problem { background: var(--bg-warm); }
+/* ===== PROBLEM SECTION ===== */
+.problem {
+  padding: 6rem 3rem;
+  background: var(--bg-warm);
+}
 
-.problem-grid {
+.problem-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.problem-label {
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+  opacity: 0;
+}
+
+.problem-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--heading);
+  margin-bottom: 3.5rem;
+  max-width: 600px;
+  opacity: 0;
+}
+
+.problem-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 5rem;
   align-items: start;
-  margin-top: 3.5rem;
 }
 
 .problem-cards {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-}
-
-.p-card {
-  padding: 1.5rem 1.8rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s;
-}
-
-.p-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-}
-
-.p-card .icon {
-  font-size: 1.3rem;
-  margin-bottom: 0.6rem;
-}
-
-.p-card h4 {
-  font-weight: 600;
-  color: var(--heading);
-  margin-bottom: 0.4rem;
-  font-size: 1rem;
-}
-
-.p-card h4 .strike {
-  text-decoration: line-through;
-  color: var(--text-light);
-  font-weight: 400;
-}
-
-.p-card p {
-  color: var(--text);
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-.problem-right {
-  display: flex;
-  flex-direction: column;
   gap: 1.5rem;
 }
 
-.problem-right li {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  list-style: none;
+.problem-card {
+  background: var(--bg-card);
+  padding: 2.5rem;
+  border-radius: var(--radius, 16px);
+  border: 1px solid var(--border);
+  opacity: 0;
 }
 
-.problem-right .num {
-  width: 36px; height: 36px; min-width: 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  font-weight: 700;
-  background: var(--accent-bg);
+.problem-card-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
   color: var(--accent);
-  border: 1px solid var(--accent-border);
-}
-
-.problem-right h4 {
-  font-weight: 600;
-  color: var(--heading);
-  margin-bottom: 0.25rem;
-  font-size: 0.95rem;
-}
-
-.problem-right p {
-  color: var(--text);
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-/* ===== METHOD ===== */
-.method-steps {
-  margin-top: 4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
-}
-
-.method-step {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.method-step.reverse { direction: rtl; }
-.method-step.reverse > * { direction: ltr; }
-
-.step-num {
-  font-family: 'DM Serif Display', serif;
-  font-size: 4.5rem;
-  color: var(--bg-warm);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
   line-height: 1;
-  margin-bottom: 0.8rem;
-  position: relative;
 }
 
-.step-num::after {
-  content: '';
-  position: absolute;
-  bottom: 8px;
-  left: 0;
-  width: 50px;
-  height: 3px;
-  background: var(--accent);
-  border-radius: 2px;
-}
-
-.step-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.6rem;
-  color: var(--heading);
-  margin-bottom: 0.8rem;
-}
-
-.step-text {
+.problem-card-text {
+  font-size: 0.95rem;
   color: var(--text);
   line-height: 1.7;
-  font-size: 1rem;
 }
 
-.step-card {
-  padding: 2.2rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  position: relative;
-  overflow: hidden;
+.problem-card-source {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  font-style: italic;
+  margin-top: 0.6rem;
 }
 
-.step-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+.problem-scenario { opacity: 0; }
+
+.problem-scenario h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: var(--heading);
+  margin-bottom: 1.5rem;
 }
 
-.step-card ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-}
-
-.step-card li {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
+.problem-scenario p {
+  font-size: 0.95rem;
   color: var(--text);
-  font-size: 0.92rem;
-}
-
-.step-card li .check {
-  color: var(--accent);
-  font-weight: 700;
-  font-size: 1rem;
-}
-
-/* ===== OFFERS ===== */
-.offers { background: var(--bg-warm); }
-
-.offers-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 3.5rem;
-}
-
-.offer-card {
-  padding: 2.2rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.offer-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transition: transform 0.4s ease;
-}
-
-.offer-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
-}
-
-.offer-card:hover::before { transform: scaleX(1); }
-
-.offer-emoji {
-  font-size: 2rem;
+  line-height: 1.8;
   margin-bottom: 1.2rem;
 }
 
-.offer-level {
-  font-size: 0.72rem;
+.problem-cta {
+  display: inline-flex;
+  align-items: center; gap: 6px;
+  color: var(--accent);
+  text-decoration: none;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+  margin-top: 0.8rem;
+  transition: gap 0.3s;
+}
+.problem-cta:hover { gap: 12px; }
+
+/* ===== AI ACT ===== */
+.ai-act {
+  padding: 6rem 3rem;
+  background: var(--bg);
 }
 
-.offer-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.35rem;
-  color: var(--heading);
-  margin-bottom: 0.7rem;
-}
-
-.offer-desc {
-  color: var(--text);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin-bottom: 1.3rem;
-}
-
-.offer-features {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.offer-features li {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text);
-  font-size: 0.85rem;
-}
-
-.offer-features li span {
-  color: var(--accent);
-  font-weight: 700;
-}
-
-/* ===== DELIVERABLES ===== */
-.deliverables-marquee {
-  overflow: hidden;
-  margin-top: 3.5rem;
-  padding: 0.5rem 0;
-}
-
-.marquee-track {
-  display: flex;
-  gap: 1rem;
-  animation: marquee 35s linear infinite;
-  width: max-content;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.d-chip {
-  padding: 0.85rem 1.6rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 50px;
-  white-space: nowrap;
-  font-size: 0.9rem;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.3s;
-  box-shadow: var(--shadow-sm);
-}
-
-.d-chip:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.d-chip .emoji { font-size: 1.1rem; }
-
-.deliverables-quote {
-  margin-top: 3.5rem;
-  padding: 3rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  text-align: center;
-  box-shadow: var(--shadow-sm);
-}
-
-.deliverables-quote p {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.3rem, 2.5vw, 1.9rem);
-  color: var(--heading);
-  line-height: 1.5;
-  max-width: 650px;
+.ai-act-box {
+  max-width: 850px;
   margin: 0 auto;
+  background: linear-gradient(135deg, var(--bg-warm) 0%, var(--bg-card) 100%);
+  border: 2px solid var(--accent);
+  border-radius: 20px;
+  padding: 3.5rem;
+  opacity: 0;
 }
 
-.deliverables-quote em {
-  color: var(--accent);
+.ai-act-box h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: var(--heading);
+  margin-bottom: 1.2rem;
+}
+
+.ai-act-box p {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.ai-act-box .source {
+  font-size: 0.8rem;
+  color: var(--text-light);
   font-style: italic;
+  margin-bottom: 1.2rem;
 }
 
-/* ===== CTA ===== */
-.cta-section {
-  background: var(--heading);
+.ai-act-link {
+  display: inline-flex;
+  align-items: center; gap: 6px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: gap 0.3s;
+}
+.ai-act-link:hover { gap: 12px; }
+
+/* ===== FINAL CTA ===== */
+.final-cta {
+  padding: 6rem 3rem;
+  background: var(--bg-dark);
   color: white;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
-.cta-section .section-label { color: var(--accent-soft); }
-
-.cta-section .section-title {
-  color: white;
-  max-width: 600px;
-  margin: 0 auto 1.2rem;
+.final-cta-content {
+  position: relative;
+  z-index: 10;
+  max-width: 650px;
+  margin: 0 auto;
+  opacity: 0;
 }
 
-.cta-text {
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.65);
-  max-width: 500px;
-  margin: 0 auto 2.5rem;
+.final-cta h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: white;
+  margin-bottom: 1.2rem;
+  line-height: 1.2;
+}
+
+.final-cta p {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 2.5rem;
   line-height: 1.7;
 }
 
-.cta-section .btn-primary {
-  background: var(--accent);
-  color: white;
+.final-cta .btn-primary {
+  margin: 0 auto;
 }
-
-.cta-section .btn-primary:hover {
-  background: var(--accent-soft);
-  color: var(--heading);
-}
-
-.cta-shape {
-  position: absolute;
-  width: 400px; height: 400px;
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 50%;
-}
-
-.cta-shape-1 { top: -200px; left: -100px; }
-.cta-shape-2 { bottom: -200px; right: -100px; width: 500px; height: 500px; }
 
 /* ===== FOOTER ===== */
 footer {
-  padding: 2.5rem 2rem;
+  padding: 2rem 3rem;
+  background: var(--bg-dark);
   text-align: center;
-  border-top: 1px solid var(--border);
-  background: var(--bg);
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
-
 footer p {
-  color: var(--text-light);
-  font-size: 0.82rem;
+  color: rgba(255,255,255,0.35);
+  font-size: 0.8rem;
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   nav { padding: 1rem 1.5rem; }
   .nav-links { display: none; }
-  .hero-shape, .hero-shape-inner { display: none; }
 
-  .problem-grid,
-  .method-step,
-  .method-step.reverse {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    direction: ltr;
-  }
+  .hero { padding: 8rem 1.5rem 4rem; }
+  .hero-title { font-size: 2.4rem; }
+  .hero-buttons { flex-direction: column; }
+  .hero-buttons .btn { width: 100%; justify-content: center; }
+  .hero-shapes { display: none; }
 
-  .offers-grid {
-    grid-template-columns: 1fr;
-    max-width: 450px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+  .video-section { padding: 4rem 1.5rem; }
+  .play-button { width: 60px; height: 60px; font-size: 22px; }
 
-  section { padding: 4.5rem 1.5rem; }
-  .step-num { font-size: 3.5rem; }
+  .philosophy { padding: 4rem 1.5rem; }
+  .philosophy-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  .problem { padding: 4rem 1.5rem; }
+  .problem-content { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  .ai-act { padding: 4rem 1.5rem; }
+  .ai-act-box { padding: 2.5rem; }
+
+  .final-cta { padding: 4rem 1.5rem; }
 }
-
-/* ===== REVEAL ===== */
-.reveal { opacity: 0; transform: translateY(35px); }
-.reveal-left { opacity: 0; transform: translateX(-50px); }
-.reveal-right { opacity: 0; transform: translateX(50px); }
-.reveal-scale { opacity: 0; transform: scale(0.92); }
-</style>
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ===== NAV ===== -->
 <nav id="navbar">
-  <a href="#" class="nav-logo">Benul IA</a>
+  <a href="index.html" class="nav-logo">Benul IA</a>
   <ul class="nav-links">
-    <li><a href="#methode">Methode</a></li>
-    <li><a href="#offres">Offres</a></li>
-    <li><a href="#livrables">Livrables</a></li>
+    <li><a href="methode.html">Methode</a></li>
+    <li><a href="offres.html">Ce qu'on fait</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <a href="contact.html" class="nav-cta">Parlons-en</a>
 </nav>
 
-<!-- HERO -->
+<!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-shape"></div>
-  <div class="hero-shape-inner"></div>
-  <div class="hero-inner">
+  <div class="hero-shapes">
+    <div class="blob"></div>
+    <div class="circle-outline"></div>
+  </div>
+
+  <div class="hero-content">
     <div class="hero-badge">
-      <span class="dot"></span>
+      <span class="badge-dot"></span>
       Consultant en Transformation IA
     </div>
-    <h1>On ne forme pas<br>a des outils.<br><em>On transforme<br>votre metier.</em></h1>
-    <p class="hero-description">
-      Nous entrons dans votre entreprise, nous comprenons vos processus,
-      et nous integrons l'IA la ou elle cree vraiment de la valeur.
+
+    <h1 class="hero-title">
+      On ne forme pas a des outils.
+      <span class="accent"><span class="typewriter"></span><span class="typewriter-cursor"></span></span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Nous entrons dans votre entreprise, nous comprenons vos processus, et nous integrons l'IA la ou elle cree vraiment de la valeur.
     </p>
+
     <div class="hero-buttons">
-      <a href="contact.html" class="btn-primary">
-        Reserver un audit
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <a href="contact.html" class="btn btn-primary">
+        Reserver un echange gratuit
+        <span>→</span>
       </a>
-      <a href="#methode" class="btn-secondary">Decouvrir la methode</a>
+      <a href="methode.html" class="btn btn-secondary">
+        Decouvrir la methode
+      </a>
     </div>
   </div>
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-dot"></div>
   </div>
 </section>
 
-<!-- PROBLEM -->
-<section class="problem" id="probleme">
-  <div class="section-inner">
-    <div class="reveal">
-      <span class="section-label">Le constat</span>
-      <h2 class="section-title">Les formations IA classiques<br>ne fonctionnent pas.</h2>
-      <p class="section-desc">
-        90% des participants oublient ce qu'ils ont appris en quelques semaines.
-        Pourquoi ? Parce que la formation n'est pas connectee a leur realite.
-      </p>
+<!-- ===== VIDEO ===== -->
+<section class="video-section">
+  <div class="video-label">Decouvrez Benul IA</div>
+  <h2 class="video-title">30 secondes pour comprendre ce qu'on fait.</h2>
+
+  <div class="video-container">
+    <div class="play-button">&#9654;</div>
+  </div>
+
+  <p class="video-caption">
+    Cette video a ete generee par IA — un apercu concret de ce qu'on peut faire pour vous.
+  </p>
+</section>
+
+<!-- ===== PHILOSOPHY ===== -->
+<section class="philosophy">
+  <div class="philosophy-inner">
+    <div class="philosophy-label">Notre philosophie</div>
+    <h2 class="philosophy-title">Ce en quoi nous croyons.</h2>
+
+    <div class="philosophy-grid">
+      <div class="philosophy-item">
+        <div class="philosophy-number">01</div>
+        <div class="philosophy-divider"></div>
+        <h3>Donner l'autonomie</h3>
+        <p>Notre objectif n'est pas de creer une dependance. C'est de vous rendre capable de continuer sans nous.</p>
+      </div>
+
+      <div class="philosophy-item">
+        <div class="philosophy-number">02</div>
+        <div class="philosophy-divider"></div>
+        <h3>Comprendre avant de construire</h3>
+        <p>Pas de solutions pre-faites. On observe, on ecoute, on comprend votre realite — et ensuite seulement, on propose.</p>
+      </div>
+
+      <div class="philosophy-item">
+        <div class="philosophy-number">03</div>
+        <div class="philosophy-divider"></div>
+        <h3>Livrer du concret</h3>
+        <p>Chaque intervention produit des actifs tangibles. Vos equipes repartent avec des outils, pas des souvenirs.</p>
+      </div>
     </div>
-    <div class="problem-grid">
+  </div>
+</section>
+
+<!-- ===== PROBLEM ===== -->
+<section class="problem">
+  <div class="problem-inner">
+    <div class="problem-label">Le constat</div>
+    <h2 class="problem-title">Pourquoi la plupart des formations IA echouent.</h2>
+
+    <div class="problem-content">
       <div class="problem-cards">
-        <div class="p-card reveal-left">
-          <h4><span class="strike">Formation generique</span></h4>
-          <p>"Voici 50 outils IA..." — personne ne les utilise ensuite.</p>
+        <div class="problem-card">
+          <div class="problem-card-number">70%</div>
+          <p class="problem-card-text">de l'information oubliee en 24h si elle n'est pas appliquee immediatement.</p>
+          <p class="problem-card-source">Source : Courbe de l'oubli, Ebbinghaus</p>
         </div>
-        <div class="p-card reveal-left">
-          <h4><span class="strike">Prompts universels</span></h4>
-          <p>"Ecris un email professionnel..." — trop vague pour creer de la valeur.</p>
-        </div>
-        <div class="p-card reveal-left">
-          <h4><span class="strike">Merci, au revoir</span></h4>
-          <p>Fin de la formation = fin de l'accompagnement. Aucun suivi.</p>
-        </div>
-      </div>
-      <ul class="problem-right">
-        <li class="reveal">
-          <div class="num">1</div>
-          <div>
-            <h4>Pas d'adaptation au metier</h4>
-            <p>Un commercial et un chef de projet n'ont pas les memes besoins. Les former ensemble est une perte de temps.</p>
-          </div>
-        </li>
-        <li class="reveal">
-          <div class="num">2</div>
-          <div>
-            <h4>Pas de livrables concrets</h4>
-            <p>Les participants repartent avec des notes, pas avec des outils qu'ils peuvent utiliser des le lendemain.</p>
-          </div>
-        </li>
-        <li class="reveal">
-          <div class="num">3</div>
-          <div>
-            <h4>Pas de suivi</h4>
-            <p>Sans accompagnement post-formation, le taux d'adoption chute sous les 15% en un mois.</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
 
-<!-- METHOD -->
-<section class="method" id="methode">
-  <div class="section-inner">
-    <div class="reveal" style="text-align:center;">
-      <span class="section-label">Notre methode</span>
-      <h2 class="section-title">On diagnostique<br>avant de prescrire.</h2>
-      <p class="section-desc" style="margin:0 auto;">
-        Chaque entreprise est unique. Notre approche commence toujours
-        par la comprehension de votre realite.
-      </p>
-    </div>
-
-    <div class="method-steps">
-      <div class="method-step">
-        <div class="reveal-left">
-          <div class="step-num">01</div>
-          <h3 class="step-title">Audit & Diagnostic</h3>
-          <p class="step-text">
-            Nous entrons dans votre entreprise, observons vos processus,
-            identifions les points de friction et comprenons le quotidien
-            de chaque equipe. Pas de solutions pre-faites.
-          </p>
+        <div class="problem-card">
+          <div class="problem-card-number">74%</div>
+          <p class="problem-card-text">des entreprises n'arrivent pas a scaler la valeur de l'IA.</p>
+          <p class="problem-card-source">Source : McKinsey, 2024</p>
         </div>
-        <div class="reveal-right">
-          <div class="step-card">
-            <ul>
-              <li><span class="check">&#10003;</span> Observation des processus existants</li>
-              <li><span class="check">&#10003;</span> Entretiens par departement</li>
-              <li><span class="check">&#10003;</span> Identification des opportunites IA</li>
-              <li><span class="check">&#10003;</span> Cartographie des flux de travail</li>
-              <li><span class="check">&#10003;</span> Rapport de recommandations</li>
-            </ul>
-          </div>
+
+        <div class="problem-card">
+          <div class="problem-card-number">12%</div>
+          <p class="problem-card-text">seulement du contenu de formation est retenu apres 30 jours sans mise en pratique.</p>
+          <p class="problem-card-source">Source : Research Institute of America</p>
         </div>
       </div>
 
-      <div class="method-step reverse">
-        <div class="reveal-left">
-          <div class="step-num">02</div>
-          <h3 class="step-title">Formation par metier</h3>
-          <p class="step-text">
-            Chaque role recoit une formation adaptee. Vos commerciaux,
-            votre marketing, vos operations — chacun apprend ce qui est
-            pertinent pour son quotidien. Du concret, pas de la theorie.
-          </p>
-        </div>
-        <div class="reveal-right">
-          <div class="step-card">
-            <ul>
-              <li><span class="check">&#10003;</span> Programmes adaptes par equipe</li>
-              <li><span class="check">&#10003;</span> Cas reels de votre entreprise</li>
-              <li><span class="check">&#10003;</span> Documents internes comme support</li>
-              <li><span class="check">&#10003;</span> Exercices pratiques en live</li>
-              <li><span class="check">&#10003;</span> Conforme aux exigences AI Act</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="method-step">
-        <div class="reveal-left">
-          <div class="step-num">03</div>
-          <h3 class="step-title">Production & Livrables</h3>
-          <p class="step-text">
-            La formation ne finit pas avec "merci, au revoir".
-            Pendant la session, on produit ensemble : prompts, workflows,
-            templates. Vous repartez avec des outils fonctionnels.
-          </p>
-        </div>
-        <div class="reveal-right">
-          <div class="step-card">
-            <ul>
-              <li><span class="check">&#10003;</span> Bibliotheque de prompts metier</li>
-              <li><span class="check">&#10003;</span> Workflows documentes et testes</li>
-              <li><span class="check">&#10003;</span> Templates reutilisables</li>
-              <li><span class="check">&#10003;</span> Guide d'usage interne</li>
-              <li><span class="check">&#10003;</span> Prototypes fonctionnels</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="method-step reverse">
-        <div class="reveal-left">
-          <div class="step-num">04</div>
-          <h3 class="step-title">Suivi & Evolution</h3>
-          <p class="step-text">
-            Un mois apres, on revient. Qu'est-ce qui marche ?
-            Qu'est-ce qu'il faut ajuster ? On optimise, on evolue.
-            On est partenaire, pas prestataire.
-          </p>
-        </div>
-        <div class="reveal-right">
-          <div class="step-card">
-            <ul>
-              <li><span class="check">&#10003;</span> Point de suivi a 1 mois</li>
-              <li><span class="check">&#10003;</span> Ajustements et optimisations</li>
-              <li><span class="check">&#10003;</span> Formation continue des equipes</li>
-              <li><span class="check">&#10003;</span> Nouvelles opportunites identifiees</li>
-              <li><span class="check">&#10003;</span> Accompagnement long terme</li>
-            </ul>
-          </div>
-        </div>
+      <div class="problem-scenario">
+        <h3>Ca vous dit quelque chose ?</h3>
+        <p>Vous avez investi dans une formation IA pour vos equipes. Pendant deux jours, tout le monde etait motive. Trois semaines plus tard ? Les prompts sont oublies, les outils ne sont pas utilises, et vos equipes sont revenues a leurs habitudes.</p>
+        <p>Ce n'est pas un probleme de motivation. C'est un probleme de methode. Les formations generiques ne fonctionnent pas parce qu'elles ne sont pas connectees a la realite de votre entreprise.</p>
+        <a href="methode.html" class="problem-cta">Decouvrir notre methode →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- OFFERS -->
-<section class="offers" id="offres">
-  <div class="section-inner">
-    <div class="reveal" style="text-align:center;">
-      <span class="section-label">Nos offres</span>
-      <h2 class="section-title">Une offre adaptee<br>a votre maturite IA.</h2>
-      <p class="section-desc" style="margin:0 auto;">
-        Que vous debutiez ou que vous soyez pret pour une transformation
-        complete, nous avons la reponse adaptee.
-      </p>
-    </div>
-    <div class="offers-grid">
-      <div class="offer-card reveal">
-        <div class="offer-level">Essentiel</div>
-        <h3 class="offer-title">Formation sur-mesure</h3>
-        <p class="offer-desc">
-          Montee en competence de vos equipes, adaptee a leur metier.
-          Des livrables utilisables des la fin de la session.
-        </p>
-        <ul class="offer-features">
-          <li><span>&#10003;</span> Formation par role</li>
-          <li><span>&#10003;</span> Cas pratiques de votre entreprise</li>
-          <li><span>&#10003;</span> Bibliotheque de prompts</li>
-          <li><span>&#10003;</span> Guide d'usage interne</li>
-          <li><span>&#10003;</span> Conforme AI Act</li>
-        </ul>
-      </div>
-      <div class="offer-card reveal">
-        <div class="offer-level">Premium</div>
-        <h3 class="offer-title">Formation + Suivi</h3>
-        <p class="offer-desc">
-          Formation initiale suivie d'un accompagnement dans la duree
-          pour ancrer les pratiques et faire evoluer les usages.
-        </p>
-        <ul class="offer-features">
-          <li><span>&#10003;</span> Tout l'Essentiel inclus</li>
-          <li><span>&#10003;</span> Suivi mensuel personnalise</li>
-          <li><span>&#10003;</span> Ajustements continus</li>
-          <li><span>&#10003;</span> Support par email et visio</li>
-          <li><span>&#10003;</span> Nouveaux cas d'usage</li>
-        </ul>
-      </div>
-      <div class="offer-card reveal">
-        <div class="offer-level">Transformation</div>
-        <h3 class="offer-title">Accompagnement complet</h3>
-        <p class="offer-desc">
-          Audit, formation, creation d'outils internes, agents IA,
-          automatisations. Transformation en profondeur.
-        </p>
-        <ul class="offer-features">
-          <li><span>&#10003;</span> Tout le Premium inclus</li>
-          <li><span>&#10003;</span> Audit complet des processus</li>
-          <li><span>&#10003;</span> Outils sur-mesure</li>
-          <li><span>&#10003;</span> Agents IA & automatisations</li>
-          <li><span>&#10003;</span> Partenariat long terme</li>
-        </ul>
-      </div>
-    </div>
+<!-- ===== AI ACT ===== -->
+<section class="ai-act">
+  <div class="ai-act-box">
+    <h3>AI Act : une obligation legale des aout 2026.</h3>
+    <p>L'Article 4 du reglement europeen sur l'IA impose a toute entreprise utilisant des systemes d'IA de former ses collaborateurs. Les sanctions peuvent atteindre 7,5 millions d'euros ou 1,5% du chiffre d'affaires mondial.</p>
+    <p>Nos formations sont concues pour vous mettre en conformite — mais surtout pour que vos equipes sachent vraiment utiliser l'IA.</p>
+    <p class="source">Source : Reglement (UE) 2024/1689, Article 4</p>
+    <a href="offres.html" class="ai-act-link">En savoir plus sur ce qu'on fait →</a>
   </div>
 </section>
 
-<!-- DELIVERABLES -->
-<section class="deliverables" id="livrables">
-  <div class="section-inner">
-    <div class="reveal" style="text-align:center;">
-      <span class="section-label">Ce qu'on laisse derriere nous</span>
-      <h2 class="section-title">Votre formation<br>produit quelque chose.</h2>
-    </div>
-    <div class="deliverables-marquee">
-      <div class="marquee-track">
-        <div class="d-chip">Bibliotheque de prompts</div>
-        <div class="d-chip">Workflows documentes</div>
-        <div class="d-chip">Templates reutilisables</div>
-        <div class="d-chip">Guide d'usage interne</div>
-        <div class="d-chip">Checklist qualite</div>
-        <div class="d-chip">Prototypes d'agents</div>
-        <div class="d-chip">Automatisations</div>
-        <div class="d-chip">Rapport d'audit</div>
-        <div class="d-chip">Bibliotheque de prompts</div>
-        <div class="d-chip">Workflows documentes</div>
-        <div class="d-chip">Templates reutilisables</div>
-        <div class="d-chip">Guide d'usage interne</div>
-        <div class="d-chip">Checklist qualite</div>
-        <div class="d-chip">Prototypes d'agents</div>
-        <div class="d-chip">Automatisations</div>
-        <div class="d-chip">Rapport d'audit</div>
-      </div>
-    </div>
-    <div class="deliverables-quote reveal-scale">
-      <p>Nous ne vendons pas du temps de presence.<br>
-      Nous livrons des <em>actifs concrets et mesurables</em><br>
-      qui transforment votre quotidien.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section" id="contact">
-  <div class="cta-shape cta-shape-1"></div>
-  <div class="cta-shape cta-shape-2"></div>
-  <div class="section-inner" style="position:relative;z-index:2;">
-    <div class="reveal">
-      <span class="section-label">Prochaine etape</span>
-      <h2 class="section-title">Pret a transformer<br>votre entreprise ?</h2>
-      <p class="cta-text">
-        On commence par un echange simple. Vous nous parlez de vos defis,
-        on vous dit comment l'IA peut concretement vous aider.
-      </p>
-      <a href="contact.html" class="btn-primary">
-        Prendre rendez-vous
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta">
+  <div class="final-cta-content">
+    <h2>Pret a voir ce que l'IA peut faire pour vous ?</h2>
+    <p>Commencez par un echange gratuit de 30 minutes. On ecoute, on pose des questions, et on vous dit honnement si on peut vous aider.</p>
+    <a href="contact.html" class="btn btn-primary">
+      Prendre rendez-vous
+      <span>→</span>
+    </a>
   </div>
 </section>
 
@@ -1063,80 +739,97 @@ window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// Hero entrance
-const htl = gsap.timeline({ defaults: { ease: 'power3.out' }});
-htl
-  .from('.hero-badge', { opacity: 0, y: 15, duration: 0.7, delay: 0.2 })
-  .from('.hero h1', { opacity: 0, y: 30, duration: 0.8 }, '-=0.3')
-  .from('.hero-description', { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
-  .from('.hero-buttons', { opacity: 0, y: 15, duration: 0.5 }, '-=0.2')
-  .from('.hero-shape', { opacity: 0, scale: 0.8, duration: 1.2, ease: 'power2.out' }, '-=0.8')
-  .from('.hero-shape-inner', { opacity: 0, scale: 0.8, duration: 1, ease: 'power2.out' }, '-=0.8')
-  .from('.hero-scroll', { opacity: 0, duration: 0.6 }, '-=0.3');
+// Hero
+const heroTl = gsap.timeline({ delay: 0.3 });
+heroTl.to('.hero-badge', { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0)
+      .to('.hero-title', { opacity: 1, duration: 0.8, ease: 'power2.out' }, 0.2)
+      .to('.hero-subtitle', { opacity: 1, duration: 0.8, ease: 'power2.out' }, 0.5)
+      .to('.hero-buttons', { opacity: 1, duration: 0.8, ease: 'power2.out' }, 0.7)
+      .to('.scroll-indicator', { opacity: 1, duration: 0.8, ease: 'power2.out' }, 0.9);
 
-// Parallax shapes
-gsap.to('.hero-shape', {
-  scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
-  y: -80, ease: 'none'
-});
-gsap.to('.hero-shape-inner', {
-  scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
-  y: -50, ease: 'none'
-});
+// Shapes
+gsap.to('.blob', { duration: 3, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+gsap.to('.circle-outline', { duration: 4, rotate: 360, repeat: -1, ease: 'none' });
 
-// Reveals
-document.querySelectorAll('.reveal').forEach(el => {
-  gsap.to(el, {
-    scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
-    opacity: 1, y: 0, duration: 0.7, ease: 'power3.out'
+// Typewriter
+const typewriterText = "On integre l'IA dans votre quotidien.";
+const typewriterEl = document.querySelector('.typewriter');
+let charIndex = 0;
+function typeWriter() {
+  if (charIndex < typewriterText.length) {
+    typewriterEl.textContent += typewriterText.charAt(charIndex);
+    charIndex++;
+    setTimeout(typeWriter, 45);
+  }
+}
+setTimeout(typeWriter, 1200);
+
+// Generic reveal helper
+function reveal(selector, props = {}) {
+  const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+  if (!el) return;
+  const defaults = { y: 30, ...props };
+  gsap.set(el, { y: defaults.y, opacity: 0 });
+  ScrollTrigger.create({
+    trigger: el,
+    start: 'top 88%',
+    onEnter: () => gsap.to(el, { opacity: 1, y: 0, x: 0, scale: 1, duration: 0.7, ease: 'power2.out', ...props })
+  });
+}
+
+// Video
+reveal('.video-label');
+reveal('.video-title');
+reveal('.video-container', { y: 40 });
+reveal('.video-caption');
+
+// Philosophy
+reveal('.philosophy-label');
+reveal('.philosophy-title');
+document.querySelectorAll('.philosophy-item').forEach((item, i) => {
+  gsap.set(item, { y: 30, opacity: 0 });
+  ScrollTrigger.create({
+    trigger: item,
+    start: 'top 88%',
+    onEnter: () => gsap.to(item, { opacity: 1, y: 0, duration: 0.7, delay: i * 0.15, ease: 'power2.out' })
   });
 });
 
-document.querySelectorAll('.reveal-left').forEach(el => {
-  gsap.to(el, {
-    scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
-    opacity: 1, x: 0, duration: 0.7, ease: 'power3.out'
+// Problem
+reveal('.problem-label');
+reveal('.problem-title');
+document.querySelectorAll('.problem-card').forEach((card, i) => {
+  gsap.set(card, { x: -40, opacity: 0 });
+  ScrollTrigger.create({
+    trigger: card,
+    start: 'top 88%',
+    onEnter: () => gsap.to(card, { opacity: 1, x: 0, duration: 0.7, delay: i * 0.12, ease: 'power2.out' })
   });
 });
 
-document.querySelectorAll('.reveal-right').forEach(el => {
-  gsap.to(el, {
-    scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
-    opacity: 1, x: 0, duration: 0.7, ease: 'power3.out'
-  });
+gsap.set('.problem-scenario', { x: 40, opacity: 0 });
+ScrollTrigger.create({
+  trigger: '.problem-scenario',
+  start: 'top 88%',
+  onEnter: () => gsap.to('.problem-scenario', { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out' })
 });
 
-document.querySelectorAll('.reveal-scale').forEach(el => {
-  gsap.to(el, {
-    scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
-    opacity: 1, scale: 1, duration: 0.7, ease: 'power3.out'
-  });
+// AI Act
+gsap.set('.ai-act-box', { scale: 0.95, opacity: 0 });
+ScrollTrigger.create({
+  trigger: '.ai-act',
+  start: 'top 85%',
+  onEnter: () => gsap.to('.ai-act-box', { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' })
 });
 
-// Offer cards stagger
-gsap.from('.offer-card', {
-  scrollTrigger: { trigger: '.offers-grid', start: 'top 80%' },
-  opacity: 0, y: 30, duration: 0.5, stagger: 0.12, ease: 'power3.out'
-});
-
-// Parallax step numbers
-document.querySelectorAll('.step-num').forEach(el => {
-  gsap.to(el, {
-    scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 1 },
-    y: -20, ease: 'none'
-  });
-});
-
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+// Final CTA
+gsap.set('.final-cta-content', { y: 30, opacity: 0 });
+ScrollTrigger.create({
+  trigger: '.final-cta',
+  start: 'top 85%',
+  onEnter: () => gsap.to('.final-cta-content', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' })
 });
 </script>
-<script src="/chatbot.js" defer></script>
 
 </body>
 </html>

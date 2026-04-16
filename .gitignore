@@ -1,0 +1,22 @@
+# Fichiers de build / deploy
+dist/
+.wrangler/
+
+# Fichiers systeme
+.DS_Store
+Thumbs.db
+
+# Documents internes (pas dans le site)
+Formations_IA_Recap_Strategie.pdf
+formation-sites-mariage.docx
+
+# Anciennes pages supprimees
+site-formations-ia.html
+realisations.html
+
+# Node
+node_modules/
+
+# Environnement
+.env
+.dev.vars
