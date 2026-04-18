@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Benul IA — Consultant en Transformation IA</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -57,6 +58,7 @@ nav.scrolled {
   font-family: 'DM Serif Display', serif;
   font-size: 1.4rem; color: var(--heading); text-decoration: none;
 }
+.nav-logo .logo-ia { color: var(--accent); font-style: italic; }
 .nav-links { display: flex; gap: 2.5rem; list-style: none; }
 .nav-links a {
   color: var(--text); text-decoration: none; font-size: 0.9rem;
@@ -575,7 +577,7 @@ footer p {
 
 <!-- ===== NAV ===== -->
 <nav id="navbar">
-  <a href="index.html" class="nav-logo">Benul IA</a>
+  <a href="index.html" class="nav-logo">Benul <span class="logo-ia">IA</span></a>
   <ul class="nav-links">
     <li><a href="methode.html">Methode</a></li>
     <li><a href="offres.html">Ce qu'on fait</a></li>
@@ -592,11 +594,6 @@ footer p {
   </div>
 
   <div class="hero-content">
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      Consultant en Transformation IA
-    </div>
-
     <h1 class="hero-title">
       On ne forme pas a des outils.
       <span class="accent"><span class="typewriter"></span><span class="typewriter-cursor"></span></span>
@@ -676,21 +673,15 @@ footer p {
     <div class="problem-content">
       <div class="problem-cards">
         <div class="problem-card">
-          <div class="problem-card-number">70%</div>
-          <p class="problem-card-text">de l'information oubliee en 24h si elle n'est pas appliquee immediatement.</p>
-          <p class="problem-card-source">Source : Courbe de l'oubli, Ebbinghaus</p>
+          <div class="problem-card-number">80%</div>
+          <p class="problem-card-text">des projets IA echouent — deux fois plus que les projets IT classiques.</p>
+          <p class="problem-card-source">Source : RAND Corporation, 2024</p>
         </div>
 
         <div class="problem-card">
           <div class="problem-card-number">74%</div>
-          <p class="problem-card-text">des entreprises n'arrivent pas a scaler la valeur de l'IA.</p>
-          <p class="problem-card-source">Source : McKinsey, 2024</p>
-        </div>
-
-        <div class="problem-card">
-          <div class="problem-card-number">12%</div>
-          <p class="problem-card-text">seulement du contenu de formation est retenu apres 30 jours sans mise en pratique.</p>
-          <p class="problem-card-source">Source : Research Institute of America</p>
+          <p class="problem-card-text">des entreprises n'arrivent pas a creer de la valeur avec l'IA.</p>
+          <p class="problem-card-source">Source : BCG, Where's the Value in AI?, 2024</p>
         </div>
       </div>
 
@@ -704,22 +695,12 @@ footer p {
   </div>
 </section>
 
-<!-- ===== AI ACT ===== -->
-<section class="ai-act">
-  <div class="ai-act-box">
-    <h3>AI Act : une obligation legale des aout 2026.</h3>
-    <p>L'Article 4 du reglement europeen sur l'IA impose a toute entreprise utilisant des systemes d'IA de former ses collaborateurs. Les sanctions peuvent atteindre 7,5 millions d'euros ou 1,5% du chiffre d'affaires mondial.</p>
-    <p>Nos formations sont concues pour vous mettre en conformite — mais surtout pour que vos equipes sachent vraiment utiliser l'IA.</p>
-    <p class="source">Source : Reglement (UE) 2024/1689, Article 4</p>
-    <a href="offres.html" class="ai-act-link">En savoir plus sur ce qu'on fait →</a>
-  </div>
-</section>
-
 <!-- ===== FINAL CTA ===== -->
 <section class="final-cta">
   <div class="final-cta-content">
     <h2>Pret a voir ce que l'IA peut faire pour vous ?</h2>
     <p>Commencez par un echange gratuit de 30 minutes. On ecoute, on pose des questions, et on vous dit honnement si on peut vous aider.</p>
+    <p style="font-size: 0.85rem; opacity: 0.7; margin-top: 1rem;">A noter : l'Article 4 du reglement europeen sur l'IA (UE 2024/1689) impose aux entreprises utilisant des systemes d'IA de garantir la litteratie IA de leurs equipes.</p>
     <a href="contact.html" class="btn btn-primary">
       Prendre rendez-vous
       <span>→</span>

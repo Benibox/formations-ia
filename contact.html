@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Benul IA</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -66,6 +67,7 @@ nav.scrolled {
   color: var(--heading);
   text-decoration: none;
 }
+.nav-logo .logo-ia { color: var(--accent); font-style: italic; }
 
 .nav-links {
   display: flex;
@@ -524,7 +526,7 @@ nav.scrolled {
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="index.html" class="nav-logo">Benul IA</a>
+  <a href="index.html" class="nav-logo">Benul <span class="logo-ia">IA</span></a>
   <ul class="nav-links">
     <li><a href="methode.html">Methode</a></li>
     <li><a href="offres.html">Ce qu'on fait</a></li>
@@ -589,6 +591,16 @@ nav.scrolled {
             <div class="value">Sous 24h, toujours</div>
           </div>
         </div>
+
+        <a href="https://calendar.app.google/qAD2vAAyERZauUFb9" target="_blank" rel="noopener" class="info-card anim-left" style="text-decoration:none;cursor:pointer;">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="info-text">
+            <div class="label">Rendez-vous</div>
+            <div class="value" style="color:var(--accent-soft);">Reserver un creneau →</div>
+          </div>
+        </a>
       </div>
     </div>
 
