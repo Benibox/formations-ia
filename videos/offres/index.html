@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Offres — Avant / Après</title>
+  <meta name="resolution" content="1920x1080">
+  <meta name="fps" content="30">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #FAFAF8;
+      --bg-warm: #F5F0EB;
+      --bg-dark: #1A1A1A;
+      --accent: #C45D3E;
+      --accent-soft: #E8A990;
+      --heading: #1A1A1A;
+      --text: #4A4A4A;
+    }
+    body { width: 1920px; height: 1080px; font-family: 'DM Sans', sans-serif; background: #000; overflow: hidden; position: relative; }
+    .screen { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; display: flex; align-items: center; justify-content: center; opacity: 0; overflow: hidden; }
+
+    /* INTRO */
+    .intro { background: var(--bg-dark); z-index: 1; }
+    .intro-left { font-family: 'DM Serif Display', serif; font-size: 120px; color: rgba(255,255,255,0.15); opacity: 0; position: absolute; left: 100px; }
+    .intro-slash { font-size: 200px; color: var(--accent); font-weight: 900; opacity: 0; }
+    .intro-right { font-family: 'DM Serif Display', serif; font-size: 120px; color: white; opacity: 0; position: absolute; right: 100px; }
+
+    /* SPLIT SCREENS */
+    .split { z-index: 2; }
+    .split-left {
+      position: absolute; top: 0; left: 0; width: 50%; height: 100%;
+      background: var(--bg-dark);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 80px;
+    }
+    .split-right {
+      position: absolute; top: 0; right: 0; width: 50%; height: 100%;
+      background: var(--bg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 80px;
+    }
+    .split-divider {
+      position: absolute; top: 0; left: 50%; width: 4px; height: 100%;
+      background: var(--accent); z-index: 5;
+      transform-origin: top; transform: scaleY(0);
+    }
+    .split-label {
+      font-size: 16px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 40px; opacity: 0;
+    }
+    .split-label-before { color: rgba(255,255,255,0.4); }
+    .split-label-after { color: var(--accent); }
+
+    .before-item, .after-item {
+      font-size: 32px; line-height: 1.6; opacity: 0; margin-bottom: 16px; text-align: center;
+    }
+    .before-item { color: rgba(255,255,255,0.6); }
+    .before-item .x { color: #E74C3C; font-weight: 800; margin-right: 12px; }
+    .after-item { color: var(--heading); }
+    .after-item .check { color: #27AE60; font-weight: 800; margin-right: 12px; }
+
+    /* Situation label */
+    .sit-badge {
+      position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
+      padding: 10px 32px; border-radius: 50px; font-size: 18px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; z-index: 10; opacity: 0;
+    }
+    .sit1 .sit-badge { background: var(--accent); color: white; }
+    .sit2 .sit-badge { background: var(--bg-dark); color: white; }
+    .sit3 .sit-badge { background: var(--accent-soft); color: var(--bg-dark); }
+
+    /* Color variations */
+    .sit2 .split-left { background: #2C1810; }
+    .sit2 .split-right { background: var(--bg-warm); }
+    .sit3 .split-left { background: #0D0D0D; }
+    .sit3 .split-right { background: white; }
+
+    /* TRANSITION */
+    .flash { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--accent); opacity: 0; z-index: 15; }
+
+    /* OUTRO */
+    .outro { background: var(--bg); z-index: 20; flex-direction: column; }
+    .outro-big { font-family: 'DM Serif Display', serif; font-size: 64px; color: var(--heading); text-align: center; line-height: 1.3; opacity: 0; }
+    .outro-big .acc { color: var(--accent); }
+    .outro-line { width: 80px; height: 3px; background: var(--accent); margin: 36px 0; transform-origin: center; transform: scaleX(0); }
+    .outro-cta { font-size: 36px; color: var(--text); opacity: 0; }
+    .outro-url { font-family: 'DM Serif Display', serif; font-size: 44px; color: var(--accent); margin-top: 8px; opacity: 0; }
+  </style>
+</head>
+<body>
+  <div data-composition-id="offres" data-width="1920" data-height="1080" data-start="0" data-duration="24">
+
+    <div class="flash" id="flash"></div>
+
+    <!-- INTRO — Avant / Après -->
+    <div class="screen intro clip" data-start="0" data-duration="3" data-track-index="0">
+      <div class="intro-left" id="i-left">Avant</div>
+      <div class="intro-slash" id="i-slash">/</div>
+      <div class="intro-right" id="i-right">Après</div>
+    </div>
+
+    <!-- SITUATION 1 — Formation -->
+    <div class="screen split sit1 clip" data-start="2.5" data-duration="6" data-track-index="1">
+      <div class="sit-badge" id="sit1-badge">Formation sur-mesure</div>
+      <div class="split-divider" id="d1"></div>
+      <div class="split-left">
+        <div class="split-label split-label-before" id="s1-lb">Avant</div>
+        <div class="before-item" id="b1-1"><span class="x">x</span>Formations génériques</div>
+        <div class="before-item" id="b1-2"><span class="x">x</span>Slides théoriques</div>
+        <div class="before-item" id="b1-3"><span class="x">x</span>Oubliées en 2 semaines</div>
+      </div>
+      <div class="split-right">
+        <div class="split-label split-label-after" id="s1-la">Après</div>
+        <div class="after-item" id="a1-1"><span class="check">&#10003;</span>Cas réels de votre métier</div>
+        <div class="after-item" id="a1-2"><span class="check">&#10003;</span>Pratique immédiate</div>
+        <div class="after-item" id="a1-3"><span class="check">&#10003;</span>Réflexes durables</div>
+      </div>
+    </div>
+
+    <!-- SITUATION 2 — Site web -->
+    <div class="screen split sit2 clip" data-start="8" data-duration="6" data-track-index="2">
+      <div class="sit-badge" id="sit2-badge">Création de site</div>
+      <div class="split-divider" id="d2"></div>
+      <div class="split-left">
+        <div class="split-label split-label-before" id="s2-lb">Avant</div>
+        <div class="before-item" id="b2-1"><span class="x">x</span>Template WordPress</div>
+        <div class="before-item" id="b2-2"><span class="x">x</span>Lent, lourd, générique</div>
+        <div class="before-item" id="b2-3"><span class="x">x</span>Aucune personnalité</div>
+      </div>
+      <div class="split-right">
+        <div class="split-label split-label-after" id="s2-la">Après</div>
+        <div class="after-item" id="a2-1"><span class="check">&#10003;</span>Design sur-mesure</div>
+        <div class="after-item" id="a2-2"><span class="check">&#10003;</span>Ultra-rapide</div>
+        <div class="after-item" id="a2-3"><span class="check">&#10003;</span>Qui vous ressemble</div>
+      </div>
+    </div>
+
+    <!-- SITUATION 3 — Audit + outils -->
+    <div class="screen split sit3 clip" data-start="13.5" data-duration="6" data-track-index="3">
+      <div class="sit-badge" id="sit3-badge">Audit + outils IA</div>
+      <div class="split-divider" id="d3"></div>
+      <div class="split-left">
+        <div class="split-label split-label-before" id="s3-lb">Avant</div>
+        <div class="before-item" id="b3-1"><span class="x">x</span>On sait pas par où commencer</div>
+        <div class="before-item" id="b3-2"><span class="x">x</span>Trop d'outils, zéro stratégie</div>
+        <div class="before-item" id="b3-3"><span class="x">x</span>Budget gaspillé</div>
+      </div>
+      <div class="split-right">
+        <div class="split-label split-label-after" id="s3-la">Après</div>
+        <div class="after-item" id="a3-1"><span class="check">&#10003;</span>Feuille de route claire</div>
+        <div class="after-item" id="a3-2"><span class="check">&#10003;</span>Les bons outils, au bon endroit</div>
+        <div class="after-item" id="a3-3"><span class="check">&#10003;</span>ROI mesurable</div>
+      </div>
+    </div>
+
+    <!-- OUTRO -->
+    <div class="screen outro clip" data-start="19" data-duration="5" data-track-index="4">
+      <div class="outro-big" id="o-big">On part de vos problèmes.<br><span class="acc">Pas de nos solutions.</span></div>
+      <div class="outro-line" id="o-line"></div>
+      <div class="outro-cta" id="o-cta">Une idée ? Appelez-nous.</div>
+      <div class="outro-url" id="o-url">benul-ia.fr</div>
+    </div>
+
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    // Helper: animate a split situation
+    function animSplit(prefix, divId, startT, badgeId) {
+      // Flash transition
+      if (startT > 2) {
+        tl.to('#flash', { opacity: 1, duration: 0.08 }, startT - 0.2);
+        tl.to('#flash', { opacity: 0, duration: 0.15 }, startT - 0.05);
+      }
+
+      tl.to(`.${prefix}`, { opacity: 1, duration: 0.01 }, startT);
+      // Badge
+      tl.fromTo(badgeId, { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, startT + 0.1);
+      // Divider
+      tl.to(divId, { scaleY: 1, duration: 0.4, ease: 'power4.out' }, startT + 0.1);
+      // Labels
+      tl.fromTo(`#${prefix.replace('sit','s')}-lb`, { opacity: 0 },
+        { opacity: 1, duration: 0.3 }, startT + 0.3);
+      tl.fromTo(`#${prefix.replace('sit','s')}-la`, { opacity: 0 },
+        { opacity: 1, duration: 0.3 }, startT + 0.3);
+      // Before items stagger
+      const bPrefix = prefix.replace('sit', 'b');
+      tl.fromTo(`#${bPrefix}-1`, { opacity: 0, x: -40 },
+        { opacity: 1, x: 0, duration: 0.3, ease: 'power4.out' }, startT + 0.5);
+      tl.fromTo(`#${bPrefix}-2`, { opacity: 0, x: -40 },
+        { opacity: 1, x: 0, duration: 0.3, ease: 'power4.out' }, startT + 0.8);
+      tl.fromTo(`#${bPrefix}-3`, { opacity: 0, x: -40 },
+        { opacity: 1, x: 0, duration: 0.3, ease: 'power4.out' }, startT + 1.1);
+      // After items stagger
+      const aPrefix = prefix.replace('sit', 'a');
+      tl.fromTo(`#${aPrefix}-1`, { opacity: 0, x: 40 },
+        { opacity: 1, x: 0, duration: 0.3, ease: 'power4.out' }, startT + 0.6);
+      tl.fromTo(`#${aPrefix}-2`, { opacity: 0, x: 40 },
+        { opacity: 1, x: 0, duration: 0.3, ease: 'power4.out' }, startT + 0.9);
+      tl.fromTo(`#${aPrefix}-3`, { opacity: 0, x: 40 },
+        { opacity: 1, x: 0, duration: 0.3, ease: 'power4.out' }, startT + 1.2);
+    }
+
+    // ===== INTRO (0 → 2.5s) =====
+    tl.to('.intro', { opacity: 1, duration: 0.01 }, 0);
+    tl.fromTo('#i-left', { opacity: 0, x: -100 },
+      { opacity: 1, x: 0, duration: 0.5, ease: 'power4.out' }, 0.2);
+    tl.fromTo('#i-slash', { opacity: 0, scale: 3, rotation: -30 },
+      { opacity: 1, scale: 1, rotation: 0, duration: 0.4, ease: 'back.out(1.7)' }, 0.5);
+    tl.fromTo('#i-right', { opacity: 0, x: 100 },
+      { opacity: 1, x: 0, duration: 0.5, ease: 'power4.out' }, 0.7);
+
+    // ===== SITUATION 1 (2.5 → 8s) =====
+    animSplit('sit1', '#d1', 2.8, '#sit1-badge');
+    tl.to('.sit1', { opacity: 0, duration: 0.2 }, 7.8);
+
+    // ===== SITUATION 2 (8 → 13.5s) =====
+    animSplit('sit2', '#d2', 8, '#sit2-badge');
+    tl.to('.sit2', { opacity: 0, duration: 0.2 }, 13.3);
+
+    // ===== SITUATION 3 (13.5 → 19s) =====
+    animSplit('sit3', '#d3', 13.5, '#sit3-badge');
+    tl.to('.sit3', { opacity: 0, duration: 0.2 }, 18.8);
+
+    // ===== OUTRO (19 → 24s) =====
+    tl.to('.outro', { opacity: 1, duration: 0.01 }, 19);
+    tl.fromTo('#o-big', { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 19.3);
+    tl.to('#o-line', { scaleX: 1, duration: 0.5, ease: 'power4.out' }, 20);
+    tl.fromTo('#o-cta', { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: 'power2.out' }, 20.5);
+    tl.fromTo('#o-url', { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 21);
+    tl.to('body', { opacity: 0, duration: 0.8, ease: 'power2.in' }, 23);
+
+    tl.set({}, {}, 24);
+    window.__timelines = window.__timelines || {};
+    window.__timelines["offres"] = tl;
+  </script>
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero — Ce que l'IA change, concrètement</title>
+
+  <meta name="resolution" content="1920x1080">
+  <meta name="fps" content="30">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #FAFAF8;
+      --bg-warm: #F5F0EB;
+      --bg-dark: #1A1A1A;
+      --accent: #C45D3E;
+      --accent-soft: #E8A990;
+      --heading: #1A1A1A;
+      --text: #4A4A4A;
+    }
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ===== ACT 1 — LE CONSTAT ===== */
+
+    .act1 {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .logo-intro {
+      font-family: 'DM Serif Display', serif;
+      font-size: 72px;
+      color: var(--heading);
+      opacity: 0;
+    }
+
+    .sweep-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--accent);
+      transform-origin: left;
+      transform: scaleX(0);
+    }
+
+    .stat-big {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      opacity: 0;
+    }
+
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 180px;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--heading);
+      margin-top: 8px;
+    }
+
+    .constat-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      max-width: 1200px;
+      opacity: 0;
+    }
+
+    .constat-line1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 52px;
+      color: var(--heading);
+      line-height: 1.3;
+    }
+
+    .constat-line2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 52px;
+      color: var(--accent);
+      line-height: 1.3;
+    }
+
+    /* ===== ACT 2 — LA SOLUTION ===== */
+
+    .act2 {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      opacity: 0;
+    }
+
+    .act2-intro {
+      font-family: 'DM Serif Display', serif;
+      font-size: 64px;
+      color: white;
+      opacity: 0;
+    }
+
+    .cards-row {
+      display: flex;
+      gap: 40px;
+      margin-top: 60px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .card {
+      width: 340px;
+      padding: 48px 36px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      text-align: center;
+      opacity: 0;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 20px;
+    }
+
+    .card-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--accent);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .card-label {
+      font-family: 'DM Serif Display', serif;
+      font-size: 30px;
+      color: white;
+      line-height: 1.3;
+    }
+
+    .punchline {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      max-width: 1100px;
+      opacity: 0;
+    }
+
+    .punchline-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 56px;
+      color: white;
+      line-height: 1.3;
+    }
+
+    .punchline-accent {
+      color: var(--accent-soft);
+    }
+
+    /* ===== ACT 3 — CTA ===== */
+
+    .act3 {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 30;
+      opacity: 0;
+    }
+
+    .cta-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 96px;
+      color: var(--heading);
+      opacity: 0;
+    }
+
+    .cta-line {
+      width: 100px;
+      height: 3px;
+      background: var(--accent);
+      margin: 40px 0;
+      transform-origin: center;
+      transform: scaleX(0);
+    }
+
+    .cta-text {
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--text);
+      opacity: 0;
+    }
+
+    .cta-url {
+      font-family: 'DM Serif Display', serif;
+      font-size: 44px;
+      color: var(--accent);
+      margin-top: 8px;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div data-composition-id="hero-benul" data-width="1920" data-height="1080" data-start="0" data-duration="21">
+
+    <!-- ===== ACT 1 : Le constat (0s → 8s) ===== -->
+    <div class="act1 clip" data-start="0" data-duration="8.5" data-track-index="0">
+
+      <!-- Logo intro -->
+      <div class="logo-intro" id="logo-intro">Benul IA</div>
+
+      <!-- Sweep line -->
+      <div class="sweep-line" id="sweep-line"></div>
+
+      <!-- 80% stat -->
+      <div class="stat-big" id="stat-big">
+        <div class="stat-number">80%</div>
+        <div class="stat-label">des projets IA échouent.</div>
+      </div>
+
+      <!-- Constat explanation -->
+      <div class="constat-text" id="constat-text">
+        <div class="constat-line1">Pas parce que l'IA ne marche pas.</div>
+        <div class="constat-line2">Parce qu'elle n'est pas intégrée au bon endroit.</div>
+      </div>
+    </div>
+
+    <!-- ===== ACT 2 : La solution (8s → 18s) ===== -->
+    <div class="act2 clip" data-start="7.5" data-duration="8.5" data-track-index="1">
+
+      <!-- "On fait autrement" -->
+      <div class="act2-intro" id="act2-intro">On fait autrement.</div>
+
+      <!-- 3 cards -->
+      <div class="cards-row">
+        <div class="card" id="card1">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></div>
+          <div class="card-label">Audit<br>sur-mesure</div>
+        </div>
+        <div class="card" id="card2">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg></div>
+          <div class="card-label">Formation<br>par métier</div>
+        </div>
+        <div class="card" id="card3">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73L13 2.27a2 2 0 0 0-2 0L4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+          <div class="card-label">Livrables<br>concrets</div>
+        </div>
+      </div>
+
+      <!-- Punchline -->
+      <div class="punchline" id="punchline">
+        <div class="punchline-text">Intégré à votre quotidien.<br><span class="punchline-accent">Pas à un PowerPoint.</span></div>
+      </div>
+
+    </div>
+
+    <!-- ===== ACT 3 : CTA (18s → 25s) ===== -->
+    <div class="act3 clip" data-start="15.5" data-duration="5.5" data-track-index="2">
+      <div class="cta-logo" id="cta-logo">Benul IA</div>
+      <div class="cta-line" id="cta-line"></div>
+      <div class="cta-text" id="cta-text">Une idée ? Appelez-nous.</div>
+      <div class="cta-url" id="cta-url">benul-ia.fr</div>
+    </div>
+
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    // ============================================
+    // ACT 1 — LE CONSTAT (0s → 8s)
+    // ============================================
+
+    // 0-1.5s — Logo apparaît en fondu puis monte vers le haut
+    tl.fromTo('#logo-intro',
+      { opacity: 0, scale: 0.9 },
+      { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' },
+      0
+    );
+    tl.to('#logo-intro',
+      { opacity: 0, y: -60, scale: 0.8, duration: 0.5, ease: 'power2.in' },
+      1.5
+    );
+
+    // 1.8s — Ligne terracotta balaie l'écran
+    tl.to('#sweep-line',
+      { scaleX: 1, duration: 0.5, ease: 'power4.out' },
+      1.8
+    );
+    tl.to('#sweep-line',
+      { opacity: 0, duration: 0.3, ease: 'power2.in' },
+      2.3
+    );
+
+    // 2.5s — "80%" apparaît avec scale-up
+    tl.fromTo('#stat-big',
+      { opacity: 0, scale: 0.7 },
+      { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.4)' },
+      2.5
+    );
+    // Léger pulse sur le chiffre
+    tl.fromTo('.stat-number',
+      { scale: 1 },
+      { scale: 1.05, duration: 0.3, ease: 'power2.inOut', yoyo: true, repeat: 1 },
+      3.2
+    );
+
+    // 4.5s — Stat sort
+    tl.to('#stat-big',
+      { opacity: 0, y: -30, duration: 0.4, ease: 'power2.in' },
+      4.5
+    );
+
+    // 5.2s — Texte constat slide up
+    tl.fromTo('#constat-text',
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+      5.2
+    );
+    // Constat sort
+    tl.to('#constat-text',
+      { opacity: 0, y: -30, duration: 0.4, ease: 'power2.in' },
+      7.5
+    );
+
+    // ============================================
+    // ACT 2 — LA SOLUTION (8s → 18s)
+    // ============================================
+
+    // 7.5s — Flash de transition : fond sombre apparaît
+    tl.fromTo('.act2',
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: 'power2.out' },
+      7.5
+    );
+
+    // 8s — "On fait autrement." apparaît
+    tl.fromTo('#act2-intro',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+      8.2
+    );
+    tl.to('#act2-intro',
+      { opacity: 0, duration: 0.3, ease: 'power2.in' },
+      9.5
+    );
+
+    // 10s — Cards glissent une par une (stagger 0.8s)
+    tl.fromTo('#card1',
+      { opacity: 0, x: -80 },
+      { opacity: 1, x: 0, duration: 0.5, ease: 'power4.out' },
+      10
+    );
+    tl.fromTo('#card2',
+      { opacity: 0, x: -80 },
+      { opacity: 1, x: 0, duration: 0.5, ease: 'power4.out' },
+      10.8
+    );
+    tl.fromTo('#card3',
+      { opacity: 0, x: -80 },
+      { opacity: 1, x: 0, duration: 0.5, ease: 'power4.out' },
+      11.6
+    );
+
+    // 12.5s — Cards sortent
+    tl.to('.card',
+      { opacity: 0, scale: 0.9, duration: 0.4, ease: 'power2.in', stagger: 0.1 },
+      12.5
+    );
+
+    // 13s — Punchline apparaît en scale
+    tl.fromTo('#punchline',
+      { opacity: 0, scale: 0.85 },
+      { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.2)' },
+      13.2
+    );
+    tl.to('#punchline',
+      { opacity: 0, y: -30, duration: 0.4, ease: 'power2.in' },
+      15
+    );
+
+    // ============================================
+    // ACT 3 — CTA (15.5s → 21s)
+    // ============================================
+
+    // 15.5s — Fond crème revient
+    tl.fromTo('.act3',
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: 'power2.out' },
+      15.5
+    );
+
+    // 16.2s — Logo centré
+    tl.fromTo('#cta-logo',
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+      16.2
+    );
+
+    // 17s — Ligne terracotta s'étend
+    tl.to('#cta-line',
+      { scaleX: 1, duration: 0.5, ease: 'power4.out' },
+      17
+    );
+
+    // 17.8s — Texte CTA
+    tl.fromTo('#cta-text',
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: 'power2.out' },
+      17.8
+    );
+
+    // 18.3s — URL
+    tl.fromTo('#cta-url',
+      { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+      18.3
+    );
+
+    // 20s — Fade out final
+    tl.to('body',
+      { opacity: 0, duration: 0.8, ease: 'power2.in' },
+      20
+    );
+
+    // Extend timeline to 21s
+    tl.set({}, {}, 21);
+
+    // Register
+    window.__timelines = window.__timelines || {};
+    window.__timelines["hero-benul"] = tl;
+  </script>
+
+</body>
+</html>

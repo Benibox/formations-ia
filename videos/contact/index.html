@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact — On commence quand ?</title>
+  <meta name="resolution" content="1920x1080">
+  <meta name="fps" content="30">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #FAFAF8;
+      --bg-warm: #F5F0EB;
+      --bg-dark: #1A1A1A;
+      --accent: #C45D3E;
+      --accent-soft: #E8A990;
+      --heading: #1A1A1A;
+      --text: #4A4A4A;
+    }
+    body { width: 1920px; height: 1080px; font-family: 'DM Sans', sans-serif; background: #000; overflow: hidden; position: relative; }
+    .screen { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; display: flex; align-items: center; justify-content: center; opacity: 0; overflow: hidden; }
+
+    /* SCREEN 1 — Question cascade */
+    .q-screen { background: var(--bg-dark); z-index: 1; flex-direction: column; gap: 0; }
+    .q-word {
+      font-family: 'DM Serif Display', serif;
+      font-size: 100px;
+      color: white;
+      line-height: 1.1;
+      opacity: 0;
+    }
+    .q-word.acc { color: var(--accent); }
+    .q-mark {
+      font-family: 'DM Serif Display', serif;
+      font-size: 400px;
+      color: var(--accent);
+      position: absolute;
+      right: 120px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+    }
+
+    /* SCREEN 2 — Rapid text flashes */
+    .flash-screen { z-index: 2; }
+    .flash-word {
+      position: absolute;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 900;
+      font-size: 140px;
+      text-transform: uppercase;
+      opacity: 0;
+    }
+    .fw1 { background: var(--accent); color: white; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+    .fw2 { background: var(--bg); color: var(--heading); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+    .fw3 { background: var(--bg-dark); color: var(--accent); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+
+    /* SCREEN 3 — Breathing circle */
+    .circle-screen { background: var(--bg-dark); z-index: 3; }
+    .breath-circle {
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0;
+    }
+    .circle-text {
+      position: absolute;
+      font-family: 'DM Serif Display', serif;
+      font-size: 56px;
+      color: white;
+      text-align: center;
+      line-height: 1.3;
+      opacity: 0;
+    }
+
+    /* SCREEN 4 — Expanding bars */
+    .bars-screen { z-index: 4; background: var(--bg); }
+    .bar {
+      position: absolute;
+      left: 0;
+      height: 216px;
+      display: flex;
+      align-items: center;
+      padding-left: 80px;
+      width: 0;
+    }
+    .bar-1 { top: 0; background: var(--bg-dark); }
+    .bar-2 { top: 216px; background: var(--accent); }
+    .bar-3 { top: 432px; background: var(--bg-warm); }
+    .bar-4 { top: 648px; background: var(--bg-dark); }
+    .bar-5 { top: 864px; background: var(--accent); }
+    .bar-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px;
+      white-space: nowrap;
+      opacity: 0;
+    }
+    .bar-1 .bar-text, .bar-4 .bar-text { color: white; }
+    .bar-2 .bar-text, .bar-5 .bar-text { color: white; }
+    .bar-3 .bar-text { color: var(--heading); }
+
+    /* SCREEN 5 — Converge */
+    .converge { z-index: 5; background: var(--bg-dark); flex-direction: column; }
+    .conv-line {
+      font-family: 'DM Serif Display', serif;
+      font-size: 72px;
+      color: white;
+      text-align: center;
+      opacity: 0;
+    }
+    .conv-line .acc { color: var(--accent-soft); }
+    .conv-arrow {
+      width: 60px; height: 60px;
+      margin-top: 40px;
+      opacity: 0;
+    }
+    .conv-arrow svg { width: 100%; height: 100%; stroke: var(--accent); stroke-width: 2; fill: none; }
+
+    /* SCREEN 6 — CTA finale */
+    .cta-screen { z-index: 6; background: var(--bg); flex-direction: column; }
+    .cta-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 100px;
+      color: var(--heading);
+      opacity: 0;
+    }
+    .cta-divider {
+      width: 100px; height: 3px;
+      background: var(--accent);
+      margin: 36px 0;
+      transform-origin: center;
+      transform: scaleX(0);
+    }
+    .cta-main {
+      font-family: 'DM Serif Display', serif;
+      font-size: 64px;
+      color: var(--heading);
+      text-align: center;
+      line-height: 1.3;
+      opacity: 0;
+    }
+    .cta-main .acc { color: var(--accent); }
+    .cta-sub {
+      font-size: 32px;
+      color: var(--text);
+      margin-top: 32px;
+      opacity: 0;
+    }
+    .cta-url {
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px;
+      color: var(--accent);
+      margin-top: 12px;
+      opacity: 0;
+    }
+
+    /* Floating shapes (CTA background) */
+    .float-shape {
+      position: absolute;
+      opacity: 0;
+    }
+    .fs1 { width: 200px; height: 200px; border: 2px solid var(--accent-soft); border-radius: 50%; top: 80px; left: 100px; }
+    .fs2 { width: 150px; height: 150px; background: var(--bg-warm); top: 700px; right: 150px; }
+    .fs3 { width: 100px; height: 100px; background: var(--accent); opacity: 0.06; border-radius: 50%; bottom: 120px; left: 300px; }
+    .fs4 { width: 250px; height: 3px; background: var(--accent-soft); top: 200px; right: 0; transform-origin: right; }
+    .fs5 { width: 3px; height: 200px; background: var(--bg-warm); bottom: 0; left: 400px; transform-origin: bottom; }
+  </style>
+</head>
+<body>
+  <div data-composition-id="contact" data-width="1920" data-height="1080" data-start="0" data-duration="20">
+
+    <!-- SCREEN 1 — Question: "Vous avez une idée ?" -->
+    <div class="screen q-screen clip" data-start="0" data-duration="3.5" data-track-index="0">
+      <div style="text-align: center;">
+        <div class="q-word" id="q1">Vous</div>
+        <div class="q-word" id="q2">avez</div>
+        <div class="q-word acc" id="q3">une idée</div>
+      </div>
+      <div class="q-mark" id="q-mark">?</div>
+    </div>
+
+    <!-- SCREEN 2 — Rapid word flashes -->
+    <div class="screen flash-screen clip" data-start="3" data-duration="2.5" data-track-index="1">
+      <div class="flash-word fw1" id="fw1">Concrétisez.</div>
+      <div class="flash-word fw2" id="fw2">Structurez.</div>
+      <div class="flash-word fw3" id="fw3">Lancez.</div>
+    </div>
+
+    <!-- SCREEN 3 — Breathing circle -->
+    <div class="screen circle-screen clip" data-start="5" data-duration="3" data-track-index="2">
+      <div class="breath-circle" id="breath"></div>
+      <div class="circle-text" id="c-text">On est là<br>pour ça.</div>
+    </div>
+
+    <!-- SCREEN 4 — Expanding bars -->
+    <div class="screen bars-screen clip" data-start="7.5" data-duration="3.5" data-track-index="3">
+      <div class="bar bar-1" id="bar1"><div class="bar-text" id="bt1">Un appel</div></div>
+      <div class="bar bar-2" id="bar2"><div class="bar-text" id="bt2">Un échange</div></div>
+      <div class="bar bar-3" id="bar3"><div class="bar-text" id="bt3">Un plan d'action</div></div>
+      <div class="bar bar-4" id="bar4"><div class="bar-text" id="bt4">Des résultats</div></div>
+      <div class="bar bar-5" id="bar5"><div class="bar-text" id="bt5">C'est aussi simple que ça</div></div>
+    </div>
+
+    <!-- SCREEN 5 — Converge -->
+    <div class="screen converge clip" data-start="10.5" data-duration="3.5" data-track-index="4">
+      <div class="conv-line" id="cv1">Pas de jargon.</div>
+      <div class="conv-line" id="cv2">Pas de bullshit.</div>
+      <div class="conv-line" id="cv3">Juste <span class="acc">ce qui marche.</span></div>
+      <div class="conv-arrow" id="cv-arrow"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="18"/><polyline points="6 12 12 18 18 12"/></svg></div>
+    </div>
+
+    <!-- SCREEN 6 — CTA finale -->
+    <div class="screen cta-screen clip" data-start="13.5" data-duration="6.5" data-track-index="5">
+      <div class="float-shape fs1"></div>
+      <div class="float-shape fs2"></div>
+      <div class="float-shape fs3"></div>
+      <div class="float-shape fs4"></div>
+      <div class="float-shape fs5"></div>
+      <div class="cta-logo" id="ct-logo">Benul IA</div>
+      <div class="cta-divider" id="ct-div"></div>
+      <div class="cta-main" id="ct-main">On commence <span class="acc">quand ?</span></div>
+      <div class="cta-sub" id="ct-sub">Une idée ? Appelez-nous.</div>
+      <div class="cta-url" id="ct-url">benul-ia.fr</div>
+    </div>
+
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    // ===== SCREEN 1 — Question cascade (0 → 3s) =====
+    tl.to('.q-screen', { opacity: 1, duration: 0.01 }, 0);
+    tl.fromTo('#q1', { opacity: 0, y: 60 },
+      { opacity: 1, y: 0, duration: 0.3, ease: 'power4.out' }, 0.2);
+    tl.fromTo('#q2', { opacity: 0, y: 60 },
+      { opacity: 1, y: 0, duration: 0.3, ease: 'power4.out' }, 0.5);
+    tl.fromTo('#q3', { opacity: 0, y: 60 },
+      { opacity: 1, y: 0, duration: 0.4, ease: 'power4.out' }, 0.8);
+    tl.fromTo('#q-mark', { opacity: 0, scale: 5, rotation: -20 },
+      { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(1.5)' }, 1.2);
+    // Pulse the question mark
+    tl.to('#q-mark', { scale: 1.1, duration: 0.2, ease: 'power2.inOut', yoyo: true, repeat: 1 }, 1.8);
+    tl.to('.q-screen', { opacity: 0, duration: 0.15 }, 2.9);
+
+    // ===== SCREEN 2 — Rapid word flashes (3 → 5s) =====
+    tl.to('.flash-screen', { opacity: 1, duration: 0.01 }, 3);
+    // Each word flashes for ~0.5s
+    tl.to('#fw1', { opacity: 1, duration: 0.01 }, 3);
+    tl.fromTo('#fw1', { scale: 1.1 }, { scale: 1, duration: 0.4, ease: 'power2.out' }, 3);
+    tl.to('#fw1', { opacity: 0, duration: 0.01 }, 3.55);
+
+    tl.to('#fw2', { opacity: 1, duration: 0.01 }, 3.6);
+    tl.fromTo('#fw2', { scale: 1.1 }, { scale: 1, duration: 0.4, ease: 'power2.out' }, 3.6);
+    tl.to('#fw2', { opacity: 0, duration: 0.01 }, 4.15);
+
+    tl.to('#fw3', { opacity: 1, duration: 0.01 }, 4.2);
+    tl.fromTo('#fw3', { scale: 1.1 }, { scale: 1, duration: 0.4, ease: 'power2.out' }, 4.2);
+    tl.to('#fw3', { opacity: 0, duration: 0.15 }, 4.8);
+    tl.to('.flash-screen', { opacity: 0, duration: 0.01 }, 5);
+
+    // ===== SCREEN 3 — Breathing circle (5 → 7.5s) =====
+    tl.to('.circle-screen', { opacity: 1, duration: 0.01 }, 5);
+    tl.fromTo('#breath', { opacity: 0, scale: 0 },
+      { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' }, 5);
+    // Breathe
+    tl.to('#breath', { scale: 1.3, duration: 0.8, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 5.8);
+    // Text over circle
+    tl.fromTo('#c-text', { opacity: 0, scale: 0.8 },
+      { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' }, 5.8);
+    tl.to('.circle-screen', { opacity: 0, duration: 0.2 }, 7.3);
+
+    // ===== SCREEN 4 — Expanding bars (7.5 → 10.5s) =====
+    tl.to('.bars-screen', { opacity: 1, duration: 0.01 }, 7.5);
+    // Bars expand with stagger
+    tl.to('#bar1', { width: '70%', duration: 0.4, ease: 'power4.out' }, 7.6);
+    tl.to('#bt1', { opacity: 1, duration: 0.2 }, 7.8);
+    tl.to('#bar2', { width: '80%', duration: 0.4, ease: 'power4.out' }, 7.9);
+    tl.to('#bt2', { opacity: 1, duration: 0.2 }, 8.1);
+    tl.to('#bar3', { width: '90%', duration: 0.4, ease: 'power4.out' }, 8.2);
+    tl.to('#bt3', { opacity: 1, duration: 0.2 }, 8.4);
+    tl.to('#bar4', { width: '95%', duration: 0.4, ease: 'power4.out' }, 8.5);
+    tl.to('#bt4', { opacity: 1, duration: 0.2 }, 8.7);
+    tl.to('#bar5', { width: '100%', duration: 0.4, ease: 'power4.out' }, 8.8);
+    tl.to('#bt5', { opacity: 1, duration: 0.2 }, 9.0);
+    tl.to('.bars-screen', { opacity: 0, duration: 0.2 }, 10.3);
+
+    // ===== SCREEN 5 — Converge (10.5 → 13.5s) =====
+    tl.to('.converge', { opacity: 1, duration: 0.01 }, 10.5);
+    tl.fromTo('#cv1', { opacity: 0, x: -60 },
+      { opacity: 1, x: 0, duration: 0.4, ease: 'power4.out' }, 10.7);
+    tl.fromTo('#cv2', { opacity: 0, x: 60 },
+      { opacity: 1, x: 0, duration: 0.4, ease: 'power4.out' }, 11.2);
+    tl.fromTo('#cv3', { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 11.7);
+    tl.fromTo('#cv-arrow', { opacity: 0, y: -20 },
+      { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 12.3);
+    // Arrow bounces
+    tl.to('#cv-arrow', { y: 15, duration: 0.3, ease: 'sine.inOut', yoyo: true, repeat: 2 }, 12.5);
+    tl.to('.converge', { opacity: 0, duration: 0.2 }, 13.3);
+
+    // ===== SCREEN 6 — CTA (13.5 → 20s) =====
+    tl.to('.cta-screen', { opacity: 1, duration: 0.01 }, 13.5);
+
+    // Floating shapes drift in
+    tl.fromTo('.fs1', { opacity: 0, scale: 0 },
+      { opacity: 0.15, scale: 1, duration: 0.8, ease: 'power2.out' }, 13.5);
+    tl.fromTo('.fs2', { opacity: 0, rotation: 45 },
+      { opacity: 0.08, rotation: 0, duration: 0.8, ease: 'power2.out' }, 13.7);
+    tl.fromTo('.fs3', { opacity: 0 },
+      { opacity: 0.06, duration: 0.6 }, 13.8);
+    tl.fromTo('.fs4', { opacity: 0, scaleX: 0 },
+      { opacity: 0.15, scaleX: 1, duration: 0.6, ease: 'power4.out' }, 13.9);
+    tl.fromTo('.fs5', { opacity: 0, scaleY: 0 },
+      { opacity: 0.1, scaleY: 1, duration: 0.6, ease: 'power4.out' }, 14.0);
+    // Shapes drift
+    tl.to('.fs1', { y: -30, rotation: 10, duration: 5, ease: 'none' }, 13.5);
+    tl.to('.fs2', { y: 20, rotation: -5, duration: 5, ease: 'none' }, 13.5);
+
+    // Logo
+    tl.fromTo('#ct-logo', { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 14);
+    // Divider
+    tl.to('#ct-div', { scaleX: 1, duration: 0.5, ease: 'power4.out' }, 14.6);
+    // Main CTA
+    tl.fromTo('#ct-main', { opacity: 0, scale: 0.9 },
+      { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' }, 15.2);
+    // Sub
+    tl.fromTo('#ct-sub', { opacity: 0 },
+      { opacity: 1, duration: 0.4 }, 15.8);
+    // URL
+    tl.fromTo('#ct-url', { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 16.2);
+
+    // Fade out
+    tl.to('body', { opacity: 0, duration: 1, ease: 'power2.in' }, 18.8);
+
+    tl.set({}, {}, 20);
+    window.__timelines = window.__timelines || {};
+    window.__timelines["contact"] = tl;
+  </script>
+</body>
+</html>

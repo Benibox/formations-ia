@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Showreel — Benul IA</title>
+
+  <meta name="resolution" content="1920x1080">
+  <meta name="fps" content="30">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #FAFAF8;
+      --bg-warm: #F5F0EB;
+      --bg-dark: #1A1A1A;
+      --accent: #C45D3E;
+      --accent-soft: #E8A990;
+      --accent-deep: #9B3A24;
+      --heading: #1A1A1A;
+      --text: #4A4A4A;
+    }
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      font-family: 'DM Sans', sans-serif;
+      background: #000;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .screen {
+      position: absolute;
+      top: 0; left: 0;
+      width: 1920px;
+      height: 1080px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      overflow: hidden;
+    }
+
+    /* ===== SCREEN 1 — INTRO FLASH ===== */
+    .s1 {
+      background: #000;
+      z-index: 1;
+    }
+    .s1-letter {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 280px;
+      font-weight: 900;
+      color: white;
+      display: inline-block;
+      opacity: 0;
+      letter-spacing: 0.05em;
+    }
+    .s1-flash {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: white;
+      opacity: 0;
+    }
+
+    /* ===== SCREEN 2 — TERRACOTTA BLAST ===== */
+    .s2 {
+      background: var(--accent);
+      z-index: 2;
+    }
+    .s2-circle {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+    .s2-c1 { width: 600px; height: 600px; top: -100px; right: -100px; }
+    .s2-c2 { width: 400px; height: 400px; bottom: -80px; left: -60px; }
+    .s2-c3 { width: 250px; height: 250px; top: 50%; left: 15%; }
+    .s2-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 320px;
+      color: var(--bg);
+      line-height: 1;
+      opacity: 0;
+      z-index: 1;
+    }
+    .s2-sub {
+      position: absolute;
+      bottom: 120px;
+      font-size: 42px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0;
+    }
+
+    /* ===== SCREEN 3 — DIAGONAL SPLIT ===== */
+    .s3 {
+      z-index: 3;
+    }
+    .s3-left {
+      position: absolute;
+      top: 0; left: 0;
+      width: 50%;
+      height: 100%;
+      background: var(--bg-dark);
+      clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .s3-right {
+      position: absolute;
+      top: 0; right: 0;
+      width: 55%;
+      height: 100%;
+      background: var(--bg);
+      clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .s3-text-left {
+      font-family: 'DM Serif Display', serif;
+      font-size: 88px;
+      color: white;
+      opacity: 0;
+      margin-right: 60px;
+    }
+    .s3-text-right {
+      font-family: 'DM Serif Display', serif;
+      font-size: 88px;
+      color: var(--accent);
+      opacity: 0;
+      margin-left: 60px;
+    }
+    .s3-line {
+      position: absolute;
+      top: 0;
+      left: 48%;
+      width: 4px;
+      height: 100%;
+      background: var(--accent);
+      transform-origin: top;
+      transform: scaleY(0);
+    }
+
+    /* ===== SCREEN 4 — FLYING WORDS ===== */
+    .s4 {
+      background: var(--bg-dark);
+      z-index: 4;
+    }
+    .s4-word {
+      position: absolute;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      opacity: 0;
+      white-space: nowrap;
+    }
+    .s4-w1 { font-size: 72px; color: var(--accent); top: 15%; left: -300px; }
+    .s4-w2 { font-size: 56px; color: var(--accent-soft); top: 30%; right: -300px; }
+    .s4-w3 { font-size: 84px; color: white; top: 48%; left: -400px; }
+    .s4-w4 { font-size: 48px; color: var(--bg-warm); top: 62%; right: -300px; }
+    .s4-w5 { font-size: 64px; color: var(--accent); top: 78%; left: -350px; }
+    .s4-w6 { font-size: 52px; color: rgba(255,255,255,0.5); top: 8%; right: -250px; }
+    .s4-w7 { font-size: 68px; color: var(--accent-soft); top: 88%; right: -300px; }
+    .s4-dot {
+      position: absolute;
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    /* ===== SCREEN 5 — 3 PANELS ===== */
+    .s5 {
+      background: var(--bg-warm);
+      z-index: 5;
+      gap: 0;
+    }
+    .s5-panel {
+      width: 640px;
+      height: 1080px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+    }
+    .s5-p1 { background: var(--bg); }
+    .s5-p2 { background: var(--accent); }
+    .s5-p3 { background: var(--bg-dark); }
+    .s5-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 32px;
+    }
+    .s5-icon svg {
+      width: 100%; height: 100%;
+      stroke-width: 1.5;
+      fill: none;
+    }
+    .s5-p1 .s5-icon svg { stroke: var(--accent); }
+    .s5-p2 .s5-icon svg { stroke: white; }
+    .s5-p3 .s5-icon svg { stroke: var(--accent-soft); }
+    .s5-label {
+      font-family: 'DM Serif Display', serif;
+      font-size: 44px;
+      line-height: 1.3;
+      text-align: center;
+    }
+    .s5-p1 .s5-label { color: var(--heading); }
+    .s5-p2 .s5-label { color: white; }
+    .s5-p3 .s5-label { color: white; }
+    .s5-number {
+      font-size: 160px;
+      font-weight: 900;
+      position: absolute;
+      opacity: 0.04;
+    }
+    .s5-p1 .s5-number { color: var(--accent); top: 60px; }
+    .s5-p2 .s5-number { color: white; top: 60px; }
+    .s5-p3 .s5-number { color: white; top: 60px; }
+
+    /* ===== SCREEN 6 — PUNCHLINE ===== */
+    .s6 {
+      z-index: 6;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, #2A1A14 50%, var(--accent-deep) 100%);
+    }
+    .s6-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 80px;
+      color: white;
+      text-align: center;
+      line-height: 1.25;
+      opacity: 0;
+    }
+    .s6-accent { color: var(--accent-soft); }
+    .s6-line-left, .s6-line-right {
+      position: absolute;
+      top: 50%;
+      height: 2px;
+      background: var(--accent);
+      width: 200px;
+    }
+    .s6-line-left { left: 80px; transform-origin: left; transform: scaleX(0); }
+    .s6-line-right { right: 80px; transform-origin: right; transform: scaleX(0); }
+    .s6-glow {
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(196,93,62,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    /* ===== SCREEN 7 — GEOMETRIC ABSTRACT ===== */
+    .s7 {
+      z-index: 7;
+      background: var(--bg);
+    }
+    .s7-shape {
+      position: absolute;
+      opacity: 0;
+    }
+    .s7-rect1 {
+      width: 400px; height: 400px;
+      background: var(--accent);
+      top: 100px; left: 200px;
+    }
+    .s7-rect2 {
+      width: 300px; height: 600px;
+      background: var(--bg-dark);
+      top: 200px; right: 300px;
+    }
+    .s7-circle1 {
+      width: 350px; height: 350px;
+      background: var(--accent-soft);
+      border-radius: 50%;
+      bottom: 100px; left: 500px;
+    }
+    .s7-circle2 {
+      width: 200px; height: 200px;
+      border: 3px solid var(--accent);
+      border-radius: 50%;
+      top: 80px; right: 200px;
+    }
+    .s7-line1 {
+      width: 600px; height: 3px;
+      background: var(--accent);
+      top: 540px; left: 0;
+      transform-origin: left;
+    }
+    .s7-line2 {
+      width: 3px; height: 400px;
+      background: var(--bg-dark);
+      top: 0; left: 960px;
+      transform-origin: top;
+    }
+    .s7-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 64px;
+      color: var(--heading);
+      z-index: 2;
+      opacity: 0;
+    }
+
+    /* ===== SCREEN 8 — CTA ===== */
+    .s8 {
+      z-index: 8;
+      background: var(--bg);
+      flex-direction: column;
+    }
+    .s8-circle-bg {
+      position: absolute;
+      width: 0; height: 0;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .s8-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 110px;
+      color: var(--heading);
+      opacity: 0;
+      z-index: 1;
+    }
+    .s8-line {
+      width: 120px;
+      height: 3px;
+      background: var(--accent);
+      margin: 36px 0;
+      transform-origin: center;
+      transform: scaleX(0);
+      z-index: 1;
+    }
+    .s8-cta {
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px;
+      color: var(--text);
+      opacity: 0;
+      z-index: 1;
+    }
+    .s8-url {
+      font-family: 'DM Serif Display', serif;
+      font-size: 52px;
+      color: var(--accent);
+      margin-top: 12px;
+      opacity: 0;
+      z-index: 1;
+    }
+    .s8-dots {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+    }
+    .s8-dot {
+      position: absolute;
+      width: 6px; height: 6px;
+      background: var(--accent-soft);
+      border-radius: 50%;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div data-composition-id="showreel-benul" data-width="1920" data-height="1080" data-start="0" data-duration="22">
+
+    <!-- SCREEN 1 — "ET SI" intro flash -->
+    <div class="screen s1 clip" data-start="0" data-duration="2.5" data-track-index="0">
+      <div>
+        <span class="s1-letter" id="l-e">E</span>
+        <span class="s1-letter" id="l-t">T</span>
+        <span class="s1-letter" style="width:60px; display:inline-block;"></span>
+        <span class="s1-letter" id="l-s">S</span>
+        <span class="s1-letter" id="l-i">I</span>
+      </div>
+      <div class="s1-flash" id="s1-flash"></div>
+    </div>
+
+    <!-- SCREEN 2 — Terracotta "L'IA" -->
+    <div class="screen s2 clip" data-start="1.8" data-duration="2.5" data-track-index="1">
+      <div class="s2-circle s2-c1"></div>
+      <div class="s2-circle s2-c2"></div>
+      <div class="s2-circle s2-c3"></div>
+      <div class="s2-text" id="s2-text">L'IA</div>
+      <div class="s2-sub" id="s2-sub">changeait la donne ?</div>
+    </div>
+
+    <!-- SCREEN 3 — Diagonal split -->
+    <div class="screen s3 clip" data-start="3.8" data-duration="2.5" data-track-index="2">
+      <div class="s3-left">
+        <div class="s3-text-left" id="s3-tl">Pas un<br>gadget.</div>
+      </div>
+      <div class="s3-right">
+        <div class="s3-text-right" id="s3-tr">Un<br>levier.</div>
+      </div>
+      <div class="s3-line" id="s3-line"></div>
+    </div>
+
+    <!-- SCREEN 4 — Flying words (tasks) -->
+    <div class="screen s4 clip" data-start="5.5" data-duration="3" data-track-index="3">
+      <div class="s4-word s4-w1" id="w1">Emails</div>
+      <div class="s4-word s4-w2" id="w2">Rapports</div>
+      <div class="s4-word s4-w3" id="w3">Analyses</div>
+      <div class="s4-word s4-w4" id="w4">Planning</div>
+      <div class="s4-word s4-w5" id="w5">Rédaction</div>
+      <div class="s4-word s4-w6" id="w6">Veille</div>
+      <div class="s4-word s4-w7" id="w7">Factures</div>
+      <!-- Dot grid -->
+      <div class="s4-dot" id="d1" style="top:20%;left:10%"></div>
+      <div class="s4-dot" id="d2" style="top:40%;left:30%"></div>
+      <div class="s4-dot" id="d3" style="top:60%;left:50%"></div>
+      <div class="s4-dot" id="d4" style="top:80%;left:70%"></div>
+      <div class="s4-dot" id="d5" style="top:35%;left:85%"></div>
+      <div class="s4-dot" id="d6" style="top:70%;left:20%"></div>
+      <div class="s4-dot" id="d7" style="top:15%;left:60%"></div>
+      <div class="s4-dot" id="d8" style="top:90%;left:45%"></div>
+    </div>
+
+    <!-- SCREEN 5 — 3 panels (services) -->
+    <div class="screen s5 clip" data-start="7.8" data-duration="3" data-track-index="4">
+      <div class="s5-panel s5-p1" id="p1">
+        <div class="s5-number">01</div>
+        <div class="s5-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></div>
+        <div class="s5-label">Audit<br>sur-mesure</div>
+      </div>
+      <div class="s5-panel s5-p2" id="p2">
+        <div class="s5-number">02</div>
+        <div class="s5-icon"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg></div>
+        <div class="s5-label">Formation<br>par métier</div>
+      </div>
+      <div class="s5-panel s5-p3" id="p3">
+        <div class="s5-number">03</div>
+        <div class="s5-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73L13 2.27a2 2 0 0 0-2 0L4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <div class="s5-label">Livrables<br>concrets</div>
+      </div>
+    </div>
+
+    <!-- SCREEN 6 — Punchline -->
+    <div class="screen s6 clip" data-start="10.2" data-duration="3" data-track-index="5">
+      <div class="s6-glow" id="s6-glow"></div>
+      <div class="s6-text" id="s6-text">Intégré à votre quotidien.<br><span class="s6-accent">Pas à un PowerPoint.</span></div>
+      <div class="s6-line-left" id="s6-ll"></div>
+      <div class="s6-line-right" id="s6-lr"></div>
+    </div>
+
+    <!-- SCREEN 7 — Geometric abstract -->
+    <div class="screen s7 clip" data-start="12.8" data-duration="3" data-track-index="6">
+      <div class="s7-shape s7-rect1" id="r1"></div>
+      <div class="s7-shape s7-rect2" id="r2"></div>
+      <div class="s7-shape s7-circle1" id="c1"></div>
+      <div class="s7-shape s7-circle2" id="c2"></div>
+      <div class="s7-shape s7-line1" id="gl1"></div>
+      <div class="s7-shape s7-line2" id="gl2"></div>
+      <div class="s7-logo" id="s7-logo">Benul IA</div>
+    </div>
+
+    <!-- SCREEN 8 — CTA final -->
+    <div class="screen s8 clip" data-start="15.2" data-duration="6.8" data-track-index="7">
+      <div class="s8-dots">
+        <div class="s8-dot" style="top:10%;left:8%"></div>
+        <div class="s8-dot" style="top:20%;left:85%"></div>
+        <div class="s8-dot" style="top:75%;left:12%"></div>
+        <div class="s8-dot" style="top:85%;left:78%"></div>
+        <div class="s8-dot" style="top:45%;left:5%"></div>
+        <div class="s8-dot" style="top:30%;left:92%"></div>
+        <div class="s8-dot" style="top:90%;left:50%"></div>
+        <div class="s8-dot" style="top:5%;left:45%"></div>
+      </div>
+      <div class="s8-circle-bg" id="s8-circle"></div>
+      <div class="s8-logo" id="s8-logo">Benul IA</div>
+      <div class="s8-line" id="s8-line"></div>
+      <div class="s8-cta" id="s8-cta">Une idée ? Appelez-nous.</div>
+      <div class="s8-url" id="s8-url">benul-ia.fr</div>
+    </div>
+
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    // ============================================
+    // SCREEN 1 — "ET SI" (0s → 1.8s)
+    // Letters slam in from different angles
+    // ============================================
+    tl.to('.s1', { opacity: 1, duration: 0.01 }, 0);
+
+    tl.fromTo('#l-e', { opacity: 0, y: -200, rotation: -15 },
+      { opacity: 1, y: 0, rotation: 0, duration: 0.3, ease: 'power4.out' }, 0.1);
+    tl.fromTo('#l-t', { opacity: 0, x: 200 },
+      { opacity: 1, x: 0, duration: 0.3, ease: 'power4.out' }, 0.2);
+    tl.fromTo('#l-s', { opacity: 0, y: 200, rotation: 10 },
+      { opacity: 1, y: 0, rotation: 0, duration: 0.3, ease: 'power4.out' }, 0.35);
+    tl.fromTo('#l-i', { opacity: 0, scale: 3 },
+      { opacity: 1, scale: 1, duration: 0.3, ease: 'power4.out' }, 0.45);
+
+    // Flash to white
+    tl.to('#s1-flash', { opacity: 1, duration: 0.08 }, 1.5);
+    tl.to('.s1', { opacity: 0, duration: 0.01 }, 1.8);
+
+    // ============================================
+    // SCREEN 2 — Terracotta "L'IA" (1.8s → 3.8s)
+    // ============================================
+    tl.to('.s2', { opacity: 1, duration: 0.01 }, 1.8);
+
+    // Circles expand
+    tl.fromTo('.s2-c1', { scale: 0 }, { scale: 1, duration: 0.8, ease: 'power2.out' }, 1.8);
+    tl.fromTo('.s2-c2', { scale: 0 }, { scale: 1, duration: 0.6, ease: 'power2.out' }, 2.0);
+    tl.fromTo('.s2-c3', { scale: 0 }, { scale: 1, duration: 0.5, ease: 'power2.out' }, 2.1);
+    // Circles rotate slowly
+    tl.to('.s2-c1', { rotation: 15, duration: 2, ease: 'none' }, 1.8);
+    tl.to('.s2-c3', { rotation: -10, x: 30, duration: 2, ease: 'none' }, 1.8);
+
+    // "L'IA" scales up from nothing
+    tl.fromTo('#s2-text', { opacity: 0, scale: 0.3 },
+      { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 1.9);
+    // Subtitle slides up
+    tl.fromTo('#s2-sub', { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 2.5);
+
+    // Exit — scale up and fade
+    tl.to('#s2-text', { scale: 1.5, opacity: 0, duration: 0.3, ease: 'power2.in' }, 3.5);
+    tl.to('.s2', { opacity: 0, duration: 0.15 }, 3.75);
+
+    // ============================================
+    // SCREEN 3 — Diagonal split (3.8s → 5.5s)
+    // ============================================
+    tl.to('.s3', { opacity: 1, duration: 0.01 }, 3.8);
+
+    // Line draws first
+    tl.to('#s3-line', { scaleY: 1, duration: 0.4, ease: 'power4.out' }, 3.8);
+    // Text slides in from sides
+    tl.fromTo('#s3-tl', { opacity: 0, x: -80 },
+      { opacity: 1, x: 0, duration: 0.5, ease: 'power4.out' }, 4.0);
+    tl.fromTo('#s3-tr', { opacity: 0, x: 80 },
+      { opacity: 1, x: 0, duration: 0.5, ease: 'power4.out' }, 4.2);
+
+    // Exit
+    tl.to('.s3', { opacity: 0, duration: 0.2, ease: 'power2.in' }, 5.3);
+
+    // ============================================
+    // SCREEN 4 — Flying words (5.5s → 7.8s)
+    // ============================================
+    tl.to('.s4', { opacity: 1, duration: 0.01 }, 5.5);
+
+    // Dots appear
+    tl.to('.s4-dot', { opacity: 0.4, duration: 0.3, stagger: 0.04 }, 5.5);
+    tl.to('.s4-dot', { scale: 1.5, duration: 2, ease: 'none', stagger: 0.1 }, 5.5);
+
+    // Words fly across screen at different speeds
+    tl.to('#w1', { opacity: 1, x: 2200, duration: 1.8, ease: 'power1.inOut' }, 5.5);
+    tl.to('#w2', { opacity: 1, x: -2200, duration: 1.6, ease: 'power1.inOut' }, 5.6);
+    tl.to('#w3', { opacity: 1, x: 2400, duration: 1.5, ease: 'power1.inOut' }, 5.7);
+    tl.to('#w4', { opacity: 1, x: -2200, duration: 1.7, ease: 'power1.inOut' }, 5.8);
+    tl.to('#w5', { opacity: 1, x: 2300, duration: 1.4, ease: 'power1.inOut' }, 5.9);
+    tl.to('#w6', { opacity: 1, x: -2100, duration: 1.5, ease: 'power1.inOut' }, 5.6);
+    tl.to('#w7', { opacity: 1, x: -2200, duration: 1.6, ease: 'power1.inOut' }, 5.8);
+
+    // Exit
+    tl.to('.s4', { opacity: 0, duration: 0.2 }, 7.6);
+
+    // ============================================
+    // SCREEN 5 — 3 Panels (7.8s → 10.2s)
+    // ============================================
+    tl.to('.s5', { opacity: 1, duration: 0.01 }, 7.8);
+
+    // Panels slide up staggered from bottom
+    tl.fromTo('#p1', { opacity: 0, y: 1080 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power4.out' }, 7.9);
+    tl.fromTo('#p2', { opacity: 0, y: 1080 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power4.out' }, 8.2);
+    tl.fromTo('#p3', { opacity: 0, y: 1080 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power4.out' }, 8.5);
+
+    // Exit — panels slide out to top
+    tl.to('#p1', { y: -1080, duration: 0.4, ease: 'power2.in' }, 9.7);
+    tl.to('#p2', { y: -1080, duration: 0.4, ease: 'power2.in' }, 9.8);
+    tl.to('#p3', { y: -1080, duration: 0.4, ease: 'power2.in' }, 9.9);
+    tl.to('.s5', { opacity: 0, duration: 0.01 }, 10.2);
+
+    // ============================================
+    // SCREEN 6 — Punchline (10.2s → 12.8s)
+    // ============================================
+    tl.to('.s6', { opacity: 1, duration: 0.01 }, 10.2);
+
+    // Glow pulses in
+    tl.fromTo('#s6-glow', { opacity: 0, scale: 0.5 },
+      { opacity: 1, scale: 1, duration: 1, ease: 'power2.out' }, 10.2);
+
+    // Lines extend from sides
+    tl.to('#s6-ll', { scaleX: 1, duration: 0.5, ease: 'power4.out' }, 10.3);
+    tl.to('#s6-lr', { scaleX: 1, duration: 0.5, ease: 'power4.out' }, 10.3);
+
+    // Text appears with scale
+    tl.fromTo('#s6-text', { opacity: 0, scale: 0.8, y: 20 },
+      { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: 'back.out(1.2)' }, 10.5);
+
+    // Exit
+    tl.to('.s6', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 12.5);
+
+    // ============================================
+    // SCREEN 7 — Geometric abstract (12.8s → 15.2s)
+    // ============================================
+    tl.to('.s7', { opacity: 1, duration: 0.01 }, 12.8);
+
+    // Shapes pop in rapidly, scattered
+    tl.fromTo('#r1', { opacity: 0, scale: 0, rotation: -20 },
+      { opacity: 1, scale: 1, rotation: 0, duration: 0.4, ease: 'back.out(1.5)' }, 12.9);
+    tl.fromTo('#r2', { opacity: 0, x: 200 },
+      { opacity: 1, x: 0, duration: 0.4, ease: 'power4.out' }, 13.1);
+    tl.fromTo('#c1', { opacity: 0, scale: 0 },
+      { opacity: 1, scale: 1, duration: 0.5, ease: 'elastic.out(1, 0.5)' }, 13.2);
+    tl.fromTo('#c2', { opacity: 0, scale: 0 },
+      { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }, 13.3);
+    tl.fromTo('#gl1', { opacity: 0, scaleX: 0 },
+      { opacity: 1, scaleX: 1, duration: 0.4, ease: 'power4.out' }, 13.4);
+    tl.fromTo('#gl2', { opacity: 0, scaleY: 0 },
+      { opacity: 1, scaleY: 1, duration: 0.4, ease: 'power4.out' }, 13.4);
+
+    // Shapes drift subtly
+    tl.to('#r1', { rotation: 5, x: 20, duration: 2, ease: 'none' }, 13);
+    tl.to('#c1', { y: -20, duration: 2, ease: 'none' }, 13);
+    tl.to('#c2', { rotation: 90, duration: 2, ease: 'none' }, 13);
+
+    // Logo appears in center over shapes
+    tl.fromTo('#s7-logo', { opacity: 0, scale: 0.8 },
+      { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' }, 13.8);
+
+    // Everything compresses to center and fades
+    tl.to('.s7-shape', { scale: 0.3, opacity: 0, duration: 0.4, ease: 'power2.in' }, 14.8);
+    tl.to('#s7-logo', { scale: 1.3, opacity: 0, duration: 0.3, ease: 'power2.in' }, 14.9);
+    tl.to('.s7', { opacity: 0, duration: 0.01 }, 15.2);
+
+    // ============================================
+    // SCREEN 8 — CTA (15.2s → 22s)
+    // ============================================
+    tl.to('.s8', { opacity: 1, duration: 0.01 }, 15.2);
+
+    // Terracotta circle expands from center then shrinks back
+    tl.fromTo('#s8-circle',
+      { width: 0, height: 0, left: '50%', top: '50%', x: '-50%', y: '-50%' },
+      { width: 2800, height: 2800, duration: 0.6, ease: 'power4.out' }, 15.2);
+    tl.to('#s8-circle',
+      { width: 0, height: 0, duration: 0.5, ease: 'power2.in' }, 16.0);
+
+    // Dots float in
+    tl.to('.s8-dot', { opacity: 0.3, duration: 0.8, stagger: 0.05 }, 15.5);
+    tl.to('.s8-dot', { y: -20, duration: 5, ease: 'sine.inOut', stagger: 0.2 }, 15.5);
+
+    // Logo
+    tl.fromTo('#s8-logo', { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 16.5);
+
+    // Line extends
+    tl.to('#s8-line', { scaleX: 1, duration: 0.5, ease: 'power4.out' }, 17.2);
+
+    // CTA text
+    tl.fromTo('#s8-cta', { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: 'power2.out' }, 17.8);
+
+    // URL
+    tl.fromTo('#s8-url', { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 18.3);
+
+    // Final fade out
+    tl.to('body', { opacity: 0, duration: 1, ease: 'power2.in' }, 20.8);
+
+    // Extend
+    tl.set({}, {}, 22);
+
+    // Register
+    window.__timelines = window.__timelines || {};
+    window.__timelines["showreel-benul"] = tl;
+  </script>
+
+</body>
+</html>

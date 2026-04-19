@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentions légales — Benul IA</title>
+  <meta name="description" content="Mentions légales du site benul-ia.fr — Benul IA, consultant en transformation IA.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+.legal-page {
+  max-width: 750px; margin: 0 auto;
+  padding: 10rem 2rem 5rem;
+}
+.legal-page h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem; color: var(--heading);
+  margin-bottom: 0.5rem;
+}
+.legal-page .subtitle {
+  color: var(--text-light); font-size: 0.95rem; margin-bottom: 3rem;
+}
+.legal-page h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem; color: var(--heading);
+  margin-top: 2.5rem; margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.legal-page p {
+  font-size: 0.95rem; color: var(--text);
+  line-height: 1.8; margin-bottom: 0.8rem;
+}
+.legal-page strong { color: var(--heading); }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Benul <span class="logo-ia">IA</span></a>
+  <ul class="nav-links">
+    <li><a href="methode.html">Méthode</a></li>
+    <li><a href="offres.html">Ce qu'on fait</a></li>
+    <li><a href="veille.html">Veille IA</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Parlons-en</a>
+  <button class="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="methode.html">Méthode</a>
+  <a href="offres.html">Ce qu'on fait</a>
+  <a href="veille.html">Veille IA</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="mobile-cta">Parlons-en</a>
+</div>
+
+<div class="legal-page">
+  <h1>Mentions légales</h1>
+  <p class="subtitle">Conformément à la loi n° 2004-575 du 21 juin 2004 (LCEN).</p>
+
+  <h2>Éditeur du site</h2>
+  <p><strong>Nom :</strong> Ethan Ben Amram</p>
+  <p><strong>Nom commercial :</strong> Benul IA</p>
+  <p><strong>Statut :</strong> Entrepreneur individuel</p>
+  <p><strong>Email :</strong> contact@benul-ia.fr</p>
+  <p><strong>Téléphone :</strong> 06 79 97 90 26</p>
+  <p><strong>Site web :</strong> https://benul-ia.fr</p>
+
+  <h2>Hébergeur</h2>
+  <p><strong>Raison sociale :</strong> Cloudflare, Inc.</p>
+  <p><strong>Adresse :</strong> 101 Townsend St, San Francisco, CA 94107, États-Unis</p>
+  <p><strong>Site web :</strong> https://www.cloudflare.com</p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>L'ensemble du contenu de ce site (textes, images, design, code source) est la propriété exclusive de Benul IA, sauf mention contraire. Toute reproduction, même partielle, est interdite sans autorisation préalable.</p>
+
+  <h2>Protection des données personnelles</h2>
+  <p>Les données collectées via le formulaire de contact (nom, email, entreprise, message) sont utilisées uniquement pour répondre à votre demande. Elles ne sont ni vendues, ni transmises à des tiers.</p>
+  <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ces droits, contactez-nous à contact@benul-ia.fr.</p>
+  <p><strong>Responsable du traitement :</strong> Ethan Ben Amram — contact@benul-ia.fr</p>
+
+  <h2>Cookies</h2>
+  <p>Ce site n'utilise pas de cookies de tracking ni de cookies publicitaires. Aucun outil de mesure d'audience tiers n'est installé. Seuls des cookies strictement nécessaires au fonctionnement du site peuvent être déposés.</p>
+
+  <h2>Limitation de responsabilité</h2>
+  <p>Benul IA s'efforce de fournir des informations aussi précises que possible sur ce site. Toutefois, il ne peut être tenu responsable des omissions, des inexactitudes ou des carences dans la mise à jour.</p>
+  <p>Les liens hypertextes présents sur ce site peuvent renvoyer vers d'autres sites internet. Benul IA ne saurait être tenu responsable du contenu de ces sites.</p>
+
+  <h2>Crédits</h2>
+  <p><strong>Design et développement :</strong> Benul IA</p>
+  <p><strong>Typographies :</strong> DM Sans &amp; DM Serif Display (Google Fonts, licence Open Font)</p>
+</div>
+
+<footer>
+  <p>&copy; 2026 Benul IA — Consultant en Transformation IA &nbsp;|&nbsp; <a href="mentions-legales.html">Mentions légales</a></p>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+document.querySelector('.hamburger').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow = this.classList.contains('open') ? 'hidden' : '';
+});
+</script>
+</body>
+</html>
