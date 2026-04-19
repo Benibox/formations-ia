@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veille IA — Benul IA</title>
+  <meta name="description" content="Articles pratiques sur l'IA en entreprise : Claude, ChatGPT, AI Act, automatisation. Des explications claires, sans jargon.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Veille IA — Benul IA">
+  <meta property="og:description" content="Articles pratiques sur l'IA en entreprise. Des explications claires, sans jargon.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://benul-ia.fr/veille.html">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Benul IA">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+.veille-hero {
+  padding: 10rem 3rem 4rem;
+  max-width: 900px; margin: 0 auto;
+  text-align: center;
+}
+.veille-hero .eyebrow {
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem;
+  opacity: 0;
+}
+.veille-hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.4rem, 5vw, 3.5rem);
+  color: var(--heading); line-height: 1.15;
+  margin-bottom: 1.5rem; opacity: 0;
+}
+.veille-hero h1 em { color: var(--accent); font-style: italic; }
+.veille-hero p {
+  font-size: 1.1rem; color: var(--text); line-height: 1.7;
+  max-width: 550px; margin: 0 auto; opacity: 0;
+}
+
+/* Articles grid */
+.articles-grid {
+  max-width: 1100px; margin: 0 auto;
+  padding: 0 3rem 6rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.article-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all 0.3s;
+  opacity: 0;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+.article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-border);
+}
+
+.card-tag-bar {
+  padding: 1.2rem 1.8rem 0;
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+}
+.card-tag {
+  padding: 0.3rem 0.8rem;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 50px;
+  font-size: 0.7rem; font-weight: 600;
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card-body {
+  padding: 1.2rem 1.8rem 1.8rem;
+  flex: 1; display: flex; flex-direction: column;
+}
+.card-date {
+  font-size: 0.78rem; color: var(--text-light);
+  margin-bottom: 0.6rem;
+}
+.card-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem; color: var(--heading);
+  line-height: 1.3; margin-bottom: 0.8rem;
+}
+.card-excerpt {
+  font-size: 0.9rem; color: var(--text);
+  line-height: 1.65; flex: 1;
+}
+.card-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--accent); font-weight: 600; font-size: 0.88rem;
+  margin-top: 1.2rem; transition: gap 0.3s;
+}
+.article-card:hover .card-link { gap: 12px; }
+
+/* CTA */
+.veille-cta {
+  padding: 4rem 3rem 6rem;
+  text-align: center;
+}
+.veille-cta p {
+  font-size: 1rem; color: var(--text-light);
+  max-width: 450px; margin: 0 auto 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .veille-hero { padding: 8rem 1.5rem 3rem; }
+  .articles-grid { padding: 0 1.5rem 4rem; grid-template-columns: 1fr; }
+  .veille-cta { padding: 3rem 1.5rem 4rem; }
+}
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Benul <span class="logo-ia">IA</span></a>
+  <ul class="nav-links">
+    <li><a href="methode.html">Méthode</a></li>
+    <li><a href="offres.html">Ce qu'on fait</a></li>
+    <li><a href="veille.html" class="active">Veille IA</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Parlons-en</a>
+  <button class="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="methode.html">Méthode</a>
+  <a href="offres.html">Ce qu'on fait</a>
+  <a href="veille.html">Veille IA</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="mobile-cta">Parlons-en</a>
+</div>
+
+<section class="veille-hero">
+  <div class="eyebrow">Veille IA</div>
+  <h1>L'IA expliquée <em>simplement.</em></h1>
+  <p>Des articles pratiques pour comprendre l'IA, ses outils, et comment l'utiliser concrètement dans votre entreprise. Sans jargon, sans hype.</p>
+</section>
+
+<div class="articles-grid">
+
+  <a href="articles/claude-vs-chatgpt.html" class="article-card">
+    <div class="card-tag-bar">
+      <span class="card-tag">Outils</span>
+      <span class="card-tag">Comparatif</span>
+    </div>
+    <div class="card-body">
+      <div class="card-date">15 avril 2026</div>
+      <h2 class="card-title">Claude vs ChatGPT : lequel choisir pour votre entreprise ?</h2>
+      <p class="card-excerpt">Deux outils, deux philosophies. On compare Claude (Anthropic) et ChatGPT (OpenAI) sur les critères qui comptent vraiment en entreprise.</p>
+      <span class="card-link">Lire l'article →</span>
+    </div>
+  </a>
+
+  <a href="articles/ai-act-article-4.html" class="article-card">
+    <div class="card-tag-bar">
+      <span class="card-tag">Réglementation</span>
+      <span class="card-tag">AI Act</span>
+    </div>
+    <div class="card-body">
+      <div class="card-date">10 avril 2026</div>
+      <h2 class="card-title">AI Act, Article 4 : ce que ça change concrètement pour votre entreprise</h2>
+      <p class="card-excerpt">Depuis février 2025, la littératie IA est une obligation légale. Voici ce que ça veut dire en pratique — et comment vous y conformer sans panique.</p>
+      <span class="card-link">Lire l'article →</span>
+    </div>
+  </a>
+
+  <a href="articles/5-usages-ia-entreprise.html" class="article-card">
+    <div class="card-tag-bar">
+      <span class="card-tag">Pratique</span>
+      <span class="card-tag">Cas d'usage</span>
+    </div>
+    <div class="card-body">
+      <div class="card-date">3 avril 2026</div>
+      <h2 class="card-title">5 utilisations concrètes de l'IA que vos équipes peuvent adopter cette semaine</h2>
+      <p class="card-excerpt">Pas de robots, pas de science-fiction. Cinq cas d'usage simples, testés, et qui font gagner du temps dès le premier jour.</p>
+      <span class="card-link">Lire l'article →</span>
+    </div>
+  </a>
+
+</div>
+
+<div class="veille-cta">
+  <p>Vous voulez qu'on vous aide à intégrer ces outils dans votre quotidien ?</p>
+  <a href="contact.html" class="btn btn-primary">Parlons-en <span>→</span></a>
+</div>
+
+<footer>
+  <p>&copy; 2026 Benul IA — Consultant en Transformation IA &nbsp;|&nbsp; <a href="mentions-legales.html">Mentions légales</a></p>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+document.querySelector('.hamburger').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow = this.classList.contains('open') ? 'hidden' : '';
+});
+
+// Hero
+const tl = gsap.timeline({ delay: 0.3 });
+tl.to('.eyebrow', { opacity: 1, duration: 0.6 })
+  .to('.veille-hero h1', { opacity: 1, duration: 0.7 }, '-=0.3')
+  .to('.veille-hero p', { opacity: 1, duration: 0.6 }, '-=0.3');
+
+// Cards
+document.querySelectorAll('.article-card').forEach((card, i) => {
+  gsap.set(card, { y: 30 });
+  ScrollTrigger.create({
+    trigger: card, start: 'top 88%',
+    onEnter: () => gsap.to(card, { opacity: 1, y: 0, duration: 0.6, delay: i * 0.1, ease: 'power2.out' })
+  });
+});
+</script>
+</body>
+</html>
