@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt : le guide pour obtenir ce que vous voulez de l'IA — Benul IA</title>
+  <meta name="description" content="Prompt engineering et prompt evaluation expliqués simplement. Les techniques concrètes pour écrire de meilleurs prompts et tester qu'ils fonctionnent vraiment.">
+  <meta property="og:title" content="Prompt : le guide pour obtenir ce que vous voulez de l'IA">
+  <meta property="og:description" content="Les techniques de prompt engineering et d'évaluation, expliquées sans jargon. Avec des exemples concrets pour l'entreprise.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://benul-ia.fr/articles/guide-prompting.html">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Benul IA">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+.article-page { max-width: 720px; margin: 0 auto; padding: 10rem 2rem 5rem; }
+.article-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--accent); text-decoration: none; font-weight: 600;
+  font-size: 0.88rem; margin-bottom: 2rem; transition: gap 0.3s;
+}
+.article-back:hover { gap: 12px; }
+.article-meta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.article-tag {
+  padding: 0.3rem 0.8rem; background: var(--accent-bg);
+  border: 1px solid var(--accent-border); border-radius: 50px;
+  font-size: 0.72rem; font-weight: 600; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.article-date { font-size: 0.85rem; color: var(--text-light); display: flex; align-items: center; }
+.article-page h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--heading); line-height: 1.2; margin-bottom: 1.5rem;
+}
+.article-intro {
+  font-size: 1.15rem; color: var(--text); line-height: 1.75;
+  margin-bottom: 2.5rem; padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.article-page h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem; color: var(--heading);
+  margin-top: 2.5rem; margin-bottom: 1rem;
+}
+.article-page h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.1rem; color: var(--heading);
+  margin-top: 2rem; margin-bottom: 0.8rem;
+}
+.article-page p {
+  font-size: 0.98rem; color: var(--text); line-height: 1.8; margin-bottom: 1.2rem;
+}
+.article-page strong { color: var(--heading); }
+.article-page ul, .article-page ol {
+  margin: 1rem 0 1.5rem 1.5rem; font-size: 0.98rem;
+  color: var(--text); line-height: 1.8;
+}
+.article-page li { margin-bottom: 0.5rem; }
+.callout {
+  background: var(--bg-warm); border-left: 3px solid var(--accent);
+  padding: 1.5rem 2rem; border-radius: 0 12px 12px 0;
+  margin: 2rem 0;
+}
+.callout p { margin-bottom: 0; font-size: 0.95rem; }
+.prompt-example {
+  background: #1a1a1a; color: #e0e0e0;
+  padding: 1.5rem 2rem; border-radius: 12px;
+  margin: 1.5rem 0; font-family: 'DM Sans', monospace;
+  font-size: 0.88rem; line-height: 1.7;
+  overflow-x: auto;
+}
+.prompt-example .prompt-label {
+  color: var(--accent); font-weight: 600;
+  display: block; margin-bottom: 0.5rem;
+  font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.prompt-example .prompt-bad {
+  opacity: 0.5; text-decoration: line-through;
+}
+.prompt-versus {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  margin: 1.5rem 0;
+}
+.prompt-versus .prompt-example { margin: 0; }
+.code-snippet {
+  background: #1a1a1a; color: #b8d4e3;
+  padding: 1.5rem 2rem; border-radius: 12px;
+  margin: 1.5rem 0; font-family: monospace;
+  font-size: 0.82rem; line-height: 1.7;
+  overflow-x: auto;
+}
+.code-snippet .comment { color: #6a9955; }
+.code-snippet .keyword { color: #c586c0; }
+.code-snippet .string { color: #ce9178; }
+.code-snippet .function { color: #dcdcaa; }
+.step-number {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; background: var(--accent);
+  color: white; border-radius: 50%; font-weight: 700;
+  font-size: 0.82rem; margin-right: 0.5rem; flex-shrink: 0;
+}
+.eval-steps {
+  display: flex; flex-direction: column; gap: 1rem;
+  margin: 1.5rem 0;
+}
+.eval-step {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--bg-warm); border-radius: 12px;
+}
+.eval-step p { margin: 0; font-size: 0.92rem; }
+.article-cta {
+  background: var(--bg-dark); color: white;
+  padding: 2.5rem; border-radius: var(--radius);
+  text-align: center; margin-top: 3rem;
+}
+.article-cta h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem; color: white; margin-bottom: 0.8rem;
+}
+.article-cta p { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+.article-cta .btn-primary { display: inline-flex; }
+
+@media (max-width: 900px) {
+  .prompt-versus { grid-template-columns: 1fr; }
+}
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="../index.html" class="nav-logo">Benul <span class="logo-ia">IA</span></a>
+  <ul class="nav-links">
+    <li><a href="../offres.html">Ce qu'on fait</a></li>
+    <li><a href="../veille.html">Nos actus IA</a></li>
+  </ul>
+  <a href="../contact.html" class="nav-cta">Parlons-en</a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../offres.html">Ce qu'on fait</a>
+  <a href="../veille.html">Nos actus IA</a>
+  <a href="../contact.html" class="mobile-cta">Parlons-en</a>
+</div>
+
+<article class="article-page">
+  <a href="../veille.html" class="article-back">← Retour à la veille</a>
+
+  <div class="article-meta">
+    <span class="article-tag">Pratique</span>
+    <span class="article-tag">Guide</span>
+    <span class="article-date">19 avril 2026</span>
+  </div>
+
+  <h1>Prompt : le guide pour obtenir ce que vous voulez de l'IA</h1>
+
+  <p class="article-intro">80 % des gens qui utilisent ChatGPT ou Claude tapent une vague question et espèrent un miracle. Résultat : une réponse générique, trop longue, à côté du sujet. Le problème n'est pas l'outil — c'est l'instruction qu'on lui donne. Ce guide vous montre comment écrire de meilleurs prompts, et surtout, comment vérifier qu'ils marchent vraiment.</p>
+
+  <h2>Un prompt, c'est quoi exactement ?</h2>
+
+  <p>Un prompt, c'est l'instruction que vous envoyez à une IA. Ça peut être une question, une demande, une consigne. Quand vous tapez "résume ce document" dans ChatGPT, c'est un prompt.</p>
+
+  <p>Mais un prompt, c'est aussi la base de tout ce qui se passe en coulisses. Quand une entreprise intègre l'IA dans ses outils via une API, chaque interaction repose sur un prompt envoyé au modèle. Un petit aperçu de ce que ça donne côté technique :</p>
+
+  <div class="code-snippet">
+    <span class="comment"># Un appel simple à l'API Claude</span><br>
+    response = client.messages.<span class="function">create</span>(<br>
+    &nbsp;&nbsp;model=<span class="string">"claude-sonnet-4-6"</span>,<br>
+    &nbsp;&nbsp;max_tokens=<span class="string">1000</span>,<br>
+    &nbsp;&nbsp;messages=[{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"role"</span>: <span class="string">"user"</span>,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"content"</span>: <span class="string">"Résume ce rapport en 5 points clés."</span><br>
+    &nbsp;&nbsp;}]<br>
+    )
+  </div>
+
+  <p>Vous voyez le champ <strong>"content"</strong> ? C'est votre prompt. Le reste — le choix du modèle, la limite de tokens — c'est de la configuration. Mais tout part de cette instruction.</p>
+
+  <p>Les <strong>tokens</strong>, d'ailleurs, c'est simplement la façon dont l'IA découpe le texte pour le traiter : chaque mot, parfois chaque morceau de mot, est un token. "Bonjour tout le monde" = 4 tokens environ. C'est ce qui détermine le coût et la longueur maximale d'une réponse.</p>
+
+  <h2>Les 4 règles d'un bon prompt</h2>
+
+  <p>Le <strong>prompt engineering</strong>, c'est l'art d'écrire des instructions que l'IA comprend bien. Pas besoin d'être développeur — il suffit de connaître quelques principes. Les voici.</p>
+
+  <h3>Règle 1 : Être direct</h3>
+
+  <p>Commencez par un verbe d'action. Dites exactement ce que vous voulez, dès la première phrase. L'IA n'a pas besoin de contexte social — pas de "Bonjour, est-ce que tu pourrais éventuellement...".</p>
+
+  <div class="prompt-versus">
+    <div class="prompt-example">
+      <span class="prompt-label">Avant</span>
+      Bonjour, j'aurais besoin d'aide pour faire un email à un client qui est en retard de paiement, si possible de manière professionnelle.
+    </div>
+    <div class="prompt-example">
+      <span class="prompt-label">Après</span>
+      Rédige un email de relance professionnelle pour un client en retard de paiement de 30 jours. Ton ferme mais courtois. Maximum 150 mots.
+    </div>
+  </div>
+
+  <p>La version "après" est directe, spécifique, et donne des contraintes claires. L'IA sait exactement quoi produire.</p>
+
+  <h3>Règle 2 : Être spécifique</h3>
+
+  <p>Plus votre instruction est précise, meilleur sera le résultat. Donnez le <strong>format</strong> (email, tableau, liste), le <strong>ton</strong> (formel, décontracté), la <strong>longueur</strong>, et les <strong>contraintes</strong> à respecter.</p>
+
+  <div class="prompt-example">
+    <span class="prompt-label">Prompt spécifique</span>
+    Analyse ce cahier des charges et produis :<br>
+    - Une liste des 5 risques principaux, classés par impact<br>
+    - Pour chaque risque : une description en 2 phrases et une action de mitigation<br>
+    - Format : tableau avec colonnes Risque / Impact / Action<br>
+    - Ton : professionnel, destiné à un comité de direction
+  </div>
+
+  <p>Vous pouvez aussi donner des <strong>étapes à suivre</strong> : "D'abord, lis le document en entier. Ensuite, identifie les points de friction. Enfin, propose des solutions." Ça guide le raisonnement de l'IA et améliore la qualité du résultat.</p>
+
+  <h3>Règle 3 : Donner un rôle</h3>
+
+  <p>Quand vous dites à l'IA "Tu es un juriste spécialisé en droit du travail", vous ne faites pas de la fiction — vous activez un mode de réponse différent. L'IA ajuste son vocabulaire, son niveau de détail et ses réflexes en fonction du rôle qu'on lui attribue.</p>
+
+  <p>En termes techniques, c'est ce qu'on appelle un <strong>system prompt</strong> : une instruction de cadrage qui définit le comportement de l'IA avant même qu'elle ne lise votre question.</p>
+
+  <div class="prompt-example">
+    <span class="prompt-label">System prompt (rôle)</span>
+    Tu es un contrôleur de gestion expérimenté dans l'industrie. Tu analyses les chiffres avec rigueur et tu expliques les écarts de manière claire pour des non-financiers.
+  </div>
+
+  <p>Résultat : au lieu d'une réponse générique, vous obtenez une analyse qui parle le langage de votre métier.</p>
+
+  <h3>Règle 4 : Donner un exemple</h3>
+
+  <p>C'est la technique la plus sous-estimée. Montrer à l'IA un exemple de ce que vous attendez — même un seul — améliore radicalement la qualité du résultat. En jargon IA, on appelle ça le <strong>one-shot prompting</strong> (un exemple) ou le <strong>multi-shot prompting</strong> (plusieurs exemples).</p>
+
+  <div class="prompt-example">
+    <span class="prompt-label">Prompt avec exemple</span>
+    Rédige une fiche produit pour notre nouveau logiciel de facturation.<br><br>
+    Voici un exemple du format attendu :<br><br>
+    Nom : GestionPro<br>
+    Accroche : "Simplifiez votre comptabilité en 3 clics"<br>
+    Description : GestionPro automatise la saisie comptable...<br>
+    Points forts : Automatisation / Interface intuitive / Export Excel<br>
+    Tarif : À partir de 29€/mois<br><br>
+    Maintenant, fais la même chose pour notre logiciel "FacturExpress".
+  </div>
+
+  <p>L'IA comprend instantanément la structure, le ton et le niveau de détail attendu. Plus besoin de longues explications.</p>
+
+  <div class="callout">
+    <p><strong>Astuce :</strong> Ces 4 règles se combinent. Un prompt avec un rôle + des contraintes spécifiques + un exemple donnera systématiquement de meilleurs résultats qu'une question vague — quel que soit l'outil utilisé.</p>
+  </div>
+
+  <h2>Le piège : "J'ai testé, ça marche"</h2>
+
+  <p>Vous avez écrit un super prompt. Vous l'avez testé une fois, le résultat était bon. Vous le déployez. Mission accomplie ?</p>
+
+  <p><strong>Non.</strong> C'est le piège dans lequel tombent la plupart des entreprises qui intègrent l'IA.</p>
+
+  <p>Un prompt qui marche une fois ne marche pas forcément à chaque fois. L'IA n'est pas un programme classique : elle a une part d'aléatoire dans ses réponses (ce qu'on appelle la <strong>température</strong> — un réglage qui va de 0 pour des réponses très prévisibles à 1 pour des réponses plus créatives). Le même prompt peut donner un résultat excellent le lundi et médiocre le mercredi.</p>
+
+  <p>C'est là qu'intervient le <strong>prompt evaluation</strong> — tester vos prompts de manière systématique.</p>
+
+  <h2>Tester ses prompts : la méthode</h2>
+
+  <p>L'idée est simple : au lieu de tester votre prompt sur un seul cas, vous le testez sur plusieurs, et vous notez les résultats. Trois étapes :</p>
+
+  <div class="eval-steps">
+    <div class="eval-step">
+      <span class="step-number">1</span>
+      <p><strong>Créer des cas de test.</strong> Listez 5 à 10 situations différentes dans lesquelles votre prompt sera utilisé. Par exemple, pour un prompt de résumé de documents : testez-le sur un contrat, un rapport financier, un cahier des charges, un compte-rendu de réunion, etc.</p>
+    </div>
+    <div class="eval-step">
+      <span class="step-number">2</span>
+      <p><strong>Évaluer les résultats.</strong> Pour chaque cas, notez la qualité de la réponse sur une échelle simple (1 à 10). Le résultat est-il complet ? Correct ? Utilisable en l'état ? Vous pouvez le faire vous-même, ou même demander à une autre IA de noter les réponses.</p>
+    </div>
+    <div class="eval-step">
+      <span class="step-number">3</span>
+      <p><strong>Ajuster et recommencer.</strong> Si votre score moyen est bas, modifiez le prompt (ajoutez des contraintes, un exemple, un rôle) et relancez les mêmes tests. Comparez les scores. Continuez jusqu'à obtenir un résultat fiable.</p>
+    </div>
+  </div>
+
+  <p>En résumé : <strong>écrire → tester → ajuster → re-tester</strong>. C'est exactement ce que font les équipes qui intègrent l'IA sérieusement. Elles ne se contentent pas d'un prompt qui "a l'air de marcher" — elles le prouvent avec des données.</p>
+
+  <div class="callout">
+    <p><strong>En pratique :</strong> Pour l'utilisation quotidienne (ChatGPT, Claude), appliquez les 4 règles et vous aurez déjà de bien meilleurs résultats. L'évaluation systématique devient essentielle quand vous intégrez l'IA dans un outil ou un process métier — là où la fiabilité n'est plus optionnelle.</p>
+  </div>
+
+  <h2>Ce qu'il faut retenir</h2>
+
+  <p>Le <strong>prompt engineering</strong>, c'est écrire des instructions claires, spécifiques, avec un rôle et des exemples. C'est la base — et ça change tout, même pour un usage quotidien.</p>
+
+  <p>Le <strong>prompt evaluation</strong>, c'est tester que vos prompts fonctionnent de manière fiable, pas juste une fois. C'est ce qui sépare un usage amateur d'un usage professionnel de l'IA.</p>
+
+  <p>Les deux vont ensemble. Un bon prompt sans évaluation, c'est un pilote d'avion qui ne regarde pas ses instruments. Une évaluation sans bon prompt, c'est mesurer les performances d'un outil mal réglé.</p>
+
+  <div class="article-cta">
+    <h3>Vous voulez que vos équipes maîtrisent le prompting ?</h3>
+    <p>Nos formations incluent des ateliers pratiques sur le prompt engineering et l'évaluation, adaptés à vos cas d'usage métier.</p>
+    <a href="../contact.html" class="btn btn-primary">Réserver un échange gratuit <span>→</span></a>
+  </div>
+</article>
+
+<footer>
+  <p>&copy; 2026 Benul IA — Consultant en Transformation IA &nbsp;|&nbsp; <a href="../mentions-legales.html">Mentions légales</a></p>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+document.querySelector('.hamburger').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow = this.classList.contains('open') ? 'hidden' : '';
+});
+</script>
+</body>
+</html>
