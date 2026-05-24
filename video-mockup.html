@@ -48,14 +48,18 @@
     z-index: 100;
   }
 
-  /* Vignette */
+  /* Vignette (dark scenes only) */
   .stage::before {
     content: "";
     position: absolute; inset: 0;
     pointer-events: none;
     background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
     z-index: 99;
+    opacity: 1;
+    transition: opacity 400ms ease;
   }
+  .stage.light::before { opacity: 0; }
+  .stage.light::after { opacity: 0; }
 
   .scene {
     position: absolute; inset: 0;
@@ -320,7 +324,7 @@
         <div class="term-title">claude · orchestrator</div>
       </div>
       <div class="term-body" data-lines='[
-        "<span class=muted>$</span> claude &quot;refonte du système de facturation&quot;",
+        "<span class=muted>$</span> claude « refonte du système de facturation »",
         "",
         "<span class=label>›</span> décomposition de la tâche",
         "<span class=label>›</span> 3 sous-agents lancés en parallèle",
@@ -381,6 +385,8 @@
 <script>
   const stage = document.getElementById('stage');
   const scenes = [...document.querySelectorAll('.scene')];
+  // expose for the recorder
+  window.__ready = false;
 
   // Type lines progressively in each term-body
   function revealLines(scene, opts = {}) {
@@ -418,7 +424,7 @@
     { id: 'scene1', at:    0, reveal: { delay: 360 } },
     { id: 'scene2', at: 4800, reveal: { delay: 340 } },
     { id: 'scene3', at: 9600, reveal: { delay: 380 } },
-    { id: 'scene4', at: 13600 },
+    { id: 'scene4', at: 13600, light: true },
   ];
 
   let timers = [];
@@ -440,6 +446,7 @@
         scenes.forEach(s => s.classList.remove('active'));
         const el = document.getElementById(step.id);
         el.classList.add('active');
+        stage.classList.toggle('light', !!step.light);
         if (step.reveal) revealLines(el, step.reveal);
       }, step.at));
     });
@@ -450,7 +457,9 @@
     if (e.code === 'KeyR')  { document.body.classList.toggle('recording'); }
   });
 
-  // autostart shortly after load so OBS / QuickTime can frame up
+  // signal readiness for the recorder; autostart for manual usage
+  window.__ready = true;
+  window.__play = play;
   setTimeout(play, 800);
 </script>
 
