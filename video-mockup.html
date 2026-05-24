@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>Benul IA — mockup video</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --panel: #111114;
+    --panel-2: #15151a;
+    --border: #1f1f26;
+    --text: #d6d6d2;
+    --dim: #6b6b72;
+    --terra: #C45D3E;
+    --green: #7ec48a;
+    --cream: #FAFAF8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #000; overflow: hidden; height: 100%; width: 100%; }
+
+  /* Stage is exactly 1920x1080 — record this region full-screen */
+  .stage {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    background: var(--bg);
+    overflow: hidden;
+    transform-origin: top left;
+    color: var(--text);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  /* fit-to-viewport for preview only — we record at 1:1 via OBS by sizing the window to 1920x1080 */
+  @media (max-width: 1920px) {
+    .stage { transform: scale(calc(100vw / 1920)); }
+  }
+
+  /* Subtle grain over everything */
+  .stage::after {
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 3px 3px;
+    mix-blend-mode: overlay;
+    z-index: 100;
+  }
+
+  /* Vignette */
+  .stage::before {
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+    z-index: 99;
+  }
+
+  .scene {
+    position: absolute; inset: 0;
+    opacity: 0;
+    transition: opacity 600ms ease;
+  }
+  .scene.active { opacity: 1; }
+
+  /* ---------- TERMINAL CHROME ---------- */
+  .term {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 2px 0 rgba(255,255,255,0.02) inset;
+  }
+  .term-head {
+    height: 36px;
+    background: var(--panel-2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 8px;
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: #2a2a30; }
+  .dot.r { background: #4a3030; }
+  .dot.y { background: #4a4030; }
+  .dot.g { background: #2f4a32; }
+  .term-title {
+    margin-left: 14px;
+    font-size: 12px;
+    color: var(--dim);
+    letter-spacing: 0.04em;
+  }
+  .term-body {
+    flex: 1;
+    padding: 18px 22px;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow: hidden;
+    white-space: pre-wrap;
+    position: relative;
+  }
+  .line { opacity: 0; }
+  .line.show { opacity: 1; transition: opacity 220ms ease; }
+  .muted { color: var(--dim); }
+  .accent { color: var(--terra); }
+  .ok { color: var(--green); }
+  .label { color: var(--terra); font-weight: 500; }
+  .cursor {
+    display: inline-block;
+    width: 9px; height: 17px;
+    background: var(--terra);
+    vertical-align: -3px;
+    margin-left: 2px;
+    animation: blink 1s steps(2) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- SCENE 1 : quad ---------- */
+  #scene1 .grid {
+    position: absolute; inset: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 32px;
+  }
+  #scene1 .caption {
+    position: absolute;
+    bottom: 56px; left: 0; right: 0;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--dim);
+    font-size: 18px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 800ms ease 1000ms;
+  }
+  #scene1.active .caption { opacity: 1; }
+
+  /* ---------- SCENE 2 : single terminal centered ---------- */
+  #scene2 .term {
+    position: absolute;
+    top: 110px; bottom: 110px;
+    left: 240px; right: 240px;
+  }
+  #scene2 .term-body { font-size: 19px; line-height: 1.85; }
+
+  /* ---------- SCENE 3 : split terminal + filetree ---------- */
+  #scene3 .left {
+    position: absolute;
+    top: 80px; bottom: 80px; left: 80px;
+    width: 900px;
+  }
+  #scene3 .right {
+    position: absolute;
+    top: 80px; bottom: 80px; right: 80px;
+    width: 780px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 32px;
+    font-size: 16px;
+    line-height: 2;
+  }
+  #scene3 .right h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .file { opacity: 0.35; transition: opacity 300ms ease, color 300ms ease; }
+  .file.done { opacity: 1; color: var(--green); }
+  .file .check { display: inline-block; width: 18px; color: var(--green); opacity: 0; transition: opacity 300ms ease; }
+  .file.done .check { opacity: 1; }
+
+  /* ---------- SCENE 4 : final card ---------- */
+  #scene4 {
+    background: var(--cream);
+  }
+  #scene4 .center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+  #scene4 h1 {
+    font-family: 'DM Serif Display', serif;
+    color: #1A1A1A;
+    font-size: 140px;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    line-height: 1;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1) 200ms,
+                opacity 1200ms ease 200ms;
+  }
+  #scene4 .rule {
+    width: 0; height: 1px; background: #C45D3E;
+    transition: width 1400ms cubic-bezier(0.22, 1, 0.36, 1) 900ms;
+  }
+  #scene4 .sub {
+    font-family: 'DM Sans', sans-serif;
+    color: #1A1A1A;
+    font-size: 22px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: transform 1000ms ease 1400ms, opacity 1000ms ease 1400ms;
+  }
+  #scene4.active h1 { opacity: 1; transform: translateY(0); }
+  #scene4.active .rule { width: 220px; }
+  #scene4.active .sub { opacity: 1; transform: translateY(0); }
+
+  /* ---------- CONTROLS (hidden during recording) ---------- */
+  .ctl {
+    position: fixed;
+    bottom: 16px; left: 16px;
+    z-index: 999;
+    font-family: 'DM Sans', sans-serif;
+    color: #888;
+    font-size: 12px;
+    background: rgba(0,0,0,0.6);
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #222;
+  }
+  .ctl kbd {
+    background: #222; padding: 2px 6px; border-radius: 3px;
+    border: 1px solid #333; color: #ccc;
+  }
+  body.recording .ctl { display: none; }
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+
+  <!-- ============== SCENE 1 : four agents in parallel ============== -->
+  <section class="scene" id="scene1">
+    <div class="grid">
+      <div class="term">
+        <div class="term-head">
+          <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+          <div class="term-title">agent-01 · refactor-auth</div>
+        </div>
+        <div class="term-body" data-lines='[
+          "<span class=muted>$</span> claude --resume refactor-auth",
+          "<span class=label>›</span> analyzing token rotation logic",
+          "<span class=label>›</span> detected race in <span class=accent>session.acquire()</span>",
+          "<span class=label>›</span> drafting migration <span class=accent>0042</span>",
+          "<span class=ok>✓ lock contention resolved</span>",
+          "<span class=ok>✓ 14 files updated</span>"
+        ]'></div>
+      </div>
+
+      <div class="term">
+        <div class="term-head">
+          <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+          <div class="term-title">agent-02 · audit-payments</div>
+        </div>
+        <div class="term-body" data-lines='[
+          "<span class=muted>$</span> claude /audit payments",
+          "<span class=label>›</span> scanning 2 847 transactions",
+          "<span class=label>›</span> cross-checking ledger",
+          "<span class=label>›</span> 3 anomalies surfaced",
+          "<span class=ok>✓ report drafted</span>",
+          "<span class=ok>✓ slack thread opened</span>"
+        ]'></div>
+      </div>
+
+      <div class="term">
+        <div class="term-head">
+          <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+          <div class="term-title">agent-03 · research</div>
+        </div>
+        <div class="term-body" data-lines='[
+          "<span class=muted>$</span> claude /research competitors",
+          "<span class=label>›</span> 12 sources crawled",
+          "<span class=label>›</span> pricing matrix extracted",
+          "<span class=label>›</span> synthesizing positioning",
+          "<span class=ok>✓ memo · 4 pages</span>",
+          "<span class=ok>✓ pushed to notion</span>"
+        ]'></div>
+      </div>
+
+      <div class="term">
+        <div class="term-head">
+          <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+          <div class="term-title">agent-04 · deploy</div>
+        </div>
+        <div class="term-body" data-lines='[
+          "<span class=muted>$</span> claude /ship staging",
+          "<span class=label>›</span> running 247 tests",
+          "<span class=label>›</span> <span class=ok>247 / 247 passed</span>",
+          "<span class=label>›</span> deploying to staging",
+          "<span class=ok>✓ health check OK</span>",
+          "<span class=ok>✓ rollback armed</span>"
+        ]'></div>
+      </div>
+    </div>
+    <div class="caption">quatre agents · une seule personne</div>
+  </section>
+
+  <!-- ============== SCENE 2 : orchestration zoom ============== -->
+  <section class="scene" id="scene2">
+    <div class="term">
+      <div class="term-head">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <div class="term-title">claude · orchestrator</div>
+      </div>
+      <div class="term-body" data-lines='[
+        "<span class=muted>$</span> claude &quot;refonte du système de facturation&quot;",
+        "",
+        "<span class=label>›</span> décomposition de la tâche",
+        "<span class=label>›</span> 3 sous-agents lancés en parallèle",
+        "  <span class=muted>↳</span> <span class=accent>research</span>     schéma existant + dépendances",
+        "  <span class=muted>↳</span> <span class=accent>migration</span>    réécriture postgres + tests",
+        "  <span class=muted>↳</span> <span class=accent>rollback</span>     plan de retour arrière",
+        "<span class=label>›</span> consolidation des sorties",
+        "<span class=label>›</span> application sur <span class=accent>23 fichiers</span>",
+        "<span class=ok>✓ commit · b3a8f12</span>",
+        "<span class=ok>✓ PR ouverte · review demandée</span>"
+      ]'></div>
+    </div>
+  </section>
+
+  <!-- ============== SCENE 3 : split — thinking + files ============== -->
+  <section class="scene" id="scene3">
+    <div class="term left">
+      <div class="term-head">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <div class="term-title">claude · live</div>
+      </div>
+      <div class="term-body" data-lines='[
+        "<span class=label>›</span> exécution en cours",
+        "<span class=label>›</span> écriture des migrations",
+        "<span class=label>›</span> mise à jour des appels client",
+        "<span class=label>›</span> régénération des types",
+        "<span class=label>›</span> lancement des tests"
+      ]' data-cursor="1"></div>
+    </div>
+    <div class="right">
+      <h4>fichiers modifiés</h4>
+      <div class="file" data-delay="200"><span class="check">✓</span> migrations/0042_billing.sql</div>
+      <div class="file" data-delay="500"><span class="check">✓</span> src/billing/invoice.ts</div>
+      <div class="file" data-delay="800"><span class="check">✓</span> src/billing/subscription.ts</div>
+      <div class="file" data-delay="1100"><span class="check">✓</span> src/api/checkout.ts</div>
+      <div class="file" data-delay="1400"><span class="check">✓</span> src/types/billing.d.ts</div>
+      <div class="file" data-delay="1700"><span class="check">✓</span> tests/billing.spec.ts</div>
+      <div class="file" data-delay="2000"><span class="check">✓</span> docs/billing.md</div>
+      <div class="file" data-delay="2300"><span class="check">✓</span> CHANGELOG.md</div>
+    </div>
+  </section>
+
+  <!-- ============== SCENE 4 : à suivre ============== -->
+  <section class="scene" id="scene4">
+    <div class="center">
+      <h1>à suivre.</h1>
+      <div class="rule"></div>
+      <div class="sub">Benul · IA</div>
+    </div>
+  </section>
+
+</div>
+
+<div class="ctl">
+  <kbd>space</kbd> rejouer · <kbd>r</kbd> mode enregistrement
+</div>
+
+<script>
+  const stage = document.getElementById('stage');
+  const scenes = [...document.querySelectorAll('.scene')];
+
+  // Type lines progressively in each term-body
+  function revealLines(scene, opts = {}) {
+    const bodies = scene.querySelectorAll('.term-body[data-lines]');
+    const delayBetween = opts.delay ?? 380;
+    const startDelay = opts.start ?? 250;
+
+    bodies.forEach((body, bodyIdx) => {
+      const lines = JSON.parse(body.dataset.lines);
+      body.innerHTML = '';
+      lines.forEach((html, i) => {
+        const div = document.createElement('div');
+        div.className = 'line';
+        div.innerHTML = html || '&nbsp;';
+        body.appendChild(div);
+        setTimeout(() => div.classList.add('show'),
+          startDelay + bodyIdx * 120 + i * delayBetween);
+      });
+      if (body.dataset.cursor) {
+        const c = document.createElement('span');
+        c.className = 'cursor';
+        setTimeout(() => body.appendChild(c),
+          startDelay + bodyIdx * 120 + lines.length * delayBetween);
+      }
+    });
+
+    // file checkmarks
+    scene.querySelectorAll('.file').forEach(f => {
+      const d = parseInt(f.dataset.delay || 0, 10);
+      setTimeout(() => f.classList.add('done'), startDelay + d);
+    });
+  }
+
+  const timeline = [
+    { id: 'scene1', at:    0, reveal: { delay: 360 } },
+    { id: 'scene2', at: 4800, reveal: { delay: 340 } },
+    { id: 'scene3', at: 9600, reveal: { delay: 380 } },
+    { id: 'scene4', at: 13600 },
+  ];
+
+  let timers = [];
+  function clearAll() {
+    timers.forEach(t => clearTimeout(t));
+    timers = [];
+    scenes.forEach(s => {
+      s.classList.remove('active');
+      s.querySelectorAll('.term-body[data-lines]').forEach(b => b.innerHTML = '');
+      s.querySelectorAll('.file').forEach(f => f.classList.remove('done'));
+    });
+  }
+
+  function play() {
+    clearAll();
+    timeline.forEach((step, i) => {
+      timers.push(setTimeout(() => {
+        // hide previous, show current
+        scenes.forEach(s => s.classList.remove('active'));
+        const el = document.getElementById(step.id);
+        el.classList.add('active');
+        if (step.reveal) revealLines(el, step.reveal);
+      }, step.at));
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') { e.preventDefault(); play(); }
+    if (e.code === 'KeyR')  { document.body.classList.toggle('recording'); }
+  });
+
+  // autostart shortly after load so OBS / QuickTime can frame up
+  setTimeout(play, 800);
+</script>
+
+</body>
+</html>
