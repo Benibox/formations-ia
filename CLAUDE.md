@@ -22,7 +22,8 @@ Formations/
 ├── chatbot.js          # Widget chatbot (bulle en bas a droite)
 ├── functions/
 │   └── api/
-│       └── chat.js     # Cloudflare Function — proxy API Claude (Anthropic)
+│       ├── chat.js     # Cloudflare Function — proxy API Claude (Anthropic)
+│       └── contact.js  # Cloudflare Function — envoi formulaire via FormSubmit
 ├── deploy.sh           # Script de deploiement Cloudflare Pages
 ├── CLAUDE.md           # Ce fichier
 └── .gitignore
@@ -123,7 +124,7 @@ git push origin main
 ## A faire
 
 - [ ] Remplacer le placeholder video par la vraie video HeyGen
-- [ ] Brancher le formulaire de contact (backend ou service tiers type Formspree)
+- [x] ~~Brancher le formulaire de contact~~ — fait via FormSubmit (Cloudflare Function `/api/contact`, envoi vers ethanbenamram99@gmail.com). Premier envoi à valider par mail FormSubmit.
 - [ ] Configurer ANTHROPIC_API_KEY dans Cloudflare pour le chatbot
 - [ ] Connecter le domaine benul-ia.fr au projet Pages
 - [ ] Ajouter les accents francais dans les textes (actuellement sans accents)

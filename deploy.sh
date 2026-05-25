@@ -32,6 +32,7 @@ mkdir -p dist/functions/api
 cp index.html methode.html offres.html contact.html dist/
 cp chatbot.js dist/
 cp functions/api/chat.js dist/functions/api/
+cp functions/api/contact.js dist/functions/api/
 
 echo "Fichiers prets dans ./dist"
 echo ""

@@ -307,29 +307,29 @@
       <form class="contact-form" id="contactForm">
         <div class="form-row">
           <div class="form-group anim-right">
-            <label>Prénom</label>
-            <input type="text" placeholder="Votre prénom" required>
+            <label for="f-prenom">Prénom</label>
+            <input id="f-prenom" name="prenom" type="text" placeholder="Votre prénom" required>
           </div>
           <div class="form-group anim-right">
-            <label>Nom</label>
-            <input type="text" placeholder="Votre nom" required>
+            <label for="f-nom">Nom</label>
+            <input id="f-nom" name="nom" type="text" placeholder="Votre nom" required>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group anim-right">
-            <label>Email</label>
-            <input type="email" placeholder="votre@email.com" required>
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" placeholder="votre@email.com" required>
           </div>
           <div class="form-group anim-right">
-            <label>Entreprise</label>
-            <input type="text" placeholder="Nom de votre entreprise">
+            <label for="f-entreprise">Entreprise</label>
+            <input id="f-entreprise" name="entreprise" type="text" placeholder="Nom de votre entreprise">
           </div>
         </div>
 
         <div class="form-group anim-right">
-          <label>Taille de l'équipe</label>
-          <select>
+          <label for="f-taille">Taille de l'équipe</label>
+          <select id="f-taille" name="taille">
             <option value="" disabled selected>Sélectionnez</option>
             <option>1 - 10 personnes</option>
             <option>11 - 50 personnes</option>
@@ -340,20 +340,25 @@
 
         <div class="form-group anim-right">
           <label>Ce qui vous intéresse</label>
-          <div class="interest-chips">
-            <div class="chip" data-value="formation">Formation sur-mesure</div>
-            <div class="chip" data-value="accompagnement">Accompagnement</div>
-            <div class="chip" data-value="transformation">Transformation complète</div>
-            <div class="chip" data-value="site">Création de site</div>
-            <div class="chip" data-value="audit">Audit IA</div>
-            <div class="chip" data-value="autre">Autre</div>
+          <div class="interest-chips" id="interestChips">
+            <button type="button" class="chip" data-value="Formation sur-mesure">Formation sur-mesure</button>
+            <button type="button" class="chip" data-value="Accompagnement">Accompagnement</button>
+            <button type="button" class="chip" data-value="Transformation complète">Transformation complète</button>
+            <button type="button" class="chip" data-value="Création de site">Création de site</button>
+            <button type="button" class="chip" data-value="Audit IA">Audit IA</button>
+            <button type="button" class="chip" data-value="Autre">Autre</button>
           </div>
         </div>
 
         <div class="form-group anim-right">
-          <label>Votre message</label>
-          <textarea placeholder="Décrivez-nous votre projet, vos défis, vos objectifs..."></textarea>
+          <label for="f-message">Votre message</label>
+          <textarea id="f-message" name="message" placeholder="Décrivez-nous votre projet, vos défis, vos objectifs..."></textarea>
         </div>
+
+        <!-- Honeypot anti-spam -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+
+        <div class="form-error" id="formError" style="display:none;color:#C45D3E;font-size:0.9rem;margin-bottom:0.8rem;"></div>
 
         <button type="submit" class="submit-btn anim-scale">
           Envoyer le message
@@ -392,27 +397,78 @@ document.querySelectorAll('.chip').forEach(chip => {
   chip.addEventListener('click', () => chip.classList.toggle('active'));
 });
 
-// Form submit
-document.getElementById('contactForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const btn = document.querySelector('.submit-btn');
-  btn.innerHTML = '<span style="display:inline-block;width:20px;height:20px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.6s linear infinite;"></span>';
-  const style = document.createElement('style');
-  style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
-  document.head.appendChild(style);
+// Spinner CSS (injected once)
+const spinStyle = document.createElement('style');
+spinStyle.textContent = '@keyframes spin { to { transform: rotate(360deg); } } .submit-spinner { display:inline-block; width:20px; height:20px; border:2px solid rgba(255,255,255,0.3); border-top-color:white; border-radius:50%; animation: spin 0.6s linear infinite; }';
+document.head.appendChild(spinStyle);
 
-  setTimeout(() => {
-    gsap.to('#formContainer', {
-      opacity: 0, y: -20, duration: 0.4,
-      onComplete: () => {
-        document.getElementById('formContainer').style.display = 'none';
-        const msg = document.getElementById('successMsg');
-        msg.classList.add('show');
-        gsap.from(msg, { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' });
-        gsap.from('.success-circle', { scale: 0, duration: 0.5, delay: 0.2, ease: 'back.out(1.7)' });
-      }
+function showSuccess() {
+  gsap.to('#formContainer', {
+    opacity: 0, y: -20, duration: 0.4,
+    onComplete: () => {
+      document.getElementById('formContainer').style.display = 'none';
+      const msg = document.getElementById('successMsg');
+      msg.classList.add('show');
+      gsap.from(msg, { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' });
+      gsap.from('.success-circle', { scale: 0, duration: 0.5, delay: 0.2, ease: 'back.out(1.7)' });
+    }
+  });
+}
+
+// Form submit
+document.getElementById('contactForm').addEventListener('submit', async e => {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+  const btn = form.querySelector('.submit-btn');
+  const errorBox = document.getElementById('formError');
+  const originalChildren = Array.from(btn.childNodes);
+  errorBox.style.display = 'none';
+
+  // Honeypot: if filled, silently pretend success (bot)
+  if (form.querySelector('input[name="_gotcha"]').value) {
+    showSuccess();
+    return;
+  }
+
+  const interets = Array.from(document.querySelectorAll('#interestChips .chip.active'))
+    .map(c => c.dataset.value);
+
+  const payload = {
+    prenom: form.prenom.value.trim(),
+    nom: form.nom.value.trim(),
+    email: form.email.value.trim(),
+    entreprise: form.entreprise.value.trim(),
+    taille: form.taille.value,
+    interets,
+    message: form.message.value.trim(),
+  };
+
+  btn.disabled = true;
+  btn.replaceChildren();
+  const spinner = document.createElement('span');
+  spinner.className = 'submit-spinner';
+  btn.appendChild(spinner);
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
     });
-  }, 1200);
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok || !data.success) {
+      throw new Error(data.error || "Erreur lors de l'envoi.");
+    }
+
+    showSuccess();
+  } catch (err) {
+    btn.disabled = false;
+    btn.replaceChildren(...originalChildren);
+    errorBox.textContent = err.message + ' Réessayez ou écrivez à contact@benul-ia.fr.';
+    errorBox.style.display = 'block';
+  }
 });
 
 // Entrance animations
