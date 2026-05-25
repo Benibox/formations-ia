@@ -2,7 +2,7 @@
 # ============================================
 # Benul IA — Deploiement Cloudflare Pages
 # ============================================
-# Usage : cd ~/Desktop/Formations && bash deploy.sh
+# Usage : cd ~/Desktop/formations-ia && bash deploy.sh
 # ============================================
 
 set -e
@@ -19,27 +19,36 @@ fi
 
 # Verifier qu'on est dans le bon dossier
 if [ ! -f "index.html" ]; then
-    echo "Erreur : index.html non trouve. Lance ce script depuis ~/Desktop/Formations"
+    echo "Erreur : index.html non trouve. Lance ce script depuis la racine du repo."
     exit 1
 fi
 
-# Preparer le dossier dist
+# Preparer le dossier dist (rsync : copie tout sauf ce qui n'est pas du site)
 echo "Preparation des fichiers..."
 rm -rf dist
-mkdir -p dist/functions/api
+mkdir -p dist
 
-# Copier les fichiers du site
-cp index.html methode.html offres.html contact.html dist/
-cp chatbot.js dist/
-cp functions/api/chat.js dist/functions/api/
-cp functions/api/contact.js dist/functions/api/
+rsync -a \
+  --exclude='.git/' \
+  --exclude='.gitignore' \
+  --exclude='.wrangler/' \
+  --exclude='node_modules/' \
+  --exclude='dist/' \
+  --exclude='deploy.sh' \
+  --exclude='CLAUDE.md' \
+  --exclude='videos/' \
+  --exclude='*.pdf' \
+  --exclude='*.docx' \
+  --exclude='.DS_Store' \
+  --exclude='Thumbs.db' \
+  ./ dist/
 
 echo "Fichiers prets dans ./dist"
 echo ""
 
 # Verifier si connecte a Cloudflare
 echo "Verification de la connexion Cloudflare..."
-if ! npx wrangler whoami 2>/dev/null | grep -q "Account"; then
+if ! npx wrangler whoami 2>/dev/null | grep -q "logged in"; then
     echo "Pas encore connecte. Ouverture du navigateur..."
     npx wrangler login
 fi
@@ -52,14 +61,14 @@ npx wrangler pages project create benul-ia --production-branch main 2>/dev/null 
 # Deployer
 echo ""
 echo "Deploiement en cours..."
-npx wrangler pages deploy ./dist --project-name benul-ia
+npx wrangler pages deploy ./dist --project-name benul-ia --branch main --commit-dirty=true
 
 echo ""
 echo "=== Deploiement termine ! ==="
 echo ""
 echo "Site en ligne : https://benul-ia.pages.dev"
 echo ""
-echo "--- Prochaines etapes ---"
+echo "--- Prochaines etapes (si pas deja fait) ---"
 echo ""
 echo "1. Connecter le domaine benul-ia.fr :"
 echo "   Dashboard Cloudflare > Workers & Pages > benul-ia > Custom domains > Add"
