@@ -46,9 +46,10 @@
 }
 
 /* Info cards */
-.info-cards { display: flex; flex-direction: column; gap: 1.2rem; }
+.info-cards { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
 .info-card {
   display: flex; align-items: center; gap: 1.2rem;
+  min-width: 360px;
   padding: 1.2rem 1.5rem;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.06);
@@ -57,7 +58,7 @@
 .info-card:hover {
   background: rgba(255,255,255,0.07);
   border-color: rgba(255,255,255,0.1);
-  transform: translateX(6px);
+  transform: translateY(-2px);
 }
 .info-icon {
   width: 44px; height: 44px; min-width: 44px; border-radius: 12px;
@@ -370,7 +371,7 @@
 <!-- Modal upsell vers le RDV -->
 <div class="modal-backdrop" id="callUpsellModal" role="dialog" aria-modal="true" aria-labelledby="callUpsellTitle">
   <div class="modal-card">
-    <h3 id="callUpsellTitle">Une seconde — un appel direct, ça vous tente ?</h3>
+    <h3 id="callUpsellTitle">Une seconde, un appel direct, ça vous tente ?</h3>
     <p>Un créneau de 30 minutes, c'est souvent plus rapide et plus utile qu'un échange par email. À vous de voir.</p>
     <div class="modal-actions">
       <a href="https://calendar.app.google/qAD2vAAyERZauUFb9" target="_blank" rel="noopener" class="modal-btn-primary" id="modalBookCall">
