@@ -16,7 +16,7 @@ function json(body, status = 200) {
 export async function onRequestPost(context) {
   try {
     const data = await context.request.json();
-    const { prenom, nom, email, entreprise, taille, interets, message } = data;
+    const { prenom, nom, email, telephone, taille, interets } = data;
 
     if (!prenom?.trim() || !nom?.trim() || !email?.trim()) {
       return json({ error: "Prénom, nom et email sont requis." }, 400);
@@ -24,11 +24,8 @@ export async function onRequestPost(context) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return json({ error: "Email invalide." }, 400);
     }
-    if ((message || "").length > 5000) {
-      return json({ error: "Message trop long." }, 400);
-    }
 
-    const subject = `Nouveau message Benul IA — ${prenom} ${nom}`;
+    const subject = `Nouvelle demande de contact Benul IA — ${prenom} ${nom}`;
     const payload = {
       _subject: subject,
       _template: "table",
@@ -36,10 +33,9 @@ export async function onRequestPost(context) {
       Prénom: prenom,
       Nom: nom,
       Email: email,
-      Entreprise: entreprise || "—",
+      Téléphone: telephone || "—",
       "Taille équipe": taille || "—",
       "Centres d'intérêt": (interets && interets.length) ? interets.join(", ") : "—",
-      Message: message || "—",
     };
 
     const res = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
