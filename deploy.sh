@@ -39,6 +39,7 @@ rsync -a \
   --exclude='videos/' \
   --exclude='*.pdf' \
   --exclude='*.docx' \
+  --exclude='*.key' \
   --exclude='.DS_Store' \
   --exclude='Thumbs.db' \
   ./ dist/
