@@ -28,18 +28,14 @@
 .hero {
   min-height: 70vh; padding: 10rem 3rem 5rem;
   display: flex; flex-direction: column; justify-content: center;
+  align-items: center; text-align: center;
   max-width: 1200px; margin: 0 auto;
-}
-.hero-eyebrow {
-  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--accent);
-  margin-bottom: 1.5rem; opacity: 0;
 }
 .hero h1 {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.8rem, 5.5vw, 4.5rem);
-  color: var(--heading); line-height: 1.1;
-  max-width: 900px; margin-bottom: 2rem; opacity: 0;
+  font-size: clamp(2.8rem, 5.5vw, 4rem);
+  color: var(--heading); line-height: 1.15;
+  max-width: 900px; margin-bottom: 2rem;
 }
 .hero h1 em { color: var(--accent); font-style: italic; }
 .hero-desc {
@@ -73,25 +69,12 @@
   display: flex; flex-direction: column; justify-content: center;
   border: 1px solid var(--border);
 }
-.sit-label {
-  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
-  text-transform: uppercase; margin-bottom: 1.2rem;
-}
-.situation-problem .sit-label { color: var(--text-light); }
-.situation-solution .sit-label { color: var(--accent); }
 .sit-title {
   font-family: 'DM Serif Display', serif;
   font-size: 1.6rem; color: var(--heading);
   line-height: 1.25; margin-bottom: 1.2rem;
 }
-.sit-text { font-size: 0.95rem; color: var(--text); line-height: 1.75; margin-bottom: 1.5rem; }
-.sit-deliverables { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; }
-.sit-tag {
-  padding: 0.45rem 1rem; background: var(--accent-bg);
-  border: 1px solid var(--accent-border); border-radius: 50px;
-  font-size: 0.78rem; font-weight: 500; color: var(--accent);
-  white-space: nowrap;
-}
+.sit-text { font-size: 0.95rem; color: var(--text); line-height: 1.75; }
 
 /* ===== PROCESS ===== */
 .process { background: var(--bg-dark); padding: 6rem 3rem; color: white; }
@@ -238,7 +221,6 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-eyebrow">Notre approche</div>
   <h1>Vous nous dites où ça coince.<br><em>On trouve comment l'IA peut aider.</em></h1>
   <p class="hero-desc">Pas de catalogue de formations. Pas de grille tarifaire. On commence par comprendre votre entreprise, et on propose uniquement ce qui a du sens pour vous.</p>
 </section>
@@ -253,60 +235,36 @@
   <!-- Situation 1 -->
   <div class="situation">
     <div class="situation-problem">
-      <div class="sit-label">La situation</div>
       <h3 class="sit-title">Vos équipes passent des heures sur des tâches que l'IA pourrait faire en minutes.</h3>
       <p class="sit-text">Relances manuelles, reformatage de documents, tri d'emails, reporting... Vos collaborateurs savent que l'IA existe, mais personne ne sait par où commencer. Et la formation ChatGPT qu'on vous a proposée ne ressemble en rien à votre quotidien.</p>
     </div>
     <div class="situation-solution">
-      <div class="sit-label">Ce qu'on fait</div>
       <h3 class="sit-title">Formation sur-mesure, adaptée à chaque métier.</h3>
       <p class="sit-text">On ne débarque pas avec un programme tout fait. On observe vos process, on échange avec les équipes, et on construit une formation basée sur vos vrais cas d'usage. Chaque participant repart avec des outils qu'il peut utiliser dès le lendemain.</p>
-      <div class="sit-deliverables">
-        <span class="sit-tag">Prompts personnalisés</span>
-        <span class="sit-tag">Templates réutilisables</span>
-        <span class="sit-tag">Guide interne</span>
-        <span class="sit-tag">Conforme AI Act</span>
-      </div>
     </div>
   </div>
 
   <!-- Situation 2 -->
   <div class="situation">
     <div class="situation-problem">
-      <div class="sit-label">La situation</div>
       <h3 class="sit-title">Vous avez besoin d'un site, mais les devis qu'on vous envoie ne correspondent à rien.</h3>
-      <p class="sit-text">Trop cher, trop vague, ou alors un template WordPress qui ressemble à 10 000 autres sites. Vous voulez quelque chose de propre, qui vous représente, sans payer le prix d'une agence parisienne.</p>
+      <p class="sit-text">Trop cher, trop vague, ou alors un template WordPress qui ressemble à 10 000 autres sites. Vous voulez quelque chose de propre, qui vous représente.</p>
     </div>
     <div class="situation-solution">
-      <div class="sit-label">Ce qu'on fait</div>
       <h3 class="sit-title">Un site qui vous ressemble, pas un template.</h3>
       <p class="sit-text">On construit votre site de A à Z — design, développement, contenu. Pas de CMS à maintenir, pas de page builder à comprendre. Un site rapide, responsive, optimisé pour le référencement, et surtout : qui raconte votre histoire.</p>
-      <div class="sit-deliverables">
-        <span class="sit-tag">Design sur-mesure</span>
-        <span class="sit-tag">Responsive</span>
-        <span class="sit-tag">SEO optimisé</span>
-        <span class="sit-tag">Déploiement inclus</span>
-      </div>
     </div>
   </div>
 
   <!-- Situation 3 -->
   <div class="situation">
     <div class="situation-problem">
-      <div class="sit-label">La situation</div>
       <h3 class="sit-title">Vous savez que l'IA pourrait automatiser certains process, mais vous ne savez pas lesquels.</h3>
       <p class="sit-text">Vous avez lu des articles, vu des démos, mais entre la promesse marketing et la réalité de votre entreprise, il y a un gouffre. Vous cherchez quelqu'un qui comprend à la fois la tech et votre métier.</p>
     </div>
     <div class="situation-solution">
-      <div class="sit-label">Ce qu'on fait</div>
       <h3 class="sit-title">Audit, prototypage, et création d'outils adaptés.</h3>
       <p class="sit-text">On commence par un audit de vos processus pour identifier où l'IA a un vrai impact — pas un impact théorique. Ensuite on construit : agents, workflows automatisés, outils internes. Et on forme vos équipes à les utiliser.</p>
-      <div class="sit-deliverables">
-        <span class="sit-tag">Audit des process</span>
-        <span class="sit-tag">Agents IA</span>
-        <span class="sit-tag">Workflows automatisés</span>
-        <span class="sit-tag">Formation à l'usage</span>
-      </div>
     </div>
   </div>
 </section>
@@ -343,18 +301,15 @@
   </div>
 </section>
 
-<!-- ===== AI ACT ===== -->
-<section class="ai-act">
-  <div class="ai-act-inner">
-    <div class="ai-act-badge">
-      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    </div>
-    <div class="ai-act-content">
-      <h3>AI Act : la littératie IA devient une obligation légale.</h3>
-      <p>L'Article 4 du règlement européen sur l'IA impose aux entreprises déployant des systèmes d'IA de garantir un niveau suffisant de littératie IA pour les personnes qui opèrent ces systèmes. Les sanctions vont de 7,5 à 35 millions d'euros (ou 1,5% à 7% du CA mondial) selon la gravité.</p>
-      <p>Toutes nos formations intègrent cette dimension de conformité. C'est une obligation légale, mais c'est surtout une opportunité de faire monter vos équipes en compétence de manière concrète.</p>
-      <p class="source">Source : Règlement (UE) 2024/1689, Article 4 — applicable depuis février 2025.</p>
-    </div>
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Ça correspond à votre situation ?</h2>
+    <p>Un premier échange de 30 minutes, gratuit et sans engagement. On écoute, on pose des questions, et on vous dit honnêtement si on peut vous aider.</p>
+    <a href="contact.html" class="btn btn-primary">
+      Prendre rendez-vous
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
   </div>
 </section>
 
@@ -392,15 +347,18 @@
   </div>
 </section>
 
-<!-- ===== CTA ===== -->
-<section class="cta-section">
-  <div class="cta-inner">
-    <h2>Ça correspond à votre situation ?</h2>
-    <p>Un premier échange de 30 minutes, gratuit et sans engagement. On écoute, on pose des questions, et on vous dit honnêtement si on peut vous aider.</p>
-    <a href="contact.html" class="btn btn-primary">
-      Prendre rendez-vous
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
+<!-- ===== AI ACT ===== -->
+<section class="ai-act">
+  <div class="ai-act-inner">
+    <div class="ai-act-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="ai-act-content">
+      <h3>AI Act : la littératie IA devient une obligation légale.</h3>
+      <p>L'Article 4 du règlement européen sur l'IA impose aux entreprises déployant des systèmes d'IA de garantir un niveau suffisant de littératie IA pour les personnes qui opèrent ces systèmes.</p>
+      <p>Toutes nos formations intègrent cette dimension de conformité. C'est une obligation légale, mais c'est surtout une opportunité de faire monter vos équipes en compétence de manière concrète.</p>
+      <p class="source">Source : Règlement (UE) 2024/1689, Article 4 — applicable depuis février 2025.</p>
+    </div>
   </div>
 </section>
 
@@ -425,9 +383,7 @@ document.querySelector('.hamburger').addEventListener('click', function() {
 
 // Hero
 const heroTl = gsap.timeline({ delay: 0.3 });
-heroTl.to('.hero-eyebrow', { opacity: 1, duration: 0.6, ease: 'power2.out' })
-      .to('.hero h1', { opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.3')
-      .to('.hero-desc', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3');
+heroTl.to('.hero-desc', { opacity: 1, duration: 0.6, ease: 'power2.out' });
 
 // Situations
 ScrollTrigger.create({
