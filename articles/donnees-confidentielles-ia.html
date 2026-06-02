@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Données confidentielles et IA : ce qu'on peut envoyer à ChatGPT — Benul IA</title>
+  <meta name="description" content="Ce que vous pouvez et ne pouvez pas envoyer à ChatGPT, Claude ou Gemini. Les 3 niveaux de sensibilité, les bons réflexes, et la solution la plus simple pour une PME.">
+  <meta property="og:title" content="Données confidentielles et IA : ce que vous pouvez (et ne pouvez pas) envoyer à ChatGPT">
+  <meta property="og:description" content="Ce qui sort vraiment de votre entreprise quand vous utilisez l'IA — et comment garder le contrôle sans interdire l'outil.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://benul-ia.fr/articles/donnees-confidentielles-ia.html">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Benul IA">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+.article-page { max-width: 720px; margin: 0 auto; padding: 10rem 2rem 5rem; }
+.article-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--accent); text-decoration: none; font-weight: 600;
+  font-size: 0.88rem; margin-bottom: 2rem; transition: gap 0.3s;
+}
+.article-back:hover { gap: 12px; }
+.article-meta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.article-tag {
+  padding: 0.3rem 0.8rem; background: var(--accent-bg);
+  border: 1px solid var(--accent-border); border-radius: 50px;
+  font-size: 0.72rem; font-weight: 600; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.article-date { font-size: 0.85rem; color: var(--text-light); display: flex; align-items: center; }
+.article-page h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--heading); line-height: 1.2; margin-bottom: 1.5rem;
+}
+.article-intro {
+  font-size: 1.15rem; color: var(--text); line-height: 1.75;
+  margin-bottom: 2.5rem; padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.article-page h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem; color: var(--heading);
+  margin-top: 2.5rem; margin-bottom: 1rem;
+}
+.article-page h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.05rem; color: var(--heading); font-weight: 600;
+  margin-top: 1.5rem; margin-bottom: 0.5rem;
+}
+.article-page p {
+  font-size: 0.98rem; color: var(--text); line-height: 1.8; margin-bottom: 1.2rem;
+}
+.article-page strong { color: var(--heading); }
+.article-page ul, .article-page ol { padding-left: 1.3rem; margin-bottom: 1.2rem; color: var(--text); }
+.article-page li { margin-bottom: 0.5rem; line-height: 1.7; }
+.callout {
+  background: var(--bg-warm); border-left: 3px solid var(--accent);
+  padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; margin: 2rem 0;
+}
+.callout p { margin-bottom: 0; font-size: 0.95rem; }
+.level-card {
+  border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.5rem 1.8rem; margin: 1.2rem 0;
+}
+.level-card.danger { border-left: 3px solid #C45D3E; }
+.level-card.warn { border-left: 3px solid #D4A036; }
+.level-card.ok { border-left: 3px solid #5D9B6A; }
+.level-card h3 { margin-top: 0; }
+.level-card p:last-child { margin-bottom: 0; }
+.article-cta {
+  background: var(--bg-dark); color: white;
+  padding: 2.5rem; border-radius: var(--radius);
+  text-align: center; margin-top: 3rem;
+}
+.article-cta h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem; color: white; margin-bottom: 0.8rem;
+}
+.article-cta p { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+.article-cta .btn-primary { display: inline-flex; }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="../index.html" class="nav-logo">Benul <span class="logo-ia">IA</span></a>
+  <ul class="nav-links">
+    <li><a href="../offres.html">Notre approche</a></li>
+    <li><a href="../veille.html" class="active">Nos actus IA</a></li>
+  </ul>
+  <a href="../contact.html" class="nav-cta">Parlons-en</a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../offres.html">Notre approche</a>
+  <a href="../veille.html">Nos actus IA</a>
+  <a href="../contact.html" class="mobile-cta">Parlons-en</a>
+</div>
+
+<article class="article-page">
+  <a href="../veille.html" class="article-back">← Retour à la veille</a>
+
+  <div class="article-meta">
+    <span class="article-tag">Sécurité</span>
+    <span class="article-tag">Pratique</span>
+    <span class="article-date">28 mai 2026</span>
+  </div>
+
+  <h1>Données confidentielles et IA : ce que vous pouvez (et ne pouvez pas) envoyer à ChatGPT</h1>
+
+  <p class="article-intro">C'est la question qui revient à chaque audit. "Est-ce qu'on peut envoyer un contrat à ChatGPT ?" "Et un fichier client ?" "Et les données RH ?" Pas de réponse universelle — mais des règles claires existent. Voici ce qui sort vraiment de votre entreprise quand vous utilisez l'IA, et comment garder le contrôle sans interdire l'outil.</p>
+
+  <h2>Ce qui se passe quand vous tapez un prompt</h2>
+
+  <p>Quand vous envoyez un texte à ChatGPT, Claude ou Gemini, ce texte quitte votre machine, transite par internet, et arrive sur les serveurs de l'éditeur — la plupart du temps aux États-Unis. C'est traité, une réponse est générée, et la conversation est conservée.</p>
+
+  <p>Ce que la majorité des utilisateurs ignorent, c'est que <strong>par défaut, sur la version gratuite ou Plus de ChatGPT et Gemini, vos conversations peuvent être utilisées pour entraîner les futurs modèles</strong>. Vous pouvez désactiver cette option dans les paramètres, mais elle est active par défaut.</p>
+
+  <p>Claude (Anthropic) a une position différente : <strong>aucune donnée envoyée par les utilisateurs n'est utilisée pour entraîner les modèles</strong>, quel que soit le plan. C'est une position publique et contractuelle.</p>
+
+  <h2>Les 3 niveaux de sensibilité</h2>
+
+  <p>Plutôt que de raisonner par outil, raisonnez par type de donnée. Trois catégories suffisent à couvrir 95% des cas en entreprise.</p>
+
+  <div class="level-card danger">
+    <h3>Niveau 1 — À ne jamais envoyer</h3>
+    <p>Ce qui ne devrait <strong>jamais</strong> être collé dans un outil IA grand public, peu importe le plan :</p>
+    <ul>
+      <li>Données nominatives clients ou employés (noms + emails, téléphones, adresses)</li>
+      <li>Identifiants bancaires, RIB, numéros de carte</li>
+      <li>Données de santé, numéros de sécurité sociale</li>
+      <li>Mots de passe, clés API, identifiants techniques</li>
+      <li>Documents sous NDA strict, brevets non déposés, secrets industriels</li>
+    </ul>
+  </div>
+
+  <div class="level-card warn">
+    <h3>Niveau 2 — À envoyer uniquement après anonymisation</h3>
+    <p>Ce que vous pouvez utiliser à condition de neutraliser les éléments identifiants avant :</p>
+    <ul>
+      <li>Emails et messages internes (remplacez les noms par "Client A", "Manager B")</li>
+      <li>Comptes-rendus de réunion</li>
+      <li>Documents juridiques (clauses sans noms ni montants spécifiques)</li>
+      <li>Extraits de bases de données (avec identifiants neutralisés)</li>
+    </ul>
+  </div>
+
+  <div class="level-card ok">
+    <h3>Niveau 3 — OK à envoyer tel quel</h3>
+    <p>Ce qui ne pose pas de problème de confidentialité :</p>
+    <ul>
+      <li>Textes destinés à être publics (articles, posts, présentations externes)</li>
+      <li>Brouillons sans données spécifiques</li>
+      <li>Code open-source</li>
+      <li>Questions générales métier ou techniques</li>
+    </ul>
+  </div>
+
+  <h2>Le cas Samsung : le rappel qui sert toujours d'exemple</h2>
+
+  <p>En avril 2023, des ingénieurs de Samsung ont collé du code source confidentiel dans ChatGPT pour le débugger. Ce code est devenu accessible aux systèmes d'OpenAI — et donc, potentiellement, à de futurs modèles entraînés dessus.</p>
+
+  <p>Samsung a réagi en interdisant purement et simplement ChatGPT à ses 270 000 employés pendant plusieurs mois. Puis ils ont changé d'approche : déploiement d'une solution privée encadrée, formation des équipes. <strong>Ils n'ont pas réinterdit. Ils ont structuré.</strong> C'est la leçon qui compte.</p>
+
+  <div class="callout">
+    <p><strong>Le réflexe à avoir :</strong> avant chaque prompt sensible, posez-vous une question simple — "si ce texte fuitait demain dans la presse, est-ce que ça me poserait problème ?" Si oui, anonymisez ou changez de canal.</p>
+  </div>
+
+  <h2>La solution la plus simple pour une PME : un compte Team</h2>
+
+  <p>Pour environ 25 à 30 € par utilisateur et par mois, les plans <strong>ChatGPT Team</strong>, <strong>Claude Team</strong> ou <strong>Gemini for Workspace</strong> apportent une garantie contractuelle claire : <strong>aucune donnée envoyée n'est utilisée pour entraîner les modèles</strong>. Les conversations restent visibles uniquement aux membres de votre organisation.</p>
+
+  <p>C'est de loin le moyen le moins cher et le plus efficace de réduire le risque pour une PME. Le retour sur investissement est immédiat : un seul incident comme celui de Samsung coûterait largement plus que dix ans d'abonnement Team pour toute votre équipe.</p>
+
+  <h2>Construire une charte d'usage IA en 4 points</h2>
+
+  <p>Une charte interne n'a pas besoin d'être un document de 30 pages. Quatre points suffisent à protéger 90% des situations :</p>
+
+  <ol>
+    <li><strong>Quels outils sont autorisés</strong> — listez les comptes officiels (Team/Entreprise) que vous avez ouverts.</li>
+    <li><strong>Quels types de données peuvent être partagés</strong> — reprenez les 3 niveaux ci-dessus, adaptés à votre activité.</li>
+    <li><strong>Que faire en cas de doute</strong> — un référent identifié (DPO, responsable IT, dirigeant) à qui demander avant d'envoyer.</li>
+    <li><strong>Que faire en cas d'incident</strong> — qui contacter, quoi documenter, dans quel délai.</li>
+  </ol>
+
+  <p>Cette charte doit être <strong>signée</strong> par chaque collaborateur. Pas pour faire peur — pour rendre le sujet conscient et tangible.</p>
+
+  <div class="callout">
+    <p><strong>À retenir :</strong> l'IA n'est pas un trou noir. Vos données vont quelque part, et c'est documenté. La plupart des risques viennent de l'usage gratuit non encadré, pas de l'IA elle-même. Une charte claire + un plan Team règlent 90% des problèmes.</p>
+  </div>
+
+  <div class="article-cta">
+    <h3>Vous voulez auditer l'usage de l'IA dans votre entreprise ?</h3>
+    <p>On commence par un échange de 30 minutes pour comprendre votre situation et identifier les vrais points de vigilance.</p>
+    <a href="../contact.html" class="btn btn-primary">Réserver un échange gratuit <span>→</span></a>
+  </div>
+</article>
+
+<footer>
+  <p>&copy; 2026 Benul IA — Consultant en Transformation IA &nbsp;|&nbsp; <a href="../mentions-legales.html">Mentions légales</a></p>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+document.querySelector('.hamburger').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow = this.classList.contains('open') ? 'hidden' : '';
+});
+</script>
+</body>
+</html>

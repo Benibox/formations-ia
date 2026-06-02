@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Construire un agent IA sur-mesure sans coder — Benul IA</title>
+  <meta name="description" content="Custom GPTs, Claude Projects, Gemini Gems : créez un assistant IA spécialisé pour votre équipe en 10 minutes, sans développeur. Mode d'emploi complet et limites à connaître.">
+  <meta property="og:title" content="Construire un agent IA sur-mesure pour votre équipe, sans une ligne de code">
+  <meta property="og:description" content="Custom GPTs, Claude Projects, Gemini Gems : créez des assistants spécialisés à votre métier en 10 minutes, sans développeur.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://benul-ia.fr/articles/agent-ia-sans-coder.html">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Benul IA">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+.article-page { max-width: 720px; margin: 0 auto; padding: 10rem 2rem 5rem; }
+.article-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--accent); text-decoration: none; font-weight: 600;
+  font-size: 0.88rem; margin-bottom: 2rem; transition: gap 0.3s;
+}
+.article-back:hover { gap: 12px; }
+.article-meta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.article-tag {
+  padding: 0.3rem 0.8rem; background: var(--accent-bg);
+  border: 1px solid var(--accent-border); border-radius: 50px;
+  font-size: 0.72rem; font-weight: 600; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.article-date { font-size: 0.85rem; color: var(--text-light); display: flex; align-items: center; }
+.article-page h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--heading); line-height: 1.2; margin-bottom: 1.5rem;
+}
+.article-intro {
+  font-size: 1.15rem; color: var(--text); line-height: 1.75;
+  margin-bottom: 2.5rem; padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.article-page h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem; color: var(--heading);
+  margin-top: 2.5rem; margin-bottom: 1rem;
+}
+.article-page h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.05rem; color: var(--heading); font-weight: 600;
+  margin-top: 1.5rem; margin-bottom: 0.5rem;
+}
+.article-page p {
+  font-size: 0.98rem; color: var(--text); line-height: 1.8; margin-bottom: 1.2rem;
+}
+.article-page strong { color: var(--heading); }
+.article-page ul, .article-page ol { padding-left: 1.3rem; margin-bottom: 1.2rem; color: var(--text); }
+.article-page li { margin-bottom: 0.5rem; line-height: 1.7; }
+.callout {
+  background: var(--bg-warm); border-left: 3px solid var(--accent);
+  padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; margin: 2rem 0;
+}
+.callout p { margin-bottom: 0; font-size: 0.95rem; }
+.tool-card {
+  border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.5rem 1.8rem; margin: 1.2rem 0;
+  background: var(--bg-card);
+}
+.tool-card h3 { margin-top: 0; font-family: 'DM Serif Display', serif; font-size: 1.15rem; }
+.tool-card p:last-child { margin-bottom: 0; }
+.tool-card .tool-tag {
+  display: inline-block; padding: 0.2rem 0.6rem;
+  background: rgba(196, 93, 62, 0.1); border-radius: 4px;
+  font-size: 0.75rem; font-weight: 600; color: var(--accent);
+  margin-right: 0.4rem;
+}
+.step {
+  border-left: 2px solid var(--accent-border);
+  padding-left: 1.2rem; margin: 1.5rem 0;
+}
+.step-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem; color: var(--accent);
+  display: block; margin-bottom: 0.3rem;
+}
+.example-box {
+  background: var(--bg-warm); border-radius: 12px;
+  padding: 1.5rem 1.8rem; margin: 1.5rem 0;
+}
+.example-box h3 { margin-top: 0; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+.example-box pre {
+  background: white; border: 1px solid var(--border); border-radius: 8px;
+  padding: 1rem 1.2rem; font-size: 0.85rem; line-height: 1.6;
+  white-space: pre-wrap; color: var(--text); font-family: 'DM Sans', monospace;
+  margin: 0.8rem 0;
+}
+.article-cta {
+  background: var(--bg-dark); color: white;
+  padding: 2.5rem; border-radius: var(--radius);
+  text-align: center; margin-top: 3rem;
+}
+.article-cta h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem; color: white; margin-bottom: 0.8rem;
+}
+.article-cta p { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+.article-cta .btn-primary { display: inline-flex; }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="../index.html" class="nav-logo">Benul <span class="logo-ia">IA</span></a>
+  <ul class="nav-links">
+    <li><a href="../offres.html">Notre approche</a></li>
+    <li><a href="../veille.html" class="active">Nos actus IA</a></li>
+  </ul>
+  <a href="../contact.html" class="nav-cta">Parlons-en</a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../offres.html">Notre approche</a>
+  <a href="../veille.html">Nos actus IA</a>
+  <a href="../contact.html" class="mobile-cta">Parlons-en</a>
+</div>
+
+<article class="article-page">
+  <a href="../veille.html" class="article-back">← Retour à la veille</a>
+
+  <div class="article-meta">
+    <span class="article-tag">Pratique</span>
+    <span class="article-tag">Outils</span>
+    <span class="article-date">8 mai 2026</span>
+  </div>
+
+  <h1>Construire un agent IA sur-mesure pour votre équipe, sans une ligne de code</h1>
+
+  <p class="article-intro">Vous utilisez déjà ChatGPT ou Claude pour vos tâches quotidiennes. Mais à chaque conversation, vous devez ré-expliquer le contexte de votre entreprise, recoller vos documents, redonner vos consignes. Bonne nouvelle : depuis 2024, les trois grands éditeurs proposent des outils pour créer des assistants IA spécialisés à votre métier, en quelques minutes, sans développeur. Mode d'emploi.</p>
+
+  <h2>D'abord, parlons vrai : "agent", c'est un mot piégé</h2>
+
+  <p>Dans la presse, on parle "d'agents IA" pour tout et n'importe quoi. Soyons clairs : ce qu'on va construire ici n'est pas un "vrai" agent autonome qui exécute des actions seul. C'est un <strong>assistant spécialisé</strong> — un ChatGPT (ou Claude, ou Gemini) à qui vous avez donné un rôle précis, des connaissances métier, et des consignes durables.</p>
+
+  <p>Ce n'est pas un robot qui prend des décisions à votre place. C'est un outil qui démarre toujours avec le bon contexte, sans que vous ayez à le rappeler à chaque fois. Et pour la majorité des cas d'usage en entreprise, c'est exactement ce qu'il faut.</p>
+
+  <h2>Les 3 outils principaux</h2>
+
+  <div class="tool-card">
+    <h3>Custom GPTs (OpenAI)</h3>
+    <p><span class="tool-tag">ChatGPT Plus / Team</span> Disponible depuis novembre 2023. Création via une interface conversationnelle ou des paramètres avancés. Possibilité d'ajouter des documents (jusqu'à 20 fichiers), de connecter des actions externes via API, et de publier en interne (équipe) ou en externe (GPT Store).</p>
+  </div>
+
+  <div class="tool-card">
+    <h3>Claude Projects (Anthropic)</h3>
+    <p><span class="tool-tag">Claude Pro / Team</span> Disponible depuis juin 2024. Particulièrement fort pour traiter de longs documents grâce à la grande fenêtre de contexte de Claude (200 000 tokens). Idéal pour des assistants qui doivent connaître par cœur un corpus important — base de connaissance interne, contrats, documentation produit.</p>
+  </div>
+
+  <div class="tool-card">
+    <h3>Gemini Gems (Google)</h3>
+    <p><span class="tool-tag">Google AI Premium / Workspace</span> Disponible depuis 2024. Intégré à l'écosystème Google. Particulièrement intéressant pour les équipes déjà sur Google Workspace, avec accès direct à Drive, Gmail, Docs, etc.</p>
+  </div>
+
+  <p>Les trois fonctionnent sur le même principe. Le choix dépend surtout des outils que votre équipe utilise déjà et du plan auquel vous êtes abonné.</p>
+
+  <h2>La méthode : 4 étapes pour construire un assistant qui sert vraiment</h2>
+
+  <div class="step">
+    <span class="step-num">Étape 1</span>
+    <h3>Définir le rôle en une phrase</h3>
+    <p>Un assistant qui fait "tout" ne fait rien bien. Avant d'ouvrir l'interface, écrivez sur une feuille : "Cet assistant aide [qui] à faire [quoi] pour économiser [combien de temps] par [unité]." Si vous ne pouvez pas remplir cette phrase, ne créez pas l'agent — vous n'avez pas encore identifié votre vrai besoin.</p>
+    <p>Exemple : "Cet assistant aide l'équipe commerciale à rédiger des emails de relance personnalisés pour économiser 30 minutes par jour et par commercial."</p>
+  </div>
+
+  <div class="step">
+    <span class="step-num">Étape 2</span>
+    <h3>Donner du contexte métier durable</h3>
+    <p>Dans les "instructions" (ou "system prompt"), donnez tout ce que l'assistant doit savoir <strong>en permanence</strong> : qui est votre entreprise, ce qu'elle fait, le ton à adopter, les choses à éviter, les formats à respecter. C'est votre "fiche de poste" pour l'assistant.</p>
+    <p>Plus c'est précis, mieux c'est. Mauvais : "Sois professionnel." Bon : "Adopte un ton chaleureux mais direct, sans superlatifs ni emojis. Tutoie systématiquement. Limite chaque email à 5 phrases maximum."</p>
+  </div>
+
+  <div class="step">
+    <span class="step-num">Étape 3</span>
+    <h3>Ajouter les ressources clés</h3>
+    <p>Chargez les documents que l'assistant doit pouvoir consulter : exemples de bons emails, charte éditoriale, guide produit, FAQ interne, templates. <strong>Ne chargez que ce qui est strictement utile</strong> — un assistant noyé sous 50 documents répondra moins bien qu'un assistant équipé de 5 documents bien choisis.</p>
+    <p>Attention aux données sensibles : pas d'informations nominatives clients dans les exemples chargés (anonymisez si besoin). Et utilisez la version Team/Entreprise pour la garantie de non-réutilisation des données.</p>
+  </div>
+
+  <div class="step">
+    <span class="step-num">Étape 4</span>
+    <h3>Tester en conditions réelles, puis itérer</h3>
+    <p>Faites tester l'assistant par les vrais utilisateurs sur leurs vrais cas pendant une semaine. Récupérez les retours : "ça a marché", "il a inventé un truc", "il a oublié la consigne X". Ajustez les instructions en conséquence. Un bon assistant n'est jamais "fini" à la première version — c'est itératif.</p>
+  </div>
+
+  <h2>Un exemple complet : assistant "Email de relance commerciale"</h2>
+
+  <div class="example-box">
+    <h3>Instructions de l'assistant</h3>
+    <pre>Tu es l'assistant de l'équipe commerciale de [Nom Entreprise].
+Tu aides à rédiger des emails de relance vers des prospects qui n'ont pas répondu à une première prise de contact.
+
+Style :
+- Ton chaleureux mais direct, jamais commercial agressif
+- 5 phrases maximum
+- Pas de superlatifs ("incroyable", "exceptionnel"), pas d'emojis
+- Termine toujours par une question ouverte qui invite à répondre
+
+Quand l'utilisateur te donne un contexte (nom du prospect, objet du premier email, date du dernier contact, sujet d'intérêt connu), tu produis 2 variantes d'email :
+1. Une variante "rappel doux"
+2. Une variante "valeur ajoutée" (apporter une info utile)
+
+Tu ne fabriques jamais d'information factuelle sur le prospect. Si une info manque, tu poses la question avant d'écrire.</pre>
+  </div>
+
+  <p>Avec ce type d'instructions, n'importe quel commercial peut, en 30 secondes, obtenir deux brouillons d'emails personnalisés qu'il n'a plus qu'à ajuster. Gain estimé : 20-30 minutes par jour, sans aucun changement d'outil métier.</p>
+
+  <h2>Les limites à connaître honnêtement</h2>
+
+  <p>Pour ne pas vous vendre du rêve, voici ce que <strong>ces assistants ne savent pas (encore) faire</strong> :</p>
+
+  <ul>
+    <li><strong>Agir tout seul.</strong> Ils répondent quand on les sollicite. Ils ne lancent pas d'actions, ne planifient pas, ne déclenchent pas de workflows complexes (sauf via intégrations API avancées, qui demandent un développeur).</li>
+    <li><strong>Apprendre en continu.</strong> Chaque conversation est isolée. L'assistant ne retient pas ce qui s'est dit hier — sauf si vous mettez à jour ses instructions manuellement.</li>
+    <li><strong>Garantir la véracité.</strong> Comme tout LLM, ils peuvent halluciner. Sur des données factuelles précises (chiffres, dates, noms), vérifiez toujours.</li>
+    <li><strong>Remplacer une vraie automatisation métier.</strong> Pour intégrer dans votre CRM, votre ERP ou votre back-office, vous aurez besoin d'autre chose (n8n, Make, ou une vraie intégration API).</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>À retenir :</strong> un Custom GPT ou un Claude Project bien fait peut transformer le quotidien d'une équipe en quelques heures de travail. Mais ce n'est qu'une marche dans un escalier — la suivante (vrais agents autonomes, intégrations métier) demande plus de moyens et plus d'expertise. Commencez par la marche actuelle, elle est déjà très haute pour la plupart des entreprises.</p>
+  </div>
+
+  <h2>À retenir</h2>
+
+  <ul>
+    <li>"Agent IA" est un mot piégé — ce qu'on construit ici est un assistant spécialisé, pas un robot autonome.</li>
+    <li>Trois plateformes principales : Custom GPTs, Claude Projects, Gemini Gems. Choisissez celle qui correspond à votre écosystème.</li>
+    <li>La méthode en 4 étapes : définir le rôle, donner du contexte durable, ajouter les bonnes ressources, tester et itérer.</li>
+    <li>Limites réelles : pas d'autonomie, pas de mémoire entre conversations, hallucinations possibles, pas d'intégration métier sans dev.</li>
+  </ul>
+
+  <div class="article-cta">
+    <h3>Vous voulez construire un assistant adapté à votre équipe ?</h3>
+    <p>On peut concevoir avec vous l'assistant qui aura le plus d'impact, et former vos équipes à l'utiliser et le faire évoluer.</p>
+    <a href="../contact.html" class="btn btn-primary">Réserver un échange gratuit <span>→</span></a>
+  </div>
+</article>
+
+<footer>
+  <p>&copy; 2026 Benul IA — Consultant en Transformation IA &nbsp;|&nbsp; <a href="../mentions-legales.html">Mentions légales</a></p>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+document.querySelector('.hamburger').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow = this.classList.contains('open') ? 'hidden' : '';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pourquoi la plupart des projets IA échouent en entreprise — Benul IA</title>
+  <meta name="description" content="Plus de 80% des projets IA en entreprise n'aboutissent pas. Les vraies raisons (qui n'ont rien à voir avec la technologie) et comment éviter le piège du POC qui ne sort jamais.">
+  <meta property="og:title" content="Pourquoi la plupart des projets IA échouent en entreprise">
+  <meta property="og:description" content="La majorité des projets IA n'aboutissent pas. Pas par manque de techno, mais par excès de précipitation. On décortique les vraies raisons.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://benul-ia.fr/articles/projets-ia-echouent.html">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Benul IA">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+.article-page { max-width: 720px; margin: 0 auto; padding: 10rem 2rem 5rem; }
+.article-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--accent); text-decoration: none; font-weight: 600;
+  font-size: 0.88rem; margin-bottom: 2rem; transition: gap 0.3s;
+}
+.article-back:hover { gap: 12px; }
+.article-meta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.article-tag {
+  padding: 0.3rem 0.8rem; background: var(--accent-bg);
+  border: 1px solid var(--accent-border); border-radius: 50px;
+  font-size: 0.72rem; font-weight: 600; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.article-date { font-size: 0.85rem; color: var(--text-light); display: flex; align-items: center; }
+.article-page h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--heading); line-height: 1.2; margin-bottom: 1.5rem;
+}
+.article-intro {
+  font-size: 1.15rem; color: var(--text); line-height: 1.75;
+  margin-bottom: 2.5rem; padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.article-page h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem; color: var(--heading);
+  margin-top: 2.5rem; margin-bottom: 1rem;
+}
+.article-page h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.05rem; color: var(--heading); font-weight: 600;
+  margin-top: 1.5rem; margin-bottom: 0.5rem;
+}
+.article-page p {
+  font-size: 0.98rem; color: var(--text); line-height: 1.8; margin-bottom: 1.2rem;
+}
+.article-page strong { color: var(--heading); }
+.article-page ul, .article-page ol { padding-left: 1.3rem; margin-bottom: 1.2rem; color: var(--text); }
+.article-page li { margin-bottom: 0.5rem; line-height: 1.7; }
+.callout {
+  background: var(--bg-warm); border-left: 3px solid var(--accent);
+  padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; margin: 2rem 0;
+}
+.callout p { margin-bottom: 0; font-size: 0.95rem; }
+.stat-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1rem; margin: 2rem 0;
+}
+.stat-block {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem; text-align: center;
+}
+.stat-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem; color: var(--accent); line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat-label { font-size: 0.88rem; color: var(--text); line-height: 1.4; }
+.stat-source { font-size: 0.72rem; color: var(--text-light); margin-top: 0.5rem; }
+.reason-block {
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem; margin-top: 2rem;
+}
+.reason-number {
+  display: inline-block; font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem; color: var(--accent); margin-right: 0.5rem;
+}
+.article-cta {
+  background: var(--bg-dark); color: white;
+  padding: 2.5rem; border-radius: var(--radius);
+  text-align: center; margin-top: 3rem;
+}
+.article-cta h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem; color: white; margin-bottom: 0.8rem;
+}
+.article-cta p { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+.article-cta .btn-primary { display: inline-flex; }
+@media (max-width: 600px) { .stat-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="../index.html" class="nav-logo">Benul <span class="logo-ia">IA</span></a>
+  <ul class="nav-links">
+    <li><a href="../offres.html">Notre approche</a></li>
+    <li><a href="../veille.html" class="active">Nos actus IA</a></li>
+  </ul>
+  <a href="../contact.html" class="nav-cta">Parlons-en</a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../offres.html">Notre approche</a>
+  <a href="../veille.html">Nos actus IA</a>
+  <a href="../contact.html" class="mobile-cta">Parlons-en</a>
+</div>
+
+<article class="article-page">
+  <a href="../veille.html" class="article-back">← Retour à la veille</a>
+
+  <div class="article-meta">
+    <span class="article-tag">Stratégie</span>
+    <span class="article-tag">Analyse</span>
+    <span class="article-date">15 mai 2026</span>
+  </div>
+
+  <h1>Pourquoi la plupart des projets IA échouent en entreprise</h1>
+
+  <p class="article-intro">Les chiffres sont implacables : la grande majorité des projets IA en entreprise n'aboutissent pas. Et contrairement à ce qu'on pourrait croire, ce n'est presque jamais un problème de technologie. C'est un problème de méthode, d'objectifs, et de gens. Voici les vraies raisons — et comment éviter le piège.</p>
+
+  <h2>Les chiffres qu'on n'aime pas regarder</h2>
+
+  <div class="stat-row">
+    <div class="stat-block">
+      <div class="stat-number">+80%</div>
+      <div class="stat-label">des projets IA en entreprise n'aboutissent pas</div>
+      <div class="stat-source">RAND Corporation, 2024</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number">74%</div>
+      <div class="stat-label">des entreprises peinent à passer de l'expérimentation à la valeur réelle</div>
+      <div class="stat-source">BCG, "Where's the Value in AI?", 2024</div>
+    </div>
+  </div>
+
+  <p>Ces chiffres sont d'autant plus marquants qu'ils ne concernent pas des startups expérimentales — il s'agit de grandes entreprises qui investissent massivement, parfois plusieurs millions d'euros par projet. La technologie fonctionne, les modèles sont impressionnants, les démos sont convaincantes. Et pourtant.</p>
+
+  <p>Le problème, comme souvent, n'est pas là où on le regarde.</p>
+
+  <h2>Les 5 vraies raisons de l'échec</h2>
+
+  <div class="reason-block">
+    <h3><span class="reason-number">1.</span> Commencer par la solution, pas par le problème</h3>
+    <p>"On veut faire de l'IA." C'est la phrase qu'on entend le plus souvent — et c'est déjà l'erreur. Un projet qui commence par l'outil ("on va déployer ChatGPT", "on veut un agent", "on va automatiser avec l'IA") sans avoir clarifié quel problème métier on veut résoudre, est condamné dès le départ.</p>
+    <p>La bonne question n'est pas <em>"que peut-on faire avec l'IA ?"</em> mais <em>"où passe-t-on du temps inutilement et pourquoi ?"</em>. Les meilleurs cas d'usage IA émergent toujours d'un irritant métier précis, pas d'une envie technologique.</p>
+  </div>
+
+  <div class="reason-block">
+    <h3><span class="reason-number">2.</span> Le POC qui ne sort jamais du laboratoire</h3>
+    <p>Un Proof of Concept brillant, présenté en grande pompe au comité de direction, applaudi par tout le monde — et qui finit oublié dans un coin parce qu'on n'a jamais pensé à comment l'intégrer dans le quotidien des équipes. C'est l'échec le plus fréquent, et le plus douloureux.</p>
+    <p>Un POC sans plan de déploiement, sans budget de production, sans propriétaire métier identifié, c'est un beau prototype qui ne deviendra jamais un produit. Selon Gartner, environ 30% des projets d'IA générative en entreprise seront abandonnés après leur phase de POC d'ici la fin 2025.</p>
+  </div>
+
+  <div class="reason-block">
+    <h3><span class="reason-number">3.</span> Sous-estimer la résistance humaine</h3>
+    <p>L'IA n'est pas une feuille Excel. Elle touche directement à la nature du travail des gens. Quand un projet est lancé sans dialogue avec les équipes concernées, sans explication claire de ce qui va changer pour eux, sans accompagnement — la résistance s'installe. Pas par mauvaise foi, par peur.</p>
+    <p>Et un outil que personne n'utilise, aussi puissant soit-il, ne crée aucune valeur. Le coût caché de l'échec n'est pas seulement financier : c'est aussi une démobilisation durable des équipes vis-à-vis des futurs projets de transformation.</p>
+  </div>
+
+  <div class="reason-block">
+    <h3><span class="reason-number">4.</span> Vouloir tout faire d'un coup</h3>
+    <p>"On va transformer toute l'entreprise avec l'IA." Ambition louable, exécution catastrophique. Les transformations IA qui marchent commencent toujours petit : une équipe, un cas d'usage, deux mois pour mesurer l'impact. Ensuite seulement on étend.</p>
+    <p>Vouloir déployer l'IA partout, tout de suite, c'est s'exposer à des échecs multiples simultanés — et à la conclusion fausse que "l'IA ne marche pas chez nous". Alors qu'en réalité, c'est la méthode qui ne marche pas.</p>
+  </div>
+
+  <div class="reason-block">
+    <h3><span class="reason-number">5.</span> Confondre formation et compétence</h3>
+    <p>Envoyer 200 collaborateurs en formation ChatGPT générique d'une journée et considérer le sujet "fait" est une erreur classique. Trois mois plus tard, 90% n'utilisent toujours pas l'outil — non parce qu'ils ne savent pas s'en servir, mais parce qu'on ne leur a jamais montré <strong>comment ça s'applique à leur métier précis</strong>.</p>
+    <p>La compétence IA s'acquiert sur des cas d'usage réels, avec les vrais documents et les vraies contraintes de chaque équipe. Une formation par métier, courte mais ciblée, vaut dix formations généralistes.</p>
+  </div>
+
+  <h2>Ce qui distingue ceux qui réussissent</h2>
+
+  <p>Les entreprises où l'IA crée de la valeur réelle ont toutes en commun une approche radicalement différente :</p>
+
+  <ul>
+    <li><strong>Elles partent du métier</strong>, pas de l'outil. Le point de départ est toujours un irritant identifié, pas une démo impressionnante.</li>
+    <li><strong>Elles commencent petit, mesurent, étendent</strong>. Pas de grand soir. Un cas d'usage à la fois, validé avant de passer au suivant.</li>
+    <li><strong>Elles impliquent les équipes très tôt</strong> — pas pour les "communiquer" le projet, mais pour le co-construire. Les meilleurs prompts viennent toujours des gens qui font le travail.</li>
+    <li><strong>Elles forment par métier, pas par outil</strong>. Un commercial, un juriste et un comptable ont des cas d'usage différents — leur donner la même formation est une perte de temps.</li>
+    <li><strong>Elles acceptent de désinvestir</strong>. Si un cas d'usage ne tient pas ses promesses au bout de 2-3 mois, elles arrêtent. Pas d'acharnement par fierté.</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Le piège du discours :</strong> beaucoup de cabinets et d'éditeurs vendent l'IA comme une magie qui transforme l'entreprise en quelques mois. La réalité est plus exigeante — et c'est tant mieux. Une transformation IA réussie est lente, méthodique, ancrée dans le réel. Tout discours qui promet l'inverse devrait être suspect.</p>
+  </div>
+
+  <h2>À retenir</h2>
+
+  <ul>
+    <li>Plus de 80% des projets IA échouent — et ce n'est presque jamais à cause de la technologie.</li>
+    <li>Les 5 vraies causes : commencer par la solution, POC sans déploiement, résistance humaine ignorée, ambition disproportionnée, formation mal calibrée.</li>
+    <li>Ce qui marche : partir du métier, commencer petit, impliquer les équipes, former par cas d'usage, savoir arrêter ce qui ne marche pas.</li>
+    <li>Une transformation IA réussie n'est pas spectaculaire. Elle est méthodique, lente, et durable.</li>
+  </ul>
+
+  <div class="article-cta">
+    <h3>Vous voulez éviter le piège du POC qui ne sort jamais ?</h3>
+    <p>Un échange de 30 minutes pour comprendre votre situation et identifier les cas d'usage qui ont une vraie chance de générer de la valeur.</p>
+    <a href="../contact.html" class="btn btn-primary">Réserver un échange gratuit <span>→</span></a>
+  </div>
+</article>
+
+<footer>
+  <p>&copy; 2026 Benul IA — Consultant en Transformation IA &nbsp;|&nbsp; <a href="../mentions-legales.html">Mentions légales</a></p>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+document.querySelector('.hamburger').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow = this.classList.contains('open') ? 'hidden' : '';
+});
+</script>
+</body>
+</html>
