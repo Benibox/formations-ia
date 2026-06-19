@@ -1,0 +1,27 @@
+# Benam AI
+
+> Benam AI (Ethan Ben Amram) est un consultant en transformation IA. Positionnement : on ne forme pas à des outils, on intègre l'IA dans le quotidien des entreprises — audit, formation sur-mesure par métier, livrables concrets. Basé en France.
+
+## Pages principales
+
+- [Accueil](https://benam-ai.com/): Benam AI intègre l'intelligence artificielle dans votre entreprise. Audit, formation sur-mesure par métier, livrables concrets. Basé en France, interventions partout.
+- [Notre approche](https://benam-ai.com/offres.html): Formation IA sur-mesure, création de sites, audit et outils IA. Pas de catalogue : on part de votre situation et on propose ce qui a du sens.
+- [Méthode](https://benam-ai.com/methode.html): Notre méthode en 4 étapes : audit, formation par métier, livrables concrets, suivi. On diagnostique avant de prescrire — chaque intervention est sur-mesure.
+- [Actus IA](https://benam-ai.com/veille.html): Articles pratiques sur l'IA en entreprise : Claude, ChatGPT, AI Act, automatisation. Des explications claires, sans jargon.
+- [Contact](https://benam-ai.com/contact.html): Contactez Benam AI pour un échange gratuit de 30 minutes. Email, téléphone ou formulaire — on revient vers vous sous 24h.
+
+## Articles
+
+- [5 utilisations concrètes de l'IA que vos équipes peuvent adopter cette semaine](https://benam-ai.com/articles/5-usages-ia-entreprise.html): 5 cas d'usage IA simples et testés que vos équipes peuvent adopter cette semaine. Emails, réunions, veille, documents, données — sans jargon.
+- [Construire un agent IA sur-mesure pour votre équipe, sans une ligne de code](https://benam-ai.com/articles/agent-ia-sans-coder.html): Custom GPTs, Claude Projects, Gemini Gems : créez un assistant IA spécialisé pour votre équipe en 10 minutes, sans développeur. Mode d'emploi complet et limites à connaître.
+- [AI Act, Article 4 : ce que ça change concrètement](https://benam-ai.com/articles/ai-act-article-4.html): L'Article 4 de l'AI Act rend la formation IA obligatoire. Qui est concerné, quelles sanctions, comment se conformer. Explications claires.
+- [Claude vs ChatGPT : lequel choisir pour votre entreprise ?](https://benam-ai.com/articles/claude-vs-chatgpt.html): Comparatif Claude vs ChatGPT pour l'entreprise : confidentialité, qualité de rédaction, analyse de documents, prix. Le guide pour faire le bon choix.
+- [Données confidentielles et IA : ce que vous pouvez (et ne pouvez pas) envoyer à ChatGPT](https://benam-ai.com/articles/donnees-confidentielles-ia.html): Ce que vous pouvez et ne pouvez pas envoyer à ChatGPT, Claude ou Gemini. Les 3 niveaux de sensibilité, les bons réflexes, et la solution la plus simple pour une PME.
+- [Prompt : le guide pour obtenir ce que vous voulez de l'IA](https://benam-ai.com/articles/guide-prompting.html): Prompt engineering et prompt evaluation expliqués simplement. Les techniques concrètes pour écrire de meilleurs prompts et tester qu'ils fonctionnent vraiment.
+- [Pourquoi la plupart des projets IA échouent en entreprise](https://benam-ai.com/articles/projets-ia-echouent.html): Plus de 80% des projets IA en entreprise n'aboutissent pas. Les vraies raisons (qui n'ont rien à voir avec la technologie) et comment éviter le piège du POC qui ne sort jamais.
+- [Shadow AI : vos équipes utilisent l'IA sans vous le dire. Et alors ?](https://benam-ai.com/articles/shadow-ai.html): La majorité des salariés utilisent ChatGPT au travail sans validation officielle. Interdire ne marche pas, ignorer non plus. Comment construire une vraie troisième voie.
+
+## Contact
+
+- Email: contact@benam-ai.com
+- Site: https://benam-ai.com/
