@@ -1,7 +1,7 @@
-# Benul IA — Site vitrine
+# Benam AI — Site vitrine
 
-Site de Benul IA, consultant en transformation IA (Ethan Ben Amram).
-Deploye sur Cloudflare Pages avec domaine custom benul-ia.fr.
+Site de Benam AI, consultant en transformation IA (Ethan Ben Amram).
+Deploye sur Cloudflare Pages avec domaine custom benam-ai.com.
 
 ## Stack
 
@@ -57,7 +57,7 @@ Formations/
 
 ### methode.html (Methode)
 - 4 etapes : Audit & Diagnostic → Formation par metier → Production & Livrables → Suivi & Evolution
-- Section avant/apres Benul IA
+- Section avant/apres Benam AI
 - Animations slide left/right alternees
 
 ### offres.html (Ce qu'on fait)
@@ -69,7 +69,7 @@ Formations/
 
 ### contact.html
 - Layout split-screen : panneau sombre (infos) + panneau clair (formulaire)
-- Email : contact@benul-ia.fr
+- Email : contact@benam-ai.com
 - Tel : 06 79 97 90 26
 - Formulaire avec chips d'interet cliquables
 - Animation de succes (pas de backend pour l'instant — a brancher)
@@ -106,7 +106,7 @@ npx wrangler pages deploy ./dist --project-name benul-ia
 ```
 
 ### Domaine custom
-Domaine : benul-ia.fr (achete sur Cloudflare Registrar)
+Domaine : benam-ai.com (achete sur Cloudflare Registrar)
 Configurer dans : Workers & Pages > benul-ia > Custom domains > Add domain
 
 ## Git
@@ -126,10 +126,10 @@ git push origin main
 - [ ] Remplacer le placeholder video par la vraie video HeyGen
 - [x] ~~Brancher le formulaire de contact~~ — fait via FormSubmit (Cloudflare Function `/api/contact`, envoi vers ethanbenamram99@gmail.com). Premier envoi à valider par mail FormSubmit.
 - [ ] Configurer ANTHROPIC_API_KEY dans Cloudflare pour le chatbot
-- [ ] Connecter le domaine benul-ia.fr au projet Pages
+- [ ] Connecter le domaine benam-ai.com au projet Pages
 - [ ] Ajouter les accents francais dans les textes (actuellement sans accents)
 - [ ] Ajouter un favicon
-- [ ] Mettre a jour le system prompt du chatbot (actuellement il parle de "formations" generiques, pas du vrai positionnement Benul IA)
+- [ ] Mettre a jour le system prompt du chatbot (actuellement il parle de "formations" generiques, pas du vrai positionnement Benam AI)
 
 ## Principes de contenu
 

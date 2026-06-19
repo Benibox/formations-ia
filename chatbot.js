@@ -65,7 +65,7 @@
   const box = document.createElement("div");
   box.id = "chat-box";
   box.innerHTML = `
-    <div id="chat-header"><span>🤖</span> Benul IA — Assistant</div>
+    <div id="chat-header"><span>🤖</span> Benam AI — Assistant</div>
     <div id="chat-messages"></div>
     <div id="chat-input-row">
       <input id="chat-input" placeholder="Posez votre question..." autocomplete="off">
@@ -94,7 +94,7 @@
 
   // Welcome message
   function init() {
-    addMsg("Bonjour ! Je suis l'assistant Benul IA. Comment puis-je vous aider avec nos formations ?", "bot");
+    addMsg("Bonjour ! Je suis l'assistant Benam AI. Comment puis-je vous aider avec nos formations ?", "bot");
   }
 
   toggle.addEventListener("click", () => {

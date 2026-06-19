@@ -1,5 +1,5 @@
 const TARGET_EMAIL = "ethanbenamram99@gmail.com";
-const FROM_ADDRESS = "Benul IA Contact <onboarding@resend.dev>";
+const FROM_ADDRESS = "Benam AI Contact <onboarding@resend.dev>";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -31,7 +31,7 @@ function buildHtml({ prenom, nom, email, telephone, taille, interets }) {
 <html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#FAFAF8;padding:24px;">
   <div style="max-width:560px;margin:0 auto;background:white;border-radius:12px;overflow:hidden;border:1px solid #eee;">
     <div style="padding:20px 24px;background:#1A1A1A;color:white;">
-      <div style="font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#E8A990;">Benul IA</div>
+      <div style="font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#E8A990;">Benam AI</div>
       <div style="font-size:18px;margin-top:4px;">Nouvelle demande de contact</div>
     </div>
     <table style="width:100%;border-collapse:collapse;font-size:14px;">
@@ -43,7 +43,7 @@ function buildHtml({ prenom, nom, email, telephone, taille, interets }) {
       ${row("Centres d'intérêt", escapeHtml((interets || []).join(", ")))}
     </table>
     <div style="padding:16px 24px;background:#FAFAF8;color:#8A8A8A;font-size:12px;">
-      Envoyé depuis le formulaire de contact benul-ia.fr
+      Envoyé depuis le formulaire de contact benam-ai.com
     </div>
   </div>
 </body></html>`;

@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================
-# Benul IA — Deploiement Cloudflare Pages
+# Benam AI — Deploiement Cloudflare Pages
 # ============================================
 # Usage : cd ~/Desktop/formations-ia && bash deploy.sh
 # ============================================
@@ -8,7 +8,7 @@
 set -e
 
 echo ""
-echo "=== Benul IA — Deploiement ==="
+echo "=== Benam AI — Deploiement ==="
 echo ""
 
 # Verifier npm/npx
@@ -71,7 +71,7 @@ echo "Site en ligne : https://benul-ia.pages.dev"
 echo ""
 echo "--- Prochaines etapes (si pas deja fait) ---"
 echo ""
-echo "1. Connecter le domaine benul-ia.fr :"
+echo "1. Connecter le domaine benam-ai.com :"
 echo "   Dashboard Cloudflare > Workers & Pages > benul-ia > Custom domains > Add"
 echo ""
 echo "2. Configurer la cle API pour le chatbot :"

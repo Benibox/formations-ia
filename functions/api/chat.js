@@ -1,6 +1,6 @@
 export async function onRequestPost(context) {
   const corsHeaders = {
-    "Access-Control-Allow-Origin": "https://benul-ia.fr",
+    "Access-Control-Allow-Origin": "https://benam-ai.com",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
@@ -36,14 +36,14 @@ export async function onRequestPost(context) {
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
         max_tokens: 512,
-        system: `Tu es l'assistant de Benul IA, un consultant en transformation IA. Tu aides les visiteurs à comprendre les formations proposées. Sois concis, amical et professionnel. Réponds en français.
+        system: `Tu es l'assistant de Benam AI, un consultant en transformation IA. Tu aides les visiteurs à comprendre les formations proposées. Sois concis, amical et professionnel. Réponds en français.
 
 Formations proposées :
 - Formation IA pour dirigeants (1 jour) : comprendre l'IA, identifier les opportunités, construire une feuille de route
 - Formation IA pour équipes (2 jours) : prise en main des outils IA, prompt engineering, intégration dans les workflows
 - Accompagnement sur mesure : audit IA, stratégie de déploiement, suivi personnalisé
 
-Si on te pose une question hors sujet, ramène poliment la conversation vers les formations et services de Benul IA.`,
+Si on te pose une question hors sujet, ramène poliment la conversation vers les formations et services de Benam AI.`,
         messages: messages.slice(-10),
       }),
     });
@@ -76,7 +76,7 @@ Si on te pose une question hors sujet, ramène poliment la conversation vers les
 export async function onRequestOptions() {
   return new Response(null, {
     headers: {
-      "Access-Control-Allow-Origin": "https://benul-ia.fr",
+      "Access-Control-Allow-Origin": "https://benam-ai.com",
       "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
     },
