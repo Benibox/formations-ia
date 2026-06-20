@@ -7,6 +7,8 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+    gtag('consent', 'default', { 'ad_storage':'denied', 'ad_user_data':'denied', 'ad_personalization':'denied', 'analytics_storage':'denied' });
+    if (localStorage.getItem('cookie-consent') === 'granted') { gtag('consent', 'update', { 'analytics_storage':'granted' }); }
     gtag('config', 'G-QMDCD7FV7Y');
   </script>
   <meta charset="UTF-8">
@@ -168,6 +170,7 @@
 .article-cta p { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
 .article-cta .btn-primary { display: inline-flex; }
   </style>
+  <script src="/consent.js" defer></script>
 </head>
 <body>
 

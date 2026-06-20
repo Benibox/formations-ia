@@ -7,6 +7,8 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+    gtag('consent', 'default', { 'ad_storage':'denied', 'ad_user_data':'denied', 'ad_personalization':'denied', 'analytics_storage':'denied' });
+    if (localStorage.getItem('cookie-consent') === 'granted') { gtag('consent', 'update', { 'analytics_storage':'granted' }); }
     gtag('config', 'G-QMDCD7FV7Y');
   </script>
   <meta charset="UTF-8">
@@ -411,6 +413,7 @@
   .final-cta { padding: 4rem 1.5rem; }
 }
   </style>
+  <script src="/consent.js" defer></script>
 </head>
 <body>
 
